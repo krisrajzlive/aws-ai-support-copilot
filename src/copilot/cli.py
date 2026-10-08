@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Annotated
 
 import typer
@@ -11,6 +12,7 @@ from copilot import __version__
 from copilot.aws import make_session
 from copilot.config import Settings
 from copilot.doctor import DoctorReport, Status, run_doctor
+from copilot.pipeline import analyze_case
 
 app = typer.Typer(help="AWS AI Support Copilot", no_args_is_help=True, add_completion=False)
 console = Console()
@@ -42,6 +44,28 @@ def doctor(
         console.print_json(json.dumps(report.to_dict()))
     else:
         _render(report, settings)
+
+
+@app.command()
+def analyze(
+    text: Annotated[str, typer.Option(help="Customer message, in any language.")] = "",
+    document: Annotated[Path | None, typer.Option(help="Scanned page or receipt image.")] = None,
+    image: Annotated[Path | None, typer.Option(help="Product photo.")] = None,
+    reply_language: Annotated[
+        str | None, typer.Option(help="Defaults to the input language.")
+    ] = None,
+) -> None:
+    """Turn a support request into a structured case and a drafted reply."""
+    settings = Settings()
+    case = analyze_case(
+        make_session(settings),
+        settings,
+        text=text,
+        document=document.read_bytes() if document else None,
+        image=image.read_bytes() if image else None,
+        reply_language=reply_language,
+    )
+    console.print_json(case.model_dump_json())
 
 
 @app.command()

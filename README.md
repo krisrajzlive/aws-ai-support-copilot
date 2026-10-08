@@ -47,10 +47,10 @@ unchanged in an unrestricted account.
 
 | Phase | Scope | State |
 |---|---|---|
-| 1 | Scaffold, config, CI, `copilot doctor` | in progress |
-| 2 | Language services (Transcribe, Translate, Comprehend, Polly) | planned |
-| 3 | Documents and vision (Textract, Rekognition) | planned |
-| 4 | Bedrock summary and reply | planned |
+| 1 | Scaffold, config, CI, `copilot doctor` | done |
+| 2 | Language services (Translate with Bedrock fallback, Comprehend PII redaction) | done; Transcribe and Polly pending |
+| 3 | Documents and vision (Textract, Rekognition) | code done; live check pending |
+| 4 | Bedrock summary and reply | done |
 | 5 | SageMaker classifier | planned |
 | 6 | Lex intake bot and UI | planned |
 
