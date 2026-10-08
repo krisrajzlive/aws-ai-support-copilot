@@ -5,6 +5,7 @@ from typing import Any
 from copilot.aws import CLIENT_CONFIG
 from copilot.config import Settings
 from copilot.models import SupportCase
+from copilot.personas import PersonaSet, load_personas
 from copilot.services import comprehend, vision
 from copilot.services.bedrock import BedrockService
 from copilot.services.guardrails import GuardrailService
@@ -15,13 +16,33 @@ from copilot.services.translate import Translator
 CATEGORIES = ["billing", "shipping", "product_defect", "account_access", "other"]
 PRIORITIES = ["low", "medium", "high", "urgent"]
 
-SYSTEM_PROMPT = (
+TRIAGE_PROMPT = (
     "You are a customer-support triage assistant. Using only the case facts provided, return a "
     "single JSON object with keys: summary (max 2 sentences), category (one of "
-    f"{CATEGORIES}), priority (one of {PRIORITIES}), reply (a polite, concise draft reply in "
-    "English). Tokens like [[NAME_1]] stand for customer details: use them verbatim where a "
-    "name or detail belongs and never invent values. Output JSON only."
+    f"{CATEGORIES}) and priority (one of {PRIORITIES}). Priority guide: low = a general question; "
+    "medium = a normal problem the customer wants fixed (late parcel, wrong charge, faulty item); "
+    "high = repeated failure, major financial loss or a vulnerable customer; urgent = safety, "
+    "legal threat or possible account compromise. Output JSON only."
 )
+
+BASE_REPLY_RULES = (
+    "Write only the reply text addressed to the customer, in English, as plain text with no "
+    "markdown and no preamble. Never state delivery times, prices, availability or company "
+    "policies unless they appear in the case facts; when the customer needs one, say a team member "
+    "will confirm it. Never invent order numbers, amounts or dates. Do not use bracketed template "
+    "placeholders such as [Your Name]; sign off as 'Customer Support Team'."
+)
+
+
+def _reply_rules(placeholders: dict[str, str]) -> str:
+    """Only advertise tokens that exist, so the model cannot copy an example that does not apply."""
+    if not placeholders:
+        return f"{BASE_REPLY_RULES} The message contains no customer details to personalise with."
+    tokens = ", ".join(placeholders)
+    return (
+        f"{BASE_REPLY_RULES} You may address the customer using these tokens verbatim: {tokens}. "
+        "Use no other bracketed tokens."
+    )
 
 
 def _case_prompt(case: SupportCase) -> str:
@@ -47,14 +68,20 @@ def analyze_case(
     audio: bytes | None = None,
     audio_format: str = "wav",
     reply_language: str | None = None,
+    persona: str | None = None,
+    personas: PersonaSet | None = None,
 ) -> SupportCase:
-    """Run one support request through language, vision and Bedrock services."""
+    """Run one support request through language, vision, triage and a routed persona."""
 
     def client(name: str) -> Any:
         return session.client(name, config=CLIENT_CONFIG)
 
-    bedrock = BedrockService(client("bedrock-runtime"), settings.bedrock_model_list)
-    translator = Translator(client("translate"), bedrock, settings.translate_backend)
+    personas = personas or load_personas(settings.personas_file or None)
+    runtime = client("bedrock-runtime")
+    # Translation, triage and replies each get their own model priority list.
+    translate_llm = BedrockService(runtime, settings.bedrock_model_list)
+    triage_llm = BedrockService(runtime, settings.triage_model_list)
+    translator = Translator(client("translate"), translate_llm, settings.translate_backend)
     guardrail = (
         GuardrailService(client("bedrock"), settings.guardrail_id, settings.guardrail_version)
         if settings.guardrail_id
@@ -65,7 +92,7 @@ def analyze_case(
         transcriber = (
             AwsTranscriber(client("transcribe"), client("s3"), settings.transcribe_bucket)
             if settings.transcribe_backend == "aws"
-            else Transcriber(client("bedrock-runtime"))
+            else Transcriber(runtime)
         )
         text = f"{text} {transcriber.transcribe(audio, audio_format)}".strip()
         backends["transcribe"] = transcriber.backend
@@ -102,11 +129,22 @@ def analyze_case(
     case.english_text = insights.redacted_text
     placeholders = insights.placeholders
 
-    result = bedrock.complete_json(SYSTEM_PROMPT, _case_prompt(case))
-    case.summary = str(result.get("summary", ""))
-    case.category = str(result.get("category", "other"))
-    case.priority = str(result.get("priority", "medium"))
-    case.reply_en = str(result.get("reply", ""))
+    # Stage 1: a small, cheap model classifies the request.
+    triage = triage_llm.complete_json(TRIAGE_PROMPT, _case_prompt(case))
+    case.summary = str(triage.get("summary", ""))
+    case.category = str(triage.get("category", "other"))
+    case.priority = str(triage.get("priority", "medium"))
+
+    # Stage 2: routing picks the persona, and with it the prompt, models and temperature.
+    chosen, reason = personas.select(case.category, case.priority, case.sentiment, persona)
+    case.persona, case.persona_reason = chosen.name, reason
+    reply_llm = BedrockService(runtime, chosen.models)
+    case.reply_en = reply_llm.complete(
+        f"{chosen.prompt}\n\n{_reply_rules(placeholders)}",
+        f"{_case_prompt(case)}\nTriage summary: {case.summary}\nPriority: {case.priority}",
+        max_tokens=chosen.max_tokens,
+        temperature=chosen.temperature,
+    )
     if guardrail:
         case.reply_en = guardrail.apply(case.reply_en, "OUTPUT").text
 
@@ -116,7 +154,8 @@ def analyze_case(
     )
     case.reply_en = comprehend.fill_placeholders(case.reply_en, placeholders)
     case.reply_language = target
-    case.model_id = bedrock.model_id
+    case.model_id = reply_llm.model_id
+    case.models = {"triage": triage_llm.model_id, "reply": reply_llm.model_id}
     case.backends = {
         **backends,
         "translate": translator.backend,

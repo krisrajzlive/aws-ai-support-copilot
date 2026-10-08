@@ -6,7 +6,7 @@ from botocore.config import Config
 from copilot.config import Settings
 
 CLIENT_CONFIG = Config(
-    retries={"max_attempts": 2, "mode": "standard"},
+    retries={"max_attempts": 5, "mode": "adaptive"},
     connect_timeout=5,
     read_timeout=30,
 )

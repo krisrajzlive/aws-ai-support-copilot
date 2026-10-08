@@ -35,3 +35,17 @@ class FakeSession:
 
     def client(self, name: str, **_: Any) -> FakeClient:
         return FakeClient({m: b for (c, m), b in self._behaviors.items() if c == name})
+
+
+def router_converse(triage: dict, reply: str, calls: list | None = None):
+    """Fake Converse: JSON for the triage prompt, plain text for a persona reply."""
+    import json
+
+    def call(**kw):
+        if calls is not None:
+            calls.append(kw)
+        is_triage = "triage assistant" in kw["system"][0]["text"]
+        text = json.dumps(triage) if is_triage else reply
+        return {"output": {"message": {"content": [{"text": text}]}}}
+
+    return call

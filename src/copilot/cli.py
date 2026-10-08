@@ -12,6 +12,7 @@ from copilot import __version__
 from copilot.aws import make_session
 from copilot.config import Settings
 from copilot.doctor import DoctorReport, Status, run_doctor
+from copilot.personas import load_personas
 from copilot.pipeline import analyze_case, speak_reply
 
 app = typer.Typer(help="AWS AI Support Copilot", no_args_is_help=True, add_completion=False)
@@ -57,6 +58,9 @@ def analyze(
     reply_language: Annotated[
         str | None, typer.Option(help="Defaults to the input language.")
     ] = None,
+    persona: Annotated[
+        str | None, typer.Option(help="Force a persona instead of routing by category.")
+    ] = None,
     speak: Annotated[
         Path | None, typer.Option(help="Write a spoken MP3 reply here (needs tts_backend=polly).")
     ] = None,
@@ -73,11 +77,42 @@ def analyze(
         audio=audio.read_bytes() if audio else None,
         audio_format=audio.suffix.lstrip(".").lower() if audio else "wav",
         reply_language=reply_language,
+        persona=persona,
     )
     console.print_json(case.model_dump_json())
     if speak:
         speak.write_bytes(speak_reply(session, settings, case))
         console.print(f"Spoken reply written to {speak}")
+
+
+@app.command()
+def personas(
+    check: Annotated[
+        bool, typer.Option("--check", help="Call each persona's models to see which respond.")
+    ] = False,
+) -> None:
+    """List personas, their routing categories and models."""
+    settings = Settings()
+    persona_set = load_personas(settings.personas_file or None)
+    table = Table(title="Support personas")
+    for col in ("Persona", "Handles", "Models (in order)", "Temp"):
+        table.add_column(col)
+    for p in persona_set.personas.values():
+        handles = ", ".join(p.categories) or "escalation rules"
+        table.add_row(p.name, handles, ", ".join(p.models), str(p.temperature))
+    console.print(table)
+    r = persona_set.routing
+    console.print(
+        f"Escalate to [bold]{r.escalation}[/bold] on priority {list(r.escalate_priorities)} or "
+        f"negative sentiment with priority {list(r.escalate_negative_priorities)}; "
+        f"default persona: [bold]{r.default}[/bold]."
+    )
+    if check:
+        models = dict.fromkeys(m for p in persona_set.personas.values() for m in p.models)
+        probe_settings = settings.model_copy(update={"bedrock_models": ",".join(models)})
+        for result in run_doctor(make_session(settings), probe_settings).results:
+            if result.service == "bedrock":
+                console.print(f"  [{_STYLE[result.status]}]{result.status}[/]  {result.capability}")
 
 
 @app.command()

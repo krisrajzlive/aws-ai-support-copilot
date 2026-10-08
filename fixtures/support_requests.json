@@ -1,0 +1,10 @@
+[
+  {"id": "billing-duplicate-charge", "text": "I was charged twice for order 55120 and I need one of the charges refunded."},
+  {"id": "shipping-delay", "text": "My parcel for order 77310 has not arrived and the tracking has not updated for a week."},
+  {"id": "defect-broken-item", "text": "The blender I received stopped heating after two uses and the lid is cracked. What can I do?"},
+  {"id": "account-locked", "text": "I cannot log in to my account and I did not request the password reset email I just received."},
+  {"id": "angry-urgent", "text": "This is outrageous! Your delivery driver left my medication outside in the rain and I am furious. I want someone to call me today."},
+  {"id": "general-question", "text": "Hi, do you ship to Canada and how long does it usually take?"},
+  {"id": "spanish-billing", "text": "Hola, me cobraron una suscripción que cancelé el mes pasado. Quiero que me devuelvan el dinero."},
+  {"id": "french-shipping", "text": "Bonjour, mon colis est arrivé avec trois jours de retard et je voudrais savoir comment suivre ma prochaine commande."}
+]

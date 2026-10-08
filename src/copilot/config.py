@@ -26,6 +26,12 @@ class Settings(BaseSettings):
     aws_region: str = "us-east-1"
     bedrock_models: str = DEFAULT_BEDROCK_MODELS
 
+    # Cheap, fast models for the triage step (category and priority), tried in order
+    triage_models: str = "amazon.nova-micro-v1:0,amazon.nova-lite-v1:0"
+
+    # Path to a personas TOML file; empty uses the built-in personas
+    personas_file: str = ""
+
     # bedrock: always use a Bedrock model; aws: Amazon Translate only; auto: Translate, then Bedrock
     translate_backend: Literal["bedrock", "aws", "auto"] = "bedrock"
 
@@ -40,6 +46,10 @@ class Settings(BaseSettings):
     # Empty disables Bedrock Guardrails; Comprehend PII redaction is always applied
     guardrail_id: str = ""
     guardrail_version: str = "DRAFT"
+
+    @property
+    def triage_model_list(self) -> list[str]:
+        return [m.strip() for m in self.triage_models.split(",") if m.strip()]
 
     @property
     def bedrock_model_list(self) -> list[str]:

@@ -16,10 +16,13 @@ class SupportCase(BaseModel):
     image_labels: list[str] = Field(default_factory=list)
     summary: str = ""
     category: str = ""
+    persona: str = ""
+    persona_reason: str = ""
     priority: str = ""
     reply_en: str = ""
     reply: str = ""
     reply_language: str = ""
     blocked: bool = False
     model_id: str = ""
+    models: dict[str, str] = Field(default_factory=dict)
     backends: dict[str, str] = Field(default_factory=dict)

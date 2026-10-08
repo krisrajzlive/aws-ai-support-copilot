@@ -26,8 +26,35 @@ flowchart LR
 2. **Protects customer data.** PII is replaced with numbered tokens (`[[NAME_1]]`) before any text
    reaches a language model, and restored only in the final reply.
 3. **Reads attachments.** Textract extracts receipt text; Rekognition labels product photos.
-4. **Triages.** A Bedrock model returns a summary, category, priority and a drafted reply.
-5. **Replies in the customer's language.**
+4. **Triages.** A small, cheap model (Nova Micro) returns a summary, category and priority.
+5. **Routes to a persona.** Each persona has its own prompt, temperature and model list, so a
+   billing question, a damaged product and an angry customer are handled by different agents.
+6. **Replies in the customer's language.**
+
+## Personas and routing
+
+| Persona | Handles | Models (in order) |
+|---|---|---|
+| `billing` | billing | Nova Pro, Nova Lite |
+| `shipping` | shipping | Nova Lite, Nova Micro |
+| `technical` | product defects | Qwen3 32B, gpt-oss-120b, Nova Pro |
+| `security` | account access | Nova Pro, Nova Lite |
+| `escalation` | urgent priority, or negative sentiment with high priority | Nova Pro, Nova Lite |
+| `general` | everything else | Nova Lite, Nova Micro |
+
+Every case records which persona handled it and why (`persona_reason`) and which model answered
+each stage (`models`). Personas live in a TOML file: copy
+[`src/copilot/default_personas.toml`](src/copilot/default_personas.toml), edit prompts, models
+or escalation rules, and set `COPILOT_PERSONAS_FILE`.
+
+```bash
+uv run copilot personas --check          # list personas and test that their models respond
+uv run copilot analyze --text "..." --persona billing   # force a persona
+uv run python scripts/evaluate_routing.py               # run 8 varied messages and show routing
+```
+
+Replies are constrained to the case facts: the model may not invent delivery times, prices or
+policies, and customer names are only restored after the model has written the reply.
 
 Example (`copilot analyze --text "Hola, mi pedido 48213 llegó roto. Soy Maria Lopez, mi correo es
 maria.lopez@example.com. Quiero un reembolso."`):
@@ -68,7 +95,9 @@ Defaults run in a restricted account; the AWS-native backends are implemented an
 | `COPILOT_TRANSCRIBE_BACKEND` | `bedrock`, `aws` | `bedrock` | `aws` uses Amazon Transcribe and needs `COPILOT_TRANSCRIBE_BUCKET` |
 | `COPILOT_TTS_BACKEND` | `off`, `polly` | `off` | `polly` enables `copilot analyze --speak reply.mp3` |
 | `COPILOT_GUARDRAIL_ID` | guardrail id or empty | empty | create one with `scripts/create_guardrail.py` |
-| `COPILOT_BEDROCK_MODELS` | comma-separated model ids | Nova Lite first | first model that responds is used |
+| `COPILOT_BEDROCK_MODELS` | comma-separated model ids | Nova Lite first | used for translation fallback; first model that responds wins |
+| `COPILOT_TRIAGE_MODELS` | comma-separated model ids | Nova Micro, Nova Lite | classifies category and priority |
+| `COPILOT_PERSONAS_FILE` | path to TOML | built-in personas | custom prompts, models and escalation rules |
 
 ## Verified against a restricted lab account
 

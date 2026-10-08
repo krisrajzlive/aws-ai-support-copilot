@@ -66,6 +66,7 @@ def handle(
             audio=audio,
             audio_format=event.get("audio_format", "wav"),
             reply_language=event.get("reply_language"),
+            persona=event.get("persona"),
         )
     except Exception as exc:  # surface the failure class without leaking internals
         return _response(502, {"error": f"{type(exc).__name__}: {exc}"})

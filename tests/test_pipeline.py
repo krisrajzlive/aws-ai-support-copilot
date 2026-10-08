@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from conftest import FakeSession, client_error
+from conftest import FakeSession, client_error, router_converse
 from copilot.config import Settings
 from copilot.pipeline import analyze_case
 from copilot.services.bedrock import parse_json_object
@@ -33,9 +33,9 @@ def test_redact_numbers_tokens_and_reuses_one_per_distinct_value():
     assert mapping == {"[[NAME_1]]": "Ann", "[[NAME_2]]": "Bob"}
 
 
-def test_fill_placeholders_restores_known_tokens_only():
+def test_fill_placeholders_restores_known_tokens_and_drops_unknown():
     out = fill_placeholders("Dear [[NAME_1]], re [[ORDER_9]]", {"[[NAME_1]]": "Maria"})
-    assert out == "Dear Maria, re [[ORDER_9]]"
+    assert out == "Dear Maria, re"
 
 
 def test_entities_and_sentiment_run_on_redacted_text():
@@ -75,12 +75,14 @@ def test_pipeline_falls_back_to_bedrock_translation_when_translate_denied():
         }
     )
     case = analyze_case(
-        session, Settings(aws_profile=None, bedrock_models="m.one"), text="Hola, pedido roto"
+        session,
+        Settings(aws_profile=None, bedrock_models="m.one", triage_models="t.one"),
+        text="Hola, pedido roto",
     )
     assert case.source_language == "es"
     assert case.backends["translate"] == "bedrock"
     assert case.category == "product_defect"
-    assert case.model_id == "m.one"
+    assert case.models["triage"] == "t.one"
 
 
 def test_audio_is_transcribed_with_voxtral_before_analysis():
@@ -126,28 +128,24 @@ def test_translate_modes():
 
 
 def test_reply_is_personalised_from_placeholders_without_sending_pii_to_the_model():
-    prompts: list[str] = []
-
-    def converse(**kw):
-        prompts.append(kw["messages"][0]["content"][0]["text"])
-        reply = json.dumps(
-            {
-                "summary": "s",
-                "category": "other",
-                "priority": "low",
-                "reply": "Dear [[NAME_1]], sorry.",
-            }
-        )
-        return {"output": {"message": {"content": [{"text": reply}]}}}
+    calls: list[dict] = []
 
     def pii(**_):
         return {"Entities": [{"Type": "NAME", "BeginOffset": 8, "EndOffset": 13}]}
 
     session = FakeSession(
-        {("bedrock-runtime", "converse"): converse, ("comprehend", "detect_pii_entities"): pii}
+        {
+            ("bedrock-runtime", "converse"): router_converse(
+                {"summary": "s", "category": "other", "priority": "low"},
+                "Dear [[NAME_1]], sorry.",
+                calls,
+            ),
+            ("comprehend", "detect_pii_entities"): pii,
+        }
     )
     case = analyze_case(
         session, Settings(aws_profile=None, bedrock_models="m.one"), text="My name Maria broke it"
     )
     assert case.reply_en == "Dear Maria, sorry."
-    assert all("Maria" not in p for p in prompts)
+    sent = [m["messages"][0]["content"][0]["text"] for m in calls]
+    assert all("Maria" not in text for text in sent)

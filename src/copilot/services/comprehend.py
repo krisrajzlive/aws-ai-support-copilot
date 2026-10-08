@@ -50,8 +50,10 @@ def redact(text: str, pii_entities: list[dict[str, Any]]) -> tuple[str, dict[str
 
 
 def fill_placeholders(text: str, placeholders: dict[str, str]) -> str:
-    """Put original values back into model output; unknown tokens are left as they are."""
-    return _TOKEN.sub(lambda m: placeholders.get(m.group(0), m.group(0)), text)
+    """Put original values back into model output and drop any token that has no value."""
+    filled = _TOKEN.sub(lambda m: placeholders.get(m.group(0), m.group(0)), text)
+    # A token the model invented (or that was dropped in translation) must not reach the customer.
+    return re.sub(r" ?\[\[[A-Z_]+_\d+\]\]", "", filled)
 
 
 def _is_token_artifact(entity_text: str) -> bool:
