@@ -60,3 +60,46 @@ def test_polly_picks_language_voice():
 def test_speech_is_off_by_default():
     with pytest.raises(RuntimeError, match="off"):
         speak_reply(FakeSession(), Settings(aws_profile=None), SupportCase(reply="hi"))
+
+
+def test_lex_intake_collects_slots_and_builds_case_text():
+    from copilot.services.lex import LexIntake
+
+    replies = iter(
+        [
+            {
+                "messages": [{"content": "What is your order number?"}],
+                "sessionState": {
+                    "dialogAction": {"type": "ElicitSlot"},
+                    "intent": {
+                        "name": "ReportProblem",
+                        "state": "InProgress",
+                        "slots": {"OrderId": None},
+                    },
+                },
+            },
+            {
+                "messages": [{"content": "Thanks."}],
+                "sessionState": {
+                    "dialogAction": {"type": "Close"},
+                    "intent": {
+                        "name": "ReportProblem",
+                        "state": "Fulfilled",
+                        "slots": {
+                            "OrderId": {
+                                "value": {"originalValue": "A55120", "interpretedValue": "a55120"}
+                            },
+                            "Details": None,
+                        },
+                    },
+                },
+            },
+        ]
+    )
+    session = FakeSession({("lexv2-runtime", "recognize_text"): lambda **_: next(replies)})
+    lex = LexIntake(session.client("lexv2-runtime"), "BOT")
+    first = lex.send("my order arrived broken")
+    assert first.messages == ["What is your order number?"] and not first.fulfilled
+    done = lex.send("A55120")
+    assert done.fulfilled and done.slots == {"OrderId": "A55120"}
+    assert lex.case_text(done) == "my order arrived broken A55120 (OrderId A55120)"

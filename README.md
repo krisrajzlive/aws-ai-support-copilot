@@ -84,6 +84,18 @@ uv run copilot analyze --audio fixtures/call.wav
 `copilot doctor` probes the active credentials and lists what is usable, so the same code runs
 against a restricted lab account and a full AWS account.
 
+## Lex intake bot
+
+`scripts/create_lex_bot.py` builds an Amazon Lex V2 bot (`SupportIntake`) from code: it asks for the
+order number and issue type, confirms, and hands the collected case to the pipeline.
+
+```bash
+uv run python scripts/create_lex_bot.py --recreate      # prints COPILOT_LEX_BOT_ID for .env
+uv run copilot intake                                    # chat with the bot, then triage the case
+uv run copilot intake --say "my parcel is late" --say "B88231" --say "shipping" --say "yes"
+uv run python scripts/create_lex_bot.py --delete        # clean up
+```
+
 ## Configuration
 
 Services that are commonly blocked in lab accounts are switchable in `.env` (see `.env.example`).
@@ -97,6 +109,7 @@ Defaults run in a restricted account; the AWS-native backends are implemented an
 | `COPILOT_GUARDRAIL_ID` | guardrail id or empty | empty | create one with `scripts/create_guardrail.py` |
 | `COPILOT_BEDROCK_MODELS` | comma-separated model ids | Nova Lite first | used for translation fallback; first model that responds wins |
 | `COPILOT_TRIAGE_MODELS` | comma-separated model ids | Nova Micro, Nova Lite | classifies category and priority |
+| `COPILOT_LEX_BOT_ID` | bot id | empty | set to the id printed by `create_lex_bot.py`; alias defaults to the DRAFT test alias |
 | `COPILOT_PERSONAS_FILE` | path to TOML | built-in personas | custom prompts, models and escalation rules |
 
 ## Verified against a restricted lab account
@@ -105,7 +118,7 @@ Results from a time-boxed, region-locked (us-east-1) training sandbox:
 
 | Ran live | Blocked (config switches retained, stub-tested only) |
 |---|---|
-| Bedrock (Nova Lite/Micro/Pro, Qwen3, gpt-oss, Voxtral), Textract, Comprehend (language, sentiment, entities, PII), Rekognition, Lambda deploy | Translate, Transcribe, Polly, Bedrock Guardrails, SageMaker training and endpoints |
+| Bedrock (Nova Lite/Micro/Pro, Qwen3, gpt-oss, Voxtral), Lex (bot built and conversed with from code), Textract, Comprehend (language, sentiment, entities, PII), Rekognition, Lambda deploy | Translate, Transcribe, Polly, Bedrock Guardrails, SageMaker training and endpoints |
 
 Anthropic Claude models appear in the Bedrock catalog there but cannot be invoked from code, so
 Bedrock calls default to Amazon Nova Lite with other models as fallbacks.
@@ -142,7 +155,8 @@ running large batches, and run `uv run python scripts/deploy_lambda.py delete` w
 | 3 | Textract and Rekognition inputs | done |
 | 4 | Bedrock triage and reply, optional Guardrails | done |
 | 5 | SageMaker ticket classifier (notebook-trained) | planned |
-| 6 | Lex intake bot, web UI | planned |
+| 6 | Lex intake bot | done |
+| 7 | Web UI | planned |
 
 ## Development
 

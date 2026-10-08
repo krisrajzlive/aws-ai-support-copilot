@@ -14,6 +14,7 @@ from copilot.config import Settings
 from copilot.doctor import DoctorReport, Status, run_doctor
 from copilot.personas import load_personas
 from copilot.pipeline import analyze_case, speak_reply
+from copilot.services.lex import LexIntake
 
 app = typer.Typer(help="AWS AI Support Copilot", no_args_is_help=True, add_completion=False)
 console = Console()
@@ -83,6 +84,49 @@ def analyze(
     if speak:
         speak.write_bytes(speak_reply(session, settings, case))
         console.print(f"Spoken reply written to {speak}")
+
+
+@app.command()
+def intake(
+    say: Annotated[
+        list[str] | None,
+        typer.Option("--say", help="Scripted customer message; repeat for each turn."),
+    ] = None,
+) -> None:
+    """Chat with the Lex intake bot, then run the collected case through the pipeline."""
+    settings = Settings()
+    if not settings.lex_bot_id:
+        raise typer.BadParameter("Set COPILOT_LEX_BOT_ID (run scripts/create_lex_bot.py first).")
+    session = make_session(settings)
+    lex = LexIntake(
+        session.client("lexv2-runtime"),
+        settings.lex_bot_id,
+        settings.lex_bot_alias_id,
+        settings.lex_locale,
+    )
+    scripted = iter(say or [])
+    first = next(scripted) if say else typer.prompt("You")
+    if say:
+        console.print(f"[green]You:[/green] {first}")
+    turn = lex.send(first)
+    while True:
+        for message in turn.messages:
+            console.print(f"[cyan]Bot:[/cyan] {message}")
+        if turn.fulfilled or turn.action == "Close":
+            break
+        reply = next(scripted, None) if say else typer.prompt("You")
+        if reply is None:
+            console.print("[yellow]Scripted messages ran out before the bot finished.[/]")
+            return
+        if say:
+            console.print(f"[green]You:[/green] {reply}")
+        turn = lex.send(reply)
+    if not turn.fulfilled or turn.intent != "ReportProblem":
+        return
+    console.print()
+    console.print("[bold]Opening a case...[/bold]")
+    case = analyze_case(session, settings, text=lex.case_text(turn))
+    console.print_json(case.model_dump_json())
 
 
 @app.command()

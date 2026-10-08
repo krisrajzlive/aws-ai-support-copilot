@@ -43,6 +43,11 @@ class Settings(BaseSettings):
     tts_backend: Literal["off", "polly"] = "off"
     polly_voice: str = "Joanna"
 
+    # Amazon Lex intake bot, created by scripts/create_lex_bot.py (TSTALIASID = DRAFT test alias)
+    lex_bot_id: str = ""
+    lex_bot_alias_id: str = "TSTALIASID"
+    lex_locale: str = "en_US"
+
     # Empty disables Bedrock Guardrails; Comprehend PII redaction is always applied
     guardrail_id: str = ""
     guardrail_version: str = "DRAFT"
