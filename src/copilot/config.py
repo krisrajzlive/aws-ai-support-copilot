@@ -19,6 +19,8 @@ class Settings(BaseSettings):
     aws_profile: str | None = "sandbox"
     aws_region: str = "us-east-1"
     bedrock_models: str = DEFAULT_BEDROCK_MODELS
+    guardrail_id: str = ""
+    guardrail_version: str = "DRAFT"
 
     @property
     def bedrock_model_list(self) -> list[str]:

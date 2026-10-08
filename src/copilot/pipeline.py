@@ -7,6 +7,7 @@ from copilot.config import Settings
 from copilot.models import SupportCase
 from copilot.services import comprehend, vision
 from copilot.services.bedrock import BedrockService
+from copilot.services.guardrails import GuardrailService
 from copilot.services.translate import Translator
 
 CATEGORIES = ["billing", "shipping", "product_defect", "account_access", "other"]
@@ -49,6 +50,11 @@ def analyze_case(
 
     bedrock = BedrockService(client("bedrock-runtime"), settings.bedrock_model_list)
     translator = Translator(client("translate"), bedrock)
+    guardrail = (
+        GuardrailService(client("bedrock"), settings.guardrail_id, settings.guardrail_version)
+        if settings.guardrail_id
+        else None
+    )
     case = SupportCase(original_text=text)
 
     if document:
@@ -60,6 +66,14 @@ def analyze_case(
     source = comprehend.detect_language(comp, text) if text.strip() else "en"
     case.source_language = source
     case.english_text = translator.translate(text, source, "en")
+
+    if guardrail:
+        checked = guardrail.apply(case.english_text, "INPUT")
+        case.english_text = checked.text
+        if checked.blocked:
+            case.blocked, case.reply, case.reply_en = True, checked.text, checked.text
+            case.backends = {"translate": translator.backend, "guardrail": "bedrock-guardrails"}
+            return case
 
     insights = comprehend.analyze_english(comp, case.english_text)
     case.sentiment, case.entities, case.pii_types = (
@@ -74,9 +88,15 @@ def analyze_case(
     case.category = str(result.get("category", "other"))
     case.priority = str(result.get("priority", "medium"))
     case.reply_en = str(result.get("reply", ""))
+    if guardrail:
+        case.reply_en = guardrail.apply(case.reply_en, "OUTPUT").text
 
     target = reply_language or source
     case.reply = translator.translate(case.reply_en, "en", target)
     case.model_id = bedrock.model_id
-    case.backends = {"translate": translator.backend, "llm": "bedrock"}
+    case.backends = {
+        "translate": translator.backend,
+        "llm": "bedrock",
+        "guardrail": "bedrock-guardrails" if guardrail else "comprehend-pii-redaction",
+    }
     return case

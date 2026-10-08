@@ -142,6 +142,7 @@ STATIC_PROBES: tuple[Probe, ...] = (
         "rekognition",
         lambda c: c.detect_moderation_labels(Image={"Bytes": _PNG}),
     ),
+    Probe("guardrails", "ListGuardrails", "bedrock", lambda c: c.list_guardrails(maxResults=1)),
     Probe("lex", "ListBots", "lexv2-models", lambda c: c.list_bots(maxResults=1)),
     Probe(
         "sagemaker",
