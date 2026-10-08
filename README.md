@@ -59,6 +59,23 @@ tested with stubs.
 | `COPILOT_GUARDRAIL_ID` | guardrail id or empty | empty | create one with `scripts/create_guardrail.py` |
 | `COPILOT_BEDROCK_MODELS` | comma-separated model ids | Nova Lite first | first model that responds is used |
 
+## Running as an AWS Lambda
+
+`src/copilot/handler.py` exposes the same pipeline as a Lambda function (JSON in, case JSON out;
+documents, images and audio are passed as base64). Credentials come from the execution role.
+
+```bash
+uv run python scripts/package_lambda.py                       # builds dist/support-copilot.zip (~18 MB)
+uv run python scripts/deploy_lambda.py deploy --role-arn <role-arn>
+uv run python scripts/deploy_lambda.py invoke --text "My order arrived broken"
+uv run python scripts/deploy_lambda.py delete
+```
+
+The role must allow the services you enable (Bedrock `InvokeModel`, Comprehend, Textract,
+Rekognition, and so on). In the restricted lab account used during development the only available
+role grants logging only: deploy and invocation work and the function reports the missing Bedrock
+permission as a 502, so end-to-end runs there use the CLI.
+
 ## Status
 
 | Phase | Scope | State |
