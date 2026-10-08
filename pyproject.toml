@@ -17,6 +17,9 @@ copilot = "copilot.cli:app"
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6"]
+ml = [
+    "scikit-learn>=1.9.1",
+]
 
 [build-system]
 requires = ["hatchling"]

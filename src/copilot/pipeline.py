@@ -8,6 +8,7 @@ from copilot.models import SupportCase
 from copilot.personas import PersonaSet, load_personas
 from copilot.services import comprehend, vision
 from copilot.services.bedrock import BedrockService
+from copilot.services.classifier import TicketClassifier
 from copilot.services.guardrails import GuardrailService
 from copilot.services.speech import synthesize_reply
 from copilot.services.transcribe import AwsTranscriber, Transcriber
@@ -133,7 +134,15 @@ def analyze_case(
     triage = triage_llm.complete_json(TRIAGE_PROMPT, _case_prompt(case))
     case.summary = str(triage.get("summary", ""))
     case.category = str(triage.get("category", "other"))
+    case.category_source = "llm"
     case.priority = str(triage.get("priority", "medium"))
+
+    # A trained classifier overrides the LLM's category only when it is confident.
+    if settings.classifier_path:
+        prediction = TicketClassifier.load(settings.classifier_path).predict(case.english_text)
+        case.category_confidence = round(prediction.confidence, 3)
+        if prediction.confidence >= settings.classifier_min_confidence:
+            case.category, case.category_source = prediction.label, "classifier"
 
     # Stage 2: routing picks the persona, and with it the prompt, models and temperature.
     chosen, reason = personas.select(case.category, case.priority, case.sentiment, persona)

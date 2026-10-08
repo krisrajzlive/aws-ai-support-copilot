@@ -1,0 +1,801 @@
+text,label,split
+"Hi, there is a part missing from my backpack. Please advise.",product_defect,train
+"Hello, you overcharged me on order 18209, please correct the bill. Please advise.",billing,test
+"the laptop charger is defective and makes a strange noise. Regards, Sam",product_defect,train
+the blender arrived damaged with a cracked case.,product_defect,train
+"Hey team, I did not request this password reset email. This is frustrating.",account_access,train
+"Hi, I was charged twice for my blender and need a refund. This is frustrating.",billing,train
+I cannot log in to my account. Thanks.,account_access,train
+Please help. delivery is late and nobody told me why. Thanks.,shipping,train
+delivery is late and nobody told me why. ASAP!,shipping,train
+Good morning. the verification code never arrives on my phone. Please advise.,account_access,test
+"Hey team, my parcel for order 19437 has not arrived yet. Thanks.",shipping,train
+the tracking for my laptop charger has not updated in a week.,shipping,train
+"Good morning. you overcharged me on order 77947, please correct the bill.",billing,test
+my invoice shows the wrong amount for order 94296. ASAP!,billing,train
+can I speak to someone about a bulk order. ASAP!,other,train
+"Hello, I would like to leave feedback about your website. ASAP!",other,train
+Please help. the verification code never arrives on my phone.,account_access,test
+"Hi, what are your opening hours. ASAP!",other,train
+the discount code was not applied and I paid the full price.,billing,train
+Please help. the tracking for my backpack has not updated in a week. Please advise.,shipping,train
+Urgent: how long will shipping to my city take. This is frustrating.,shipping,test
+"Hi, there is a part missing from my blender. ASAP!",product_defect,train
+Good morning. my order 49231 says delivered but I never received it. This is frustrating.,shipping,test
+"Hey team, I need a receipt for the payment I made for the desk lamp.",billing,test
+"Hi, I would like to leave feedback about your website. This is frustrating.",other,train
+Please help. my parcel for order 79187 has not arrived yet. Please advise.,shipping,train
+Please help. my account is locked after too many attempts. This is frustrating.,account_access,train
+"please cancel my subscription and refund last month's payment. Regards, Sam",billing,train
+how do I become a reseller.,other,test
+the kettle is defective and makes a strange noise. Thanks.,product_defect,train
+"Hi, the discount code was not applied and I paid the full price. Regards, Sam",billing,train
+Good morning. the discount code was not applied and I paid the full price. Thanks.,billing,train
+I did not request this password reset email.,account_access,train
+Good morning. I did not request this password reset email. Please advise.,account_access,train
+Good morning. my order 67948 says delivered but I never received it. This is frustrating.,shipping,test
+can you change the delivery address for order 48725.,shipping,train
+how do I become a reseller.,other,test
+"Hi, the verification code never arrives on my phone. Please advise.",account_access,test
+Urgent: there is a part missing from my monitor. Thanks.,product_defect,train
+"Hi, there is an unknown charge on my card from your store.",billing,train
+Please help. the backpack is defective and makes a strange noise.,product_defect,train
+my parcel for order 90443 has not arrived yet.,shipping,train
+Please help. can I speak to someone about a bulk order. This is frustrating.,other,train
+"Hi, how do I become a reseller. ASAP!",other,test
+Good morning. how long will shipping to my city take. Please advise.,shipping,test
+I need a receipt for the payment I made for the desk lamp. This is frustrating.,billing,test
+"Hey team, you overcharged me on order 76412, please correct the bill. Regards, Sam",billing,test
+Urgent: delivery is late and nobody told me why.,shipping,train
+Urgent: the kettle does not turn on at all.,product_defect,test
+"Hello, I need a receipt for the payment I made for the blender. Please advise.",billing,test
+Urgent: my invoice shows the wrong amount for order 58935.,billing,train
+"Hi, delivery is late and nobody told me why.",shipping,train
+delivery is late and nobody told me why. Thanks.,shipping,train
+"Good morning. my kettle stopped working after two days. Regards, Sam",product_defect,train
+"Hey team, the blender is defective and makes a strange noise. This is frustrating.",product_defect,train
+Urgent: is the monitor available in other colours. Please advise.,other,test
+my kettle overheats and shuts down by itself. This is frustrating.,product_defect,test
+"I cannot log in to my account. Regards, Sam",account_access,train
+"Hi, the verification code never arrives on my phone. Regards, Sam",account_access,test
+how do I become a reseller.,other,test
+"Hello, the discount code was not applied and I paid the full price.",billing,train
+"Hi, is the blender available in other colours.",other,test
+do you ship to other countries. Thanks.,other,train
+Please help. the courier left my package at the wrong address. ASAP!,shipping,train
+Good morning. do you offer a gift wrapping service.,other,train
+"Hey team, what are your opening hours. ASAP!",other,train
+Good morning. delivery is late and nobody told me why. Please advise.,shipping,train
+someone else may have accessed my account. Please advise.,account_access,train
+I did not request this password reset email. Please advise.,account_access,train
+"Hello, my account is locked after too many attempts. Thanks.",account_access,train
+"Hello, can I speak to someone about a bulk order. Please advise.",other,train
+do you offer a gift wrapping service. ASAP!,other,train
+"Hello, there is an unknown charge on my card from your store. Regards, Sam",billing,train
+"Hi, do you ship to other countries. This is frustrating.",other,train
+please cancel my subscription and refund last month's payment. This is frustrating.,billing,train
+"Hey team, I did not request this password reset email.",account_access,train
+"Hey team, the courier left my package at the wrong address. Please advise.",shipping,train
+can you change the delivery address for order 18229. This is frustrating.,shipping,train
+"Hello, my account is locked after too many attempts. This is frustrating.",account_access,train
+"you overcharged me on order 69477, please correct the bill. Thanks.",billing,test
+Good morning. the discount code was not applied and I paid the full price. Thanks.,billing,train
+what are your opening hours. Thanks.,other,train
+I was charged twice for my laptop charger and need a refund. Thanks.,billing,train
+"Hello, is the headphones available in other colours. Thanks.",other,test
+Good morning. I need to change the email address on my account.,account_access,test
+Good morning. do you ship to other countries. Please advise.,other,train
+I cannot log in to my account. This is frustrating.,account_access,train
+I need to change the email address on my account. This is frustrating.,account_access,test
+"Hi, can you change the delivery address for order 61984. ASAP!",shipping,train
+Urgent: is the backpack available in other colours.,other,test
+"Hey team, can I speak to someone about a bulk order.",other,train
+"Hello, can I speak to someone about a bulk order.",other,train
+Urgent: I need a receipt for the payment I made for the monitor. ASAP!,billing,test
+what are your opening hours. Thanks.,other,train
+Good morning. is the headphones available in other colours. This is frustrating.,other,test
+Good morning. delivery is late and nobody told me why. Thanks.,shipping,train
+I cannot log in to my account.,account_access,train
+"Hey team, the kettle arrived damaged with a cracked case. ASAP!",product_defect,train
+Good morning. is the headphones available in other colours.,other,test
+"Hi, the laptop charger I received is broken. Thanks.",product_defect,train
+my blender overheats and shuts down by itself. This is frustrating.,product_defect,test
+my desk lamp overheats and shuts down by itself. ASAP!,product_defect,test
+"Hi, someone else may have accessed my account.",account_access,train
+"Hello, I need to change the email address on my account. Thanks.",account_access,test
+Please help. I need a receipt for the payment I made for the desk lamp.,billing,test
+Urgent: someone else may have accessed my account. Please advise.,account_access,train
+Urgent: can you change the delivery address for order 31062.,shipping,train
+Good morning. can I speak to someone about a bulk order. This is frustrating.,other,train
+my order 68519 says delivered but I never received it.,shipping,test
+Good morning. I need a receipt for the payment I made for the blender. Thanks.,billing,test
+"Hi, is the laptop charger available in other colours. Regards, Sam",other,test
+"Hey team, the kettle arrived damaged with a cracked case.",product_defect,train
+"Hey team, my parcel for order 24816 has not arrived yet. Thanks.",shipping,train
+"Please help. you overcharged me on order 93471, please correct the bill. This is frustrating.",billing,test
+"how do I become a reseller. Regards, Sam",other,test
+"the courier left my package at the wrong address. Regards, Sam",shipping,train
+"Hi, the discount code was not applied and I paid the full price. Regards, Sam",billing,train
+I forgot my password and the reset link is expired. This is frustrating.,account_access,train
+Urgent: my parcel for order 88389 has not arrived yet.,shipping,train
+I did not request this password reset email. ASAP!,account_access,train
+I need a receipt for the payment I made for the kettle. Thanks.,billing,test
+"Urgent: my account is locked after too many attempts. Regards, Sam",account_access,train
+my invoice shows the wrong amount for order 88782.,billing,train
+"I forgot my password and the reset link is expired. Regards, Sam",account_access,train
+Urgent: how do I become a reseller. ASAP!,other,test
+I need to change the email address on my account.,account_access,test
+"Hi, the kettle arrived damaged with a cracked case. This is frustrating.",product_defect,train
+"Hi, I forgot my password and the reset link is expired. Regards, Sam",account_access,train
+Please help. my kettle overheats and shuts down by itself. This is frustrating.,product_defect,test
+someone else may have accessed my account. Thanks.,account_access,train
+is the laptop charger available in other colours. ASAP!,other,test
+"Hello, I forgot my password and the reset link is expired. Please advise.",account_access,train
+Good morning. someone else may have accessed my account. ASAP!,account_access,train
+"Hello, the kettle does not turn on at all. Regards, Sam",product_defect,test
+Urgent: I need a receipt for the payment I made for the laptop charger.,billing,test
+my kettle overheats and shuts down by itself.,product_defect,test
+Good morning. I forgot my password and the reset link is expired.,account_access,train
+Urgent: I need to change the email address on my account. Thanks.,account_access,test
+"Hey team, what are your opening hours. Thanks.",other,train
+"Hey team, do you offer a gift wrapping service. Please advise.",other,train
+"Hey team, do you offer a gift wrapping service. Regards, Sam",other,train
+the monitor is defective and makes a strange noise. Thanks.,product_defect,train
+I would like to leave feedback about your website.,other,train
+"Hello, I forgot my password and the reset link is expired. Thanks.",account_access,train
+"Urgent: I did not request this password reset email. Regards, Sam",account_access,train
+Urgent: my invoice shows the wrong amount for order 22471. Please advise.,billing,train
+"Hello, I need to change the email address on my account. Thanks.",account_access,test
+the kettle I received is broken.,product_defect,train
+"Hi, there is a part missing from my laptop charger.",product_defect,train
+"Please help. delivery is late and nobody told me why. Regards, Sam",shipping,train
+I did not request this password reset email. ASAP!,account_access,train
+Please help. I need to change the email address on my account. Please advise.,account_access,test
+the laptop charger does not turn on at all. This is frustrating.,product_defect,test
+Good morning. I did not request this password reset email. Please advise.,account_access,train
+Urgent: the desk lamp arrived damaged with a cracked case.,product_defect,train
+there is a part missing from my backpack.,product_defect,train
+Good morning. I did not request this password reset email.,account_access,train
+"Hey team, how do I become a reseller. Thanks.",other,test
+"there is a part missing from my desk lamp. Regards, Sam",product_defect,train
+the tracking for my monitor has not updated in a week. Please advise.,shipping,train
+"Please help. you overcharged me on order 74854, please correct the bill. This is frustrating.",billing,test
+"Hi, do you ship to other countries.",other,train
+there is an unknown charge on my card from your store. This is frustrating.,billing,train
+Urgent: there is an unknown charge on my card from your store. ASAP!,billing,train
+"Please help. the discount code was not applied and I paid the full price. Regards, Sam",billing,train
+"Hi, the verification code never arrives on my phone.",account_access,test
+"Hey team, you overcharged me on order 13669, please correct the bill.",billing,test
+"Hi, do you offer a gift wrapping service. Regards, Sam",other,train
+"someone else may have accessed my account. Regards, Sam",account_access,train
+how long will shipping to my city take. Thanks.,shipping,test
+I forgot my password and the reset link is expired.,account_access,train
+Good morning. the verification code never arrives on my phone. Please advise.,account_access,test
+"Hey team, someone else may have accessed my account. This is frustrating.",account_access,train
+"Hello, the desk lamp arrived damaged with a cracked case. Regards, Sam",product_defect,train
+I cannot log in to my account. Please advise.,account_access,train
+"Hi, you overcharged me on order 14806, please correct the bill. Regards, Sam",billing,test
+Urgent: my laptop charger stopped working after two days. ASAP!,product_defect,train
+Good morning. the tracking for my backpack has not updated in a week. Please advise.,shipping,train
+"Hey team, my laptop charger stopped working after two days.",product_defect,train
+Please help. I would like to leave feedback about your website.,other,train
+"Hello, I cannot log in to my account. ASAP!",account_access,train
+"Hey team, delivery is late and nobody told me why. Please advise.",shipping,train
+"Hey team, the desk lamp is defective and makes a strange noise. Regards, Sam",product_defect,train
+I would like to leave feedback about your website.,other,train
+Good morning. my order 20779 says delivered but I never received it. ASAP!,shipping,test
+"Hi, there is an unknown charge on my card from your store. Please advise.",billing,train
+Urgent: how long will shipping to my city take. Please advise.,shipping,test
+Good morning. I need to change the email address on my account. This is frustrating.,account_access,test
+Please help. the desk lamp I received is broken. ASAP!,product_defect,train
+"Hello, can I speak to someone about a bulk order.",other,train
+"Hello, the tracking for my kettle has not updated in a week. ASAP!",shipping,train
+"Hey team, do you ship to other countries.",other,train
+"Hello, my invoice shows the wrong amount for order 43970. Regards, Sam",billing,train
+Urgent: I would like to leave feedback about your website. Thanks.,other,train
+"Hi, there is a part missing from my headphones.",product_defect,train
+I need a receipt for the payment I made for the kettle. ASAP!,billing,test
+Urgent: my order 26159 says delivered but I never received it. ASAP!,shipping,test
+Please help. the discount code was not applied and I paid the full price. Please advise.,billing,train
+"Hello, someone else may have accessed my account. Please advise.",account_access,train
+"Hello, can you change the delivery address for order 42680.",shipping,train
+Good morning. can you change the delivery address for order 44018. Please advise.,shipping,train
+how long will shipping to my city take. Thanks.,shipping,test
+Urgent: please cancel my subscription and refund last month's payment.,billing,train
+"Hi, my backpack overheats and shuts down by itself. Please advise.",product_defect,test
+"Hey team, I forgot my password and the reset link is expired. Regards, Sam",account_access,train
+"Hello, the kettle is defective and makes a strange noise. ASAP!",product_defect,train
+Please help. I cannot log in to my account. ASAP!,account_access,train
+"Hey team, what are your opening hours. This is frustrating.",other,train
+"delivery is late and nobody told me why. Regards, Sam",shipping,train
+"Hey team, the backpack I received is broken. Regards, Sam",product_defect,train
+"Hi, there is an unknown charge on my card from your store. Regards, Sam",billing,train
+"Hi, the monitor is defective and makes a strange noise. Thanks.",product_defect,train
+"Good morning. is the kettle available in other colours. Regards, Sam",other,test
+Urgent: is the kettle available in other colours. ASAP!,other,test
+"Good morning. delivery is late and nobody told me why. Regards, Sam",shipping,train
+"Hi, the desk lamp arrived damaged with a cracked case. Thanks.",product_defect,train
+Urgent: the desk lamp is defective and makes a strange noise. Please advise.,product_defect,train
+Urgent: how long will shipping to my city take. This is frustrating.,shipping,test
+Please help. the headphones I received is broken.,product_defect,train
+"Hey team, the courier left my package at the wrong address.",shipping,train
+"Hi, the laptop charger is defective and makes a strange noise. Please advise.",product_defect,train
+please cancel my subscription and refund last month's payment. Thanks.,billing,train
+Good morning. what are your opening hours. This is frustrating.,other,train
+"Hi, the tracking for my headphones has not updated in a week. This is frustrating.",shipping,train
+Please help. is the desk lamp available in other colours. ASAP!,other,test
+"Hello, the blender I received is broken. This is frustrating.",product_defect,train
+my order 47740 says delivered but I never received it.,shipping,test
+the backpack does not turn on at all. Please advise.,product_defect,test
+do you offer a gift wrapping service. Thanks.,other,train
+"Hey team, the tracking for my headphones has not updated in a week. Regards, Sam",shipping,train
+"Hey team, how long will shipping to my city take. This is frustrating.",shipping,test
+"Hey team, delivery is late and nobody told me why.",shipping,train
+what are your opening hours. Please advise.,other,train
+"Hi, there is an unknown charge on my card from your store.",billing,train
+"my laptop charger stopped working after two days. Regards, Sam",product_defect,train
+my account is locked after too many attempts.,account_access,train
+"Hey team, the courier left my package at the wrong address. This is frustrating.",shipping,train
+Urgent: the tracking for my desk lamp has not updated in a week. ASAP!,shipping,train
+"Hi, there is an unknown charge on my card from your store. Regards, Sam",billing,train
+"Hello, can you change the delivery address for order 16499.",shipping,train
+the blender does not turn on at all. Thanks.,product_defect,test
+Urgent: the kettle is defective and makes a strange noise.,product_defect,train
+"Please help. my invoice shows the wrong amount for order 16355. Regards, Sam",billing,train
+"Hello, someone else may have accessed my account. Please advise.",account_access,train
+"Hello, what are your opening hours. Please advise.",other,train
+"Hello, there is a part missing from my backpack. This is frustrating.",product_defect,train
+"Hi, can you change the delivery address for order 45108.",shipping,train
+"Good morning. the monitor is defective and makes a strange noise. Regards, Sam",product_defect,train
+"Hey team, how long will shipping to my city take. This is frustrating.",shipping,test
+the kettle does not turn on at all. Thanks.,product_defect,test
+"Please help. the tracking for my laptop charger has not updated in a week. Regards, Sam",shipping,train
+Good morning. can you change the delivery address for order 99468. ASAP!,shipping,train
+Please help. there is an unknown charge on my card from your store.,billing,train
+I forgot my password and the reset link is expired. ASAP!,account_access,train
+"you overcharged me on order 30783, please correct the bill. This is frustrating.",billing,test
+Please help. I need a receipt for the payment I made for the laptop charger.,billing,test
+Good morning. I need a receipt for the payment I made for the blender.,billing,test
+Good morning. my parcel for order 95320 has not arrived yet. ASAP!,shipping,train
+"Hi, I forgot my password and the reset link is expired. ASAP!",account_access,train
+"Hey team, my account is locked after too many attempts. ASAP!",account_access,train
+"Hello, my invoice shows the wrong amount for order 98518. This is frustrating.",billing,train
+"you overcharged me on order 89816, please correct the bill. Thanks.",billing,test
+"Hi, the courier left my package at the wrong address. ASAP!",shipping,train
+Please help. there is an unknown charge on my card from your store. Please advise.,billing,train
+Urgent: can you change the delivery address for order 30349. ASAP!,shipping,train
+please cancel my subscription and refund last month's payment.,billing,train
+"Hi, the tracking for my backpack has not updated in a week. This is frustrating.",shipping,train
+"Hey team, the tracking for my backpack has not updated in a week. Regards, Sam",shipping,train
+Good morning. I need a receipt for the payment I made for the laptop charger.,billing,test
+"Hi, the tracking for my kettle has not updated in a week. Regards, Sam",shipping,train
+"Hey team, how long will shipping to my city take. Regards, Sam",shipping,test
+Please help. how do I become a reseller.,other,test
+"Urgent: can you change the delivery address for order 59172. Regards, Sam",shipping,train
+Please help. I was charged twice for my laptop charger and need a refund.,billing,train
+"Hi, I would like to leave feedback about your website. Thanks.",other,train
+"Please help. the headphones does not turn on at all. Regards, Sam",product_defect,test
+Please help. I was charged twice for my kettle and need a refund. ASAP!,billing,train
+"Hey team, I cannot log in to my account.",account_access,train
+what are your opening hours.,other,train
+the blender is defective and makes a strange noise. Please advise.,product_defect,train
+"Hi, you overcharged me on order 41693, please correct the bill.",billing,test
+"Hello, my laptop charger stopped working after two days.",product_defect,train
+"Hello, do you ship to other countries. Thanks.",other,train
+Please help. I need to change the email address on my account. ASAP!,account_access,test
+Good morning. I cannot log in to my account. ASAP!,account_access,train
+"Hey team, there is an unknown charge on my card from your store. Thanks.",billing,train
+"Hello, I need a receipt for the payment I made for the kettle. This is frustrating.",billing,test
+"Hi, someone else may have accessed my account. Please advise.",account_access,train
+"Hey team, can you change the delivery address for order 44288. Please advise.",shipping,train
+the courier left my package at the wrong address. This is frustrating.,shipping,train
+"Hey team, my desk lamp stopped working after two days. ASAP!",product_defect,train
+Please help. I would like to leave feedback about your website. Please advise.,other,train
+Urgent: I was charged twice for my desk lamp and need a refund.,billing,train
+how long will shipping to my city take.,shipping,test
+Urgent: I cannot log in to my account.,account_access,train
+Good morning. the discount code was not applied and I paid the full price.,billing,train
+"I need to change the email address on my account. Regards, Sam",account_access,test
+Please help. my account is locked after too many attempts.,account_access,train
+do you ship to other countries. Please advise.,other,train
+"Hello, there is a part missing from my desk lamp.",product_defect,train
+how do I become a reseller. This is frustrating.,other,test
+"Hi, my account is locked after too many attempts.",account_access,train
+do you offer a gift wrapping service.,other,train
+"Hello, can you change the delivery address for order 46953. Regards, Sam",shipping,train
+Urgent: the courier left my package at the wrong address. ASAP!,shipping,train
+"Hello, I was charged twice for my laptop charger and need a refund. This is frustrating.",billing,train
+Urgent: can I speak to someone about a bulk order. This is frustrating.,other,train
+"Please help. my order 90160 says delivered but I never received it. Regards, Sam",shipping,test
+"Hello, I forgot my password and the reset link is expired.",account_access,train
+"Hi, my parcel for order 29634 has not arrived yet.",shipping,train
+"Urgent: the monitor arrived damaged with a cracked case. Regards, Sam",product_defect,train
+Good morning. delivery is late and nobody told me why. This is frustrating.,shipping,train
+"Hello, I did not request this password reset email. This is frustrating.",account_access,train
+my invoice shows the wrong amount for order 90868. Thanks.,billing,train
+Please help. I did not request this password reset email. Please advise.,account_access,train
+I cannot log in to my account. Thanks.,account_access,train
+"Hey team, I did not request this password reset email. This is frustrating.",account_access,train
+Please help. my monitor overheats and shuts down by itself. This is frustrating.,product_defect,test
+"Hello, I was charged twice for my backpack and need a refund. Please advise.",billing,train
+"Hi, please cancel my subscription and refund last month's payment.",billing,train
+"Hey team, my order 51482 says delivered but I never received it. Thanks.",shipping,test
+"Good morning. there is an unknown charge on my card from your store. Regards, Sam",billing,train
+"Hey team, my order 63711 says delivered but I never received it. Regards, Sam",shipping,test
+my account is locked after too many attempts. Thanks.,account_access,train
+my headphones stopped working after two days. Thanks.,product_defect,train
+my order 14046 says delivered but I never received it.,shipping,test
+"Hello, my desk lamp stopped working after two days. ASAP!",product_defect,train
+"Hey team, the courier left my package at the wrong address. Thanks.",shipping,train
+"Hey team, I need to change the email address on my account. ASAP!",account_access,test
+the headphones arrived damaged with a cracked case. Please advise.,product_defect,train
+Good morning. I did not request this password reset email. ASAP!,account_access,train
+Good morning. my laptop charger stopped working after two days.,product_defect,train
+Please help. how do I become a reseller. Thanks.,other,test
+"you overcharged me on order 89781, please correct the bill. ASAP!",billing,test
+the discount code was not applied and I paid the full price. ASAP!,billing,train
+Good morning. do you offer a gift wrapping service. Please advise.,other,train
+"Hi, my headphones overheats and shuts down by itself. Please advise.",product_defect,test
+"Hi, my parcel for order 80429 has not arrived yet.",shipping,train
+Urgent: my account is locked after too many attempts.,account_access,train
+"Hi, my laptop charger overheats and shuts down by itself. Please advise.",product_defect,test
+"what are your opening hours. Regards, Sam",other,train
+Good morning. the discount code was not applied and I paid the full price. This is frustrating.,billing,train
+Please help. the verification code never arrives on my phone. ASAP!,account_access,test
+"Hi, the verification code never arrives on my phone. Regards, Sam",account_access,test
+Good morning. can I speak to someone about a bulk order. This is frustrating.,other,train
+Urgent: my account is locked after too many attempts.,account_access,train
+"Hello, there is a part missing from my headphones.",product_defect,train
+Good morning. my parcel for order 67949 has not arrived yet.,shipping,train
+"Hi, delivery is late and nobody told me why. This is frustrating.",shipping,train
+I would like to leave feedback about your website. Thanks.,other,train
+"Urgent: the courier left my package at the wrong address. Regards, Sam",shipping,train
+"Hi, please cancel my subscription and refund last month's payment. This is frustrating.",billing,train
+I need a receipt for the payment I made for the laptop charger. Please advise.,billing,test
+"Hey team, I did not request this password reset email. Thanks.",account_access,train
+"there is a part missing from my laptop charger. Regards, Sam",product_defect,train
+"I forgot my password and the reset link is expired. Regards, Sam",account_access,train
+"Hi, there is a part missing from my monitor. ASAP!",product_defect,train
+Please help. what are your opening hours. This is frustrating.,other,train
+how long will shipping to my city take. ASAP!,shipping,test
+"Hey team, the laptop charger arrived damaged with a cracked case. Regards, Sam",product_defect,train
+"Please help. my order 75286 says delivered but I never received it. Regards, Sam",shipping,test
+"Hey team, the laptop charger does not turn on at all. Please advise.",product_defect,test
+"Urgent: how do I become a reseller. Regards, Sam",other,test
+Urgent: the discount code was not applied and I paid the full price. This is frustrating.,billing,train
+"Hi, the desk lamp does not turn on at all. ASAP!",product_defect,test
+the kettle I received is broken. Thanks.,product_defect,train
+"Urgent: I was charged twice for my headphones and need a refund. Regards, Sam",billing,train
+"Hey team, the monitor I received is broken. Thanks.",product_defect,train
+"Hello, my parcel for order 56812 has not arrived yet. Please advise.",shipping,train
+Urgent: how long will shipping to my city take. Please advise.,shipping,test
+how do I become a reseller.,other,test
+how long will shipping to my city take. Please advise.,shipping,test
+I would like to leave feedback about your website.,other,train
+Please help. my account is locked after too many attempts.,account_access,train
+can I speak to someone about a bulk order.,other,train
+Please help. the discount code was not applied and I paid the full price. ASAP!,billing,train
+"Hi, can I speak to someone about a bulk order. Thanks.",other,train
+"Hey team, my invoice shows the wrong amount for order 19841. This is frustrating.",billing,train
+Urgent: can I speak to someone about a bulk order.,other,train
+"Please help. delivery is late and nobody told me why. Regards, Sam",shipping,train
+Please help. my order 64170 says delivered but I never received it. Thanks.,shipping,test
+"Hi, the discount code was not applied and I paid the full price. ASAP!",billing,train
+"Hi, there is a part missing from my headphones.",product_defect,train
+Urgent: I was charged twice for my blender and need a refund. ASAP!,billing,train
+Good morning. my invoice shows the wrong amount for order 68085. This is frustrating.,billing,train
+"Hey team, you overcharged me on order 53763, please correct the bill. Thanks.",billing,test
+"Hi, someone else may have accessed my account. Thanks.",account_access,train
+Urgent: there is an unknown charge on my card from your store. Thanks.,billing,train
+"Urgent: my parcel for order 52893 has not arrived yet. Regards, Sam",shipping,train
+Good morning. my blender overheats and shuts down by itself. This is frustrating.,product_defect,test
+"Urgent: how long will shipping to my city take. Regards, Sam",shipping,test
+"Hello, the laptop charger is defective and makes a strange noise.",product_defect,train
+the headphones arrived damaged with a cracked case.,product_defect,train
+my invoice shows the wrong amount for order 61750.,billing,train
+please cancel my subscription and refund last month's payment.,billing,train
+Urgent: can you change the delivery address for order 52025. ASAP!,shipping,train
+"Hey team, my order 63139 says delivered but I never received it. Regards, Sam",shipping,test
+"Urgent: my account is locked after too many attempts. Regards, Sam",account_access,train
+Please help. the courier left my package at the wrong address.,shipping,train
+Urgent: my order 13969 says delivered but I never received it.,shipping,test
+"Hello, delivery is late and nobody told me why. Regards, Sam",shipping,train
+do you offer a gift wrapping service. This is frustrating.,other,train
+"Please help. the verification code never arrives on my phone. Regards, Sam",account_access,test
+"Hey team, is the headphones available in other colours. This is frustrating.",other,test
+I need to change the email address on my account. Please advise.,account_access,test
+"Good morning. my laptop charger stopped working after two days. Regards, Sam",product_defect,train
+"Hey team, the tracking for my laptop charger has not updated in a week. Please advise.",shipping,train
+I need to change the email address on my account. Thanks.,account_access,test
+Good morning. there is a part missing from my laptop charger.,product_defect,train
+Urgent: delivery is late and nobody told me why. ASAP!,shipping,train
+Urgent: the desk lamp arrived damaged with a cracked case. Please advise.,product_defect,train
+Please help. do you ship to other countries. Please advise.,other,train
+"Please help. I would like to leave feedback about your website. Regards, Sam",other,train
+"Hello, the verification code never arrives on my phone. This is frustrating.",account_access,test
+"Hello, my invoice shows the wrong amount for order 22129. Regards, Sam",billing,train
+"Hey team, my account is locked after too many attempts. Thanks.",account_access,train
+I did not request this password reset email. ASAP!,account_access,train
+I did not request this password reset email. Please advise.,account_access,train
+"Hi, the headphones is defective and makes a strange noise. Thanks.",product_defect,train
+"you overcharged me on order 97053, please correct the bill. ASAP!",billing,test
+"Hello, I was charged twice for my headphones and need a refund.",billing,train
+"Hey team, how do I become a reseller. ASAP!",other,test
+"Hello, please cancel my subscription and refund last month's payment. Regards, Sam",billing,train
+"Hi, the blender arrived damaged with a cracked case.",product_defect,train
+the desk lamp I received is broken.,product_defect,train
+"Hi, I was charged twice for my blender and need a refund. ASAP!",billing,train
+"Hi, there is an unknown charge on my card from your store. Thanks.",billing,train
+do you ship to other countries. Thanks.,other,train
+"Hello, I need to change the email address on my account. Regards, Sam",account_access,test
+"Hey team, my headphones overheats and shuts down by itself. This is frustrating.",product_defect,test
+"Hello, can I speak to someone about a bulk order.",other,train
+the verification code never arrives on my phone.,account_access,test
+the desk lamp is defective and makes a strange noise. Thanks.,product_defect,train
+"the tracking for my kettle has not updated in a week. Regards, Sam",shipping,train
+Urgent: what are your opening hours. Thanks.,other,train
+"Hey team, the tracking for my blender has not updated in a week. Regards, Sam",shipping,train
+Urgent: I would like to leave feedback about your website. ASAP!,other,train
+"Please help. my parcel for order 61553 has not arrived yet. Regards, Sam",shipping,train
+is the backpack available in other colours.,other,test
+"Hello, there is a part missing from my desk lamp. Please advise.",product_defect,train
+"Hey team, the monitor does not turn on at all.",product_defect,test
+Good morning. how long will shipping to my city take.,shipping,test
+"I cannot log in to my account. Regards, Sam",account_access,train
+I cannot log in to my account. ASAP!,account_access,train
+Urgent: what are your opening hours. This is frustrating.,other,train
+the courier left my package at the wrong address. Thanks.,shipping,train
+"Hi, there is a part missing from my desk lamp. Regards, Sam",product_defect,train
+Good morning. I need to change the email address on my account.,account_access,test
+the backpack I received is broken.,product_defect,train
+"Hi, can you change the delivery address for order 22204. Thanks.",shipping,train
+"Hey team, I cannot log in to my account.",account_access,train
+Please help. someone else may have accessed my account. This is frustrating.,account_access,train
+my parcel for order 61139 has not arrived yet. Thanks.,shipping,train
+"Hey team, I cannot log in to my account.",account_access,train
+the blender does not turn on at all. Please advise.,product_defect,test
+Urgent: I need a receipt for the payment I made for the desk lamp. Thanks.,billing,test
+"Hello, I was charged twice for my backpack and need a refund.",billing,train
+"Hello, how do I become a reseller. Regards, Sam",other,test
+"Hi, my blender stopped working after two days.",product_defect,train
+"Hi, the laptop charger is defective and makes a strange noise. Thanks.",product_defect,train
+"Hello, there is an unknown charge on my card from your store. ASAP!",billing,train
+"Please help. there is an unknown charge on my card from your store. Regards, Sam",billing,train
+"Hey team, my blender overheats and shuts down by itself. Regards, Sam",product_defect,test
+the discount code was not applied and I paid the full price. Please advise.,billing,train
+"Hi, the verification code never arrives on my phone. Please advise.",account_access,test
+Good morning. the discount code was not applied and I paid the full price.,billing,train
+Urgent: the desk lamp does not turn on at all.,product_defect,test
+"can I speak to someone about a bulk order. Regards, Sam",other,train
+"Please help. I did not request this password reset email. Regards, Sam",account_access,train
+my monitor overheats and shuts down by itself.,product_defect,test
+"Please help. the laptop charger is defective and makes a strange noise. Regards, Sam",product_defect,train
+"Hey team, can I speak to someone about a bulk order.",other,train
+"Hey team, my parcel for order 44477 has not arrived yet. Please advise.",shipping,train
+"Hey team, the tracking for my backpack has not updated in a week. ASAP!",shipping,train
+the tracking for my desk lamp has not updated in a week.,shipping,train
+the monitor I received is broken. ASAP!,product_defect,train
+"Hey team, I need a receipt for the payment I made for the desk lamp.",billing,test
+Good morning. do you offer a gift wrapping service. This is frustrating.,other,train
+"I was charged twice for my laptop charger and need a refund. Regards, Sam",billing,train
+can I speak to someone about a bulk order.,other,train
+"Hi, what are your opening hours. This is frustrating.",other,train
+"Hi, the discount code was not applied and I paid the full price. This is frustrating.",billing,train
+the tracking for my laptop charger has not updated in a week. Please advise.,shipping,train
+"Hi, the kettle does not turn on at all.",product_defect,test
+Please help. delivery is late and nobody told me why. This is frustrating.,shipping,train
+"I would like to leave feedback about your website. Regards, Sam",other,train
+Urgent: my headphones stopped working after two days. This is frustrating.,product_defect,train
+Good morning. the discount code was not applied and I paid the full price. Please advise.,billing,train
+"Hello, my laptop charger overheats and shuts down by itself. Thanks.",product_defect,test
+the tracking for my desk lamp has not updated in a week.,shipping,train
+Good morning. I was charged twice for my desk lamp and need a refund.,billing,train
+"Hello, I need a receipt for the payment I made for the laptop charger. Please advise.",billing,test
+"Hello, the courier left my package at the wrong address.",shipping,train
+Good morning. how long will shipping to my city take. This is frustrating.,shipping,test
+Good morning. can I speak to someone about a bulk order. Thanks.,other,train
+"Hello, how do I become a reseller. Please advise.",other,test
+Good morning. my account is locked after too many attempts. ASAP!,account_access,train
+"Hi, do you ship to other countries. Please advise.",other,train
+I need to change the email address on my account. ASAP!,account_access,test
+"Hey team, you overcharged me on order 69148, please correct the bill. Regards, Sam",billing,test
+can you change the delivery address for order 84299. ASAP!,shipping,train
+Good morning. can you change the delivery address for order 68619. Thanks.,shipping,train
+I need to change the email address on my account.,account_access,test
+Urgent: I did not request this password reset email.,account_access,train
+Urgent: my laptop charger stopped working after two days. Thanks.,product_defect,train
+my backpack stopped working after two days.,product_defect,train
+do you offer a gift wrapping service. Please advise.,other,train
+Good morning. the discount code was not applied and I paid the full price.,billing,train
+"Hello, my headphones stopped working after two days. Please advise.",product_defect,train
+"Hey team, please cancel my subscription and refund last month's payment.",billing,train
+"how long will shipping to my city take. Regards, Sam",shipping,test
+my invoice shows the wrong amount for order 94740.,billing,train
+Please help. my headphones stopped working after two days. Thanks.,product_defect,train
+"Hey team, I would like to leave feedback about your website.",other,train
+I forgot my password and the reset link is expired.,account_access,train
+"Please help. the tracking for my laptop charger has not updated in a week. Regards, Sam",shipping,train
+Urgent: delivery is late and nobody told me why. Thanks.,shipping,train
+"Good morning. the headphones does not turn on at all. Regards, Sam",product_defect,test
+"Hey team, someone else may have accessed my account.",account_access,train
+"Hi, my account is locked after too many attempts. Regards, Sam",account_access,train
+Please help. is the backpack available in other colours. ASAP!,other,test
+"Hey team, my kettle overheats and shuts down by itself. ASAP!",product_defect,test
+I need to change the email address on my account. This is frustrating.,account_access,test
+"Urgent: I was charged twice for my backpack and need a refund. Regards, Sam",billing,train
+"Hello, delivery is late and nobody told me why. Regards, Sam",shipping,train
+I need a receipt for the payment I made for the backpack. Thanks.,billing,test
+Please help. I would like to leave feedback about your website.,other,train
+"Hey team, what are your opening hours. Please advise.",other,train
+"Hello, I was charged twice for my kettle and need a refund. Thanks.",billing,train
+do you offer a gift wrapping service.,other,train
+"Hey team, I forgot my password and the reset link is expired. Regards, Sam",account_access,train
+"the discount code was not applied and I paid the full price. Regards, Sam",billing,train
+how long will shipping to my city take. ASAP!,shipping,test
+Urgent: I did not request this password reset email. This is frustrating.,account_access,train
+Please help. I was charged twice for my monitor and need a refund. Thanks.,billing,train
+Please help. how do I become a reseller. This is frustrating.,other,test
+my invoice shows the wrong amount for order 90074. Please advise.,billing,train
+"Hey team, I would like to leave feedback about your website. This is frustrating.",other,train
+the verification code never arrives on my phone. ASAP!,account_access,test
+"Hello, please cancel my subscription and refund last month's payment. Thanks.",billing,train
+how long will shipping to my city take. This is frustrating.,shipping,test
+Good morning. can I speak to someone about a bulk order.,other,train
+my kettle overheats and shuts down by itself.,product_defect,test
+how do I become a reseller. Thanks.,other,test
+"Hello, what are your opening hours.",other,train
+"Hello, I forgot my password and the reset link is expired. This is frustrating.",account_access,train
+Urgent: I was charged twice for my desk lamp and need a refund.,billing,train
+Urgent: I cannot log in to my account. This is frustrating.,account_access,train
+Good morning. the blender arrived damaged with a cracked case. This is frustrating.,product_defect,train
+Urgent: the tracking for my kettle has not updated in a week. This is frustrating.,shipping,train
+"Hello, the discount code was not applied and I paid the full price.",billing,train
+"Hello, I would like to leave feedback about your website.",other,train
+I would like to leave feedback about your website.,other,train
+"Hey team, do you ship to other countries. Regards, Sam",other,train
+there is an unknown charge on my card from your store. Please advise.,billing,train
+"Good morning. the verification code never arrives on my phone. Regards, Sam",account_access,test
+Urgent: the backpack arrived damaged with a cracked case.,product_defect,train
+how do I become a reseller.,other,test
+"Hi, I cannot log in to my account. Regards, Sam",account_access,train
+Urgent: I need to change the email address on my account.,account_access,test
+"Hey team, I need to change the email address on my account. Please advise.",account_access,test
+Urgent: delivery is late and nobody told me why.,shipping,train
+"Hey team, there is an unknown charge on my card from your store. Thanks.",billing,train
+Good morning. the discount code was not applied and I paid the full price.,billing,train
+"you overcharged me on order 98113, please correct the bill. Regards, Sam",billing,test
+"Hello, please cancel my subscription and refund last month's payment. Please advise.",billing,train
+Urgent: I did not request this password reset email. ASAP!,account_access,train
+Urgent: I forgot my password and the reset link is expired.,account_access,train
+"the headphones arrived damaged with a cracked case. Regards, Sam",product_defect,train
+"Hi, my parcel for order 49756 has not arrived yet. This is frustrating.",shipping,train
+"Hello, someone else may have accessed my account. This is frustrating.",account_access,train
+Good morning. what are your opening hours. Thanks.,other,train
+Urgent: someone else may have accessed my account.,account_access,train
+"Please help. how long will shipping to my city take. Regards, Sam",shipping,test
+the monitor arrived damaged with a cracked case.,product_defect,train
+"Hi, the tracking for my blender has not updated in a week.",shipping,train
+Good morning. what are your opening hours. Thanks.,other,train
+"Hi, what are your opening hours. Regards, Sam",other,train
+"Urgent: is the laptop charger available in other colours. Regards, Sam",other,test
+Good morning. there is an unknown charge on my card from your store.,billing,train
+"Hello, I need a receipt for the payment I made for the headphones. Thanks.",billing,test
+"Hello, can I speak to someone about a bulk order. Thanks.",other,train
+"can you change the delivery address for order 46273. Regards, Sam",shipping,train
+the blender arrived damaged with a cracked case. This is frustrating.,product_defect,train
+"Hey team, delivery is late and nobody told me why. Regards, Sam",shipping,train
+Good morning. how long will shipping to my city take. This is frustrating.,shipping,test
+"Hey team, I did not request this password reset email.",account_access,train
+"Hi, please cancel my subscription and refund last month's payment. Thanks.",billing,train
+"Hey team, the tracking for my monitor has not updated in a week. Thanks.",shipping,train
+my parcel for order 23751 has not arrived yet. This is frustrating.,shipping,train
+"Hello, do you ship to other countries. ASAP!",other,train
+"Hello, my order 21552 says delivered but I never received it. ASAP!",shipping,test
+"Hi, I did not request this password reset email. Thanks.",account_access,train
+my desk lamp stopped working after two days.,product_defect,train
+Please help. my account is locked after too many attempts.,account_access,train
+"Please help. you overcharged me on order 84117, please correct the bill. This is frustrating.",billing,test
+"Urgent: my blender overheats and shuts down by itself. Regards, Sam",product_defect,test
+"Hello, I forgot my password and the reset link is expired.",account_access,train
+"Hey team, how do I become a reseller. Please advise.",other,test
+"Hey team, how do I become a reseller. Regards, Sam",other,test
+"Hello, my parcel for order 97592 has not arrived yet. This is frustrating.",shipping,train
+"Hey team, I need a receipt for the payment I made for the blender. Thanks.",billing,test
+"Hello, the tracking for my desk lamp has not updated in a week.",shipping,train
+Please help. there is a part missing from my headphones. Please advise.,product_defect,train
+"how do I become a reseller. Regards, Sam",other,test
+"Hi, the discount code was not applied and I paid the full price. Please advise.",billing,train
+Please help. delivery is late and nobody told me why. Thanks.,shipping,train
+Please help. do you ship to other countries. ASAP!,other,train
+do you ship to other countries.,other,train
+the kettle is defective and makes a strange noise. This is frustrating.,product_defect,train
+"Hey team, how long will shipping to my city take. ASAP!",shipping,test
+Good morning. my account is locked after too many attempts.,account_access,train
+"Hi, my invoice shows the wrong amount for order 56738.",billing,train
+"Hello, my desk lamp overheats and shuts down by itself.",product_defect,test
+please cancel my subscription and refund last month's payment.,billing,train
+"Hey team, my order 56379 says delivered but I never received it.",shipping,test
+Good morning. I was charged twice for my laptop charger and need a refund. This is frustrating.,billing,train
+"Please help. I need to change the email address on my account. Regards, Sam",account_access,test
+I need a receipt for the payment I made for the kettle. This is frustrating.,billing,test
+"Hello, the discount code was not applied and I paid the full price.",billing,train
+my kettle overheats and shuts down by itself. Thanks.,product_defect,test
+"Hi, there is a part missing from my backpack. This is frustrating.",product_defect,train
+the tracking for my backpack has not updated in a week. Thanks.,shipping,train
+how do I become a reseller. This is frustrating.,other,test
+"Hello, my blender overheats and shuts down by itself. Regards, Sam",product_defect,test
+"Hi, I need a receipt for the payment I made for the monitor. This is frustrating.",billing,test
+"Hello, the discount code was not applied and I paid the full price. This is frustrating.",billing,train
+the headphones I received is broken. ASAP!,product_defect,train
+Please help. I need a receipt for the payment I made for the blender. This is frustrating.,billing,test
+"do you offer a gift wrapping service. Regards, Sam",other,train
+what are your opening hours. This is frustrating.,other,train
+the blender does not turn on at all. Thanks.,product_defect,test
+"Hi, I need a receipt for the payment I made for the laptop charger.",billing,test
+there is a part missing from my laptop charger.,product_defect,train
+"Hello, my parcel for order 14429 has not arrived yet.",shipping,train
+Please help. my kettle overheats and shuts down by itself. ASAP!,product_defect,test
+Urgent: do you offer a gift wrapping service. This is frustrating.,other,train
+"Hi, do you offer a gift wrapping service. Regards, Sam",other,train
+"Good morning. I forgot my password and the reset link is expired. Regards, Sam",account_access,train
+"Please help. you overcharged me on order 27394, please correct the bill.",billing,test
+"Hello, I did not request this password reset email. Regards, Sam",account_access,train
+"Hey team, the verification code never arrives on my phone. Regards, Sam",account_access,test
+"Hey team, can you change the delivery address for order 64776. ASAP!",shipping,train
+"Hey team, the kettle I received is broken. Thanks.",product_defect,train
+I cannot log in to my account.,account_access,train
+"Hi, the blender is defective and makes a strange noise. ASAP!",product_defect,train
+Please help. can you change the delivery address for order 21458. ASAP!,shipping,train
+"my backpack overheats and shuts down by itself. Regards, Sam",product_defect,test
+"Hello, I cannot log in to my account. ASAP!",account_access,train
+"Hi, please cancel my subscription and refund last month's payment. Please advise.",billing,train
+"Hello, my order 80501 says delivered but I never received it. Regards, Sam",shipping,test
+Urgent: my laptop charger overheats and shuts down by itself. Thanks.,product_defect,test
+the monitor is defective and makes a strange noise. Thanks.,product_defect,train
+the courier left my package at the wrong address. This is frustrating.,shipping,train
+"the discount code was not applied and I paid the full price. Regards, Sam",billing,train
+Please help. is the headphones available in other colours. Please advise.,other,test
+"Good morning. I would like to leave feedback about your website. Regards, Sam",other,train
+Urgent: please cancel my subscription and refund last month's payment. Thanks.,billing,train
+please cancel my subscription and refund last month's payment. Please advise.,billing,train
+Please help. the blender is defective and makes a strange noise.,product_defect,train
+Urgent: someone else may have accessed my account. Please advise.,account_access,train
+"there is an unknown charge on my card from your store. Regards, Sam",billing,train
+"Hello, the kettle I received is broken. Please advise.",product_defect,train
+Good morning. I was charged twice for my blender and need a refund. Thanks.,billing,train
+Urgent: the backpack I received is broken. This is frustrating.,product_defect,train
+"Hi, do you ship to other countries. Please advise.",other,train
+"Hi, my parcel for order 47674 has not arrived yet. Regards, Sam",shipping,train
+Please help. my account is locked after too many attempts. Thanks.,account_access,train
+Good morning. is the kettle available in other colours. ASAP!,other,test
+I did not request this password reset email.,account_access,train
+"Hello, the monitor is defective and makes a strange noise.",product_defect,train
+"Hey team, the backpack does not turn on at all. ASAP!",product_defect,test
+"Good morning. the courier left my package at the wrong address. Regards, Sam",shipping,train
+Urgent: the monitor arrived damaged with a cracked case. ASAP!,product_defect,train
+"Hey team, there is a part missing from my laptop charger. This is frustrating.",product_defect,train
+"Hey team, is the headphones available in other colours.",other,test
+"Hi, is the backpack available in other colours. Thanks.",other,test
+Please help. my order 44702 says delivered but I never received it. ASAP!,shipping,test
+Good morning. do you ship to other countries. ASAP!,other,train
+"Hey team, my blender stopped working after two days.",product_defect,train
+"Hi, the verification code never arrives on my phone. Regards, Sam",account_access,test
+Please help. is the laptop charger available in other colours.,other,test
+Good morning. what are your opening hours. ASAP!,other,train
+"Hey team, I did not request this password reset email. Please advise.",account_access,train
+"Please help. the backpack I received is broken. Regards, Sam",product_defect,train
+do you offer a gift wrapping service. Thanks.,other,train
+Please help. my laptop charger stopped working after two days.,product_defect,train
+"Hey team, I would like to leave feedback about your website.",other,train
+what are your opening hours. This is frustrating.,other,train
+the backpack arrived damaged with a cracked case.,product_defect,train
+"Hey team, I did not request this password reset email.",account_access,train
+there is a part missing from my headphones.,product_defect,train
+Please help. please cancel my subscription and refund last month's payment.,billing,train
+Please help. the discount code was not applied and I paid the full price. Thanks.,billing,train
+Good morning. my desk lamp stopped working after two days.,product_defect,train
+"Hi, can I speak to someone about a bulk order. ASAP!",other,train
+"Hey team, the laptop charger is defective and makes a strange noise.",product_defect,train
+"Hello, my monitor stopped working after two days.",product_defect,train
+I need a receipt for the payment I made for the backpack. This is frustrating.,billing,test
+"do you offer a gift wrapping service. Regards, Sam",other,train
+Good morning. the laptop charger is defective and makes a strange noise.,product_defect,train
+I would like to leave feedback about your website. Thanks.,other,train
+Good morning. the tracking for my laptop charger has not updated in a week. This is frustrating.,shipping,train
+the verification code never arrives on my phone. Please advise.,account_access,test
+"I would like to leave feedback about your website. Regards, Sam",other,train
+Please help. the discount code was not applied and I paid the full price. Please advise.,billing,train
+"Hi, the backpack arrived damaged with a cracked case. Thanks.",product_defect,train
+Please help. I did not request this password reset email. This is frustrating.,account_access,train
+"Hey team, the headphones arrived damaged with a cracked case.",product_defect,train
+"Hey team, can you change the delivery address for order 70383. Thanks.",shipping,train
+delivery is late and nobody told me why. ASAP!,shipping,train
+my account is locked after too many attempts. Thanks.,account_access,train
+"Hello, I need to change the email address on my account.",account_access,test
+Please help. do you offer a gift wrapping service. This is frustrating.,other,train
+Urgent: there is a part missing from my desk lamp. ASAP!,product_defect,train
+Urgent: there is an unknown charge on my card from your store.,billing,train
+"Please help. I cannot log in to my account. Regards, Sam",account_access,train
+can I speak to someone about a bulk order.,other,train
+someone else may have accessed my account. ASAP!,account_access,train
+Urgent: I need to change the email address on my account.,account_access,test
+Please help. my invoice shows the wrong amount for order 75100.,billing,train
+"you overcharged me on order 73969, please correct the bill.",billing,test
+the headphones I received is broken.,product_defect,train
+"Good morning. how do I become a reseller. Regards, Sam",other,test
+Urgent: my order 15546 says delivered but I never received it.,shipping,test
+"Hey team, I cannot log in to my account. Regards, Sam",account_access,train
+"Hey team, someone else may have accessed my account. Regards, Sam",account_access,train
+"Hi, is the headphones available in other colours. This is frustrating.",other,test
+Please help. I did not request this password reset email.,account_access,train
+Urgent: there is a part missing from my kettle. This is frustrating.,product_defect,train
+Please help. what are your opening hours. This is frustrating.,other,train
+Urgent: my order 45358 says delivered but I never received it. ASAP!,shipping,test
+"Hey team, the courier left my package at the wrong address. This is frustrating.",shipping,train
+"Hello, is the kettle available in other colours. ASAP!",other,test
+Good morning. my account is locked after too many attempts. Please advise.,account_access,train
+Please help. can you change the delivery address for order 26730. ASAP!,shipping,train
+Good morning. please cancel my subscription and refund last month's payment. Please advise.,billing,train
+"Hi, can I speak to someone about a bulk order. ASAP!",other,train
+"Hey team, delivery is late and nobody told me why.",shipping,train
+I would like to leave feedback about your website. This is frustrating.,other,train
+"do you ship to other countries. Regards, Sam",other,train
+"Hello, I did not request this password reset email.",account_access,train
+Good morning. I forgot my password and the reset link is expired. Please advise.,account_access,train
+the courier left my package at the wrong address. Please advise.,shipping,train
+"Hello, the desk lamp is defective and makes a strange noise. Regards, Sam",product_defect,train
+Please help. is the backpack available in other colours.,other,test
+"Hi, the discount code was not applied and I paid the full price. This is frustrating.",billing,train
+I did not request this password reset email. This is frustrating.,account_access,train
+Please help. I would like to leave feedback about your website. This is frustrating.,other,train
+is the monitor available in other colours. Thanks.,other,test
+please cancel my subscription and refund last month's payment.,billing,train
+"Hi, do you ship to other countries. Please advise.",other,train
+Good morning. the verification code never arrives on my phone.,account_access,test
+"Good morning. the discount code was not applied and I paid the full price. Regards, Sam",billing,train
+my headphones stopped working after two days.,product_defect,train
+I need to change the email address on my account. ASAP!,account_access,test
+my backpack overheats and shuts down by itself. This is frustrating.,product_defect,test
+"Hi, the kettle arrived damaged with a cracked case.",product_defect,train
+"Hello, you overcharged me on order 14058, please correct the bill. Thanks.",billing,test
+"there is a part missing from my kettle. Regards, Sam",product_defect,train
+Good morning. I would like to leave feedback about your website. ASAP!,other,train
+"Hi, there is a part missing from my blender. Regards, Sam",product_defect,train
+Good morning. please cancel my subscription and refund last month's payment. This is frustrating.,billing,train
+Urgent: can you change the delivery address for order 90181. This is frustrating.,shipping,train
+"Please help. how do I become a reseller. Regards, Sam",other,test
+Please help. is the desk lamp available in other colours. This is frustrating.,other,test
+Good morning. the verification code never arrives on my phone.,account_access,test
+"Hey team, there is a part missing from my monitor. Please advise.",product_defect,train
+"Hello, please cancel my subscription and refund last month's payment.",billing,train
+Good morning. I cannot log in to my account.,account_access,train
+"Hey team, do you ship to other countries. Please advise.",other,train
+my kettle stopped working after two days.,product_defect,train
+Please help. I was charged twice for my backpack and need a refund. This is frustrating.,billing,train
+"Hello, what are your opening hours. Thanks.",other,train
+my order 65329 says delivered but I never received it. Thanks.,shipping,test
+Please help. the discount code was not applied and I paid the full price. ASAP!,billing,train
+"Hi, I did not request this password reset email. Thanks.",account_access,train
+"Hello, I was charged twice for my laptop charger and need a refund.",billing,train
+"Hi, the monitor is defective and makes a strange noise. Thanks.",product_defect,train
+Please help. there is an unknown charge on my card from your store. Please advise.,billing,train
+Please help. the tracking for my headphones has not updated in a week. This is frustrating.,shipping,train
+"Hello, my order 60926 says delivered but I never received it. Please advise.",shipping,test
+my blender stopped working after two days.,product_defect,train
+"Hi, the discount code was not applied and I paid the full price. Thanks.",billing,train
+Good morning. my backpack stopped working after two days.,product_defect,train
+Good morning. my account is locked after too many attempts. ASAP!,account_access,train
+I need to change the email address on my account. ASAP!,account_access,test
+"can you change the delivery address for order 95149. Regards, Sam",shipping,train
+Good morning. I was charged twice for my backpack and need a refund.,billing,train
+delivery is late and nobody told me why. ASAP!,shipping,train
+"Hey team, can you change the delivery address for order 77520. This is frustrating.",shipping,train
+"Hello, there is a part missing from my backpack. ASAP!",product_defect,train
+what are your opening hours.,other,train
+"Hi, how long will shipping to my city take. This is frustrating.",shipping,test
+Good morning. can you change the delivery address for order 61675. Thanks.,shipping,train
+Urgent: my account is locked after too many attempts. ASAP!,account_access,train
+Good morning. my backpack overheats and shuts down by itself.,product_defect,test
+"Hello, can I speak to someone about a bulk order. Regards, Sam",other,train
+Please help. I cannot log in to my account.,account_access,train
+"Hello, I forgot my password and the reset link is expired. Please advise.",account_access,train

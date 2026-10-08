@@ -1,0 +1,469 @@
+text,label,split,source
+I recently noticed an unexpected charge on my account and would like to request a detailed explanation and potential refund.,billing,train,llm
+It appears that I have been double-charged for my latest subscription renewal; could you please investigate and issue a refund for the duplicate amount?,billing,train,llm
+I have not received the invoice for my recent purchase; could you kindly send it to my registered email address?,billing,train,llm
+There seems to be a recurring subscription charge that I did not authorize; please cancel this subscription and process a refund.,billing,train,llm
+I encountered an issue with my payment method during the checkout process; could you assist me in resolving this problem?,billing,train,llm
+I would like to request a refund for a service that was not delivered as promised; please provide the necessary steps to proceed with this request.,billing,train,llm
+My invoice shows an incorrect amount; could you please review and correct this discrepancy at your earliest convenience?,billing,train,llm
+I have been charged for a service that I canceled mid-subscription; could you investigate this matter and issue a refund?,billing,train,llm
+I am having trouble updating my payment information; could you provide guidance on how to resolve this issue?,billing,train,llm
+It appears that there is an unauthorized transaction on my account; please investigate and ensure the security of my account.,billing,train,llm
+I would like to cancel my current subscription and request a prorated refund for the unused portion of my subscription period.,billing,train,llm
+I have not received any communication regarding my recent payment; could you confirm that it has been processed and provide an updated invoice?,billing,train,llm
+"Dear customer support, I recently noticed a duplicate charge on my statement for a subscription I cancelled months ago. Could you please investigate this matter and provide a resolution?",billing,train,llm
+"Hello, I am writing to inquire about an unexpected charge on my credit card statement. I did not authorize this transaction and would appreciate a prompt refund.",billing,train,llm
+"Good day, I have been experiencing difficulties with my subscription renewal payment. Despite multiple attempts, the transaction continues to fail. Please advise on how to resolve this issue.",billing,train,llm
+"Greetings, I would like to request a detailed invoice for the services rendered last quarter. Additionally, could you confirm if there are any outstanding balances on my account?",billing,train,llm
+"Dear team, I have been charged twice for the same purchase. I would kindly ask for a refund of the duplicate amount at your earliest convenience.",billing,train,llm
+"Hello, I am facing issues with the automatic payment for my subscription. The payment method on file appears to be incorrect. Please assist me in updating my payment details.",billing,train,llm
+"Good afternoon, I require assistance with a refund for a service that was not delivered as promised. I have attached the relevant invoice for your reference.",billing,train,llm
+"Dear support, I have noticed an unauthorized subscription charge on my account. I did not sign up for this service and request an immediate cancellation and refund.",billing,train,llm
+"Hello, I am having trouble understanding the charges listed on my recent invoice. Could you please provide a breakdown of these charges and clarify any discrepancies?",billing,train,llm
+"Dear customer service, I have been unsuccessfully trying to cancel a recurring subscription. The online portal is not allowing me to proceed with the cancellation. Please help.",billing,train,llm
+"Greetings, I was recently charged for a service I believed was included in my subscription package. Could you please review this charge and issue a refund if necessary?",billing,train,llm
+"Hello, I am experiencing difficulties with processing a payment for my subscription. The error message indicates an issue with the payment method. Please guide me through the troubleshooting steps.",billing,train,llm
+"I would like to inquire about the status of my parcel, which appears to be delayed according to the tracking information.",shipping,train,llm
+"Could you please assist me in changing the delivery address for my package, as I have moved to a new location?",shipping,train,llm
+"I am concerned that my parcel may be lost, as there have been no updates on the tracking for over a week.",shipping,train,llm
+"Can you provide more information on the estimated delivery date for my package, as the tracking details are currently vague?",shipping,train,llm
+"I need to confirm if the delivery address on file is correct, as I believe there may have been an error during the order process.",shipping,train,llm
+"My parcel was scheduled for delivery yesterday, but it has not arrived. Could you please investigate this matter?",shipping,train,llm
+"I would appreciate it if you could update the tracking information for my package, as it has not been updated in several days.",shipping,train,llm
+Is it possible to redirect my parcel to an alternative address due to an unexpected change in my circumstances?,shipping,train,llm
+I have not received any notifications regarding the delivery of my package. Could you please check the status?,shipping,train,llm
+There seems to be a discrepancy between the tracking number provided and the information on your website. Could you clarify this?,shipping,train,llm
+I am planning to be away during the expected delivery period. Can the parcel be held at a local post office instead?,shipping,train,llm
+"I noticed that the tracking information indicates my parcel was delivered, but I have not received it. Could you look into this?",shipping,train,llm
+I have not received my parcel with tracking number 987654ABCD and the estimated delivery date has passed. Could you please investigate this matter?,shipping,train,llm
+"My tracking information indicates that my package was delivered, but I have not received it. Can you provide further details or possible next steps?",shipping,train,llm
+I need to change the delivery address for my order with tracking number 123456EFGH. What is the procedure for making this change?,shipping,train,llm
+There seems to be a discrepancy in the delivery address listed on my tracking details. Please confirm if this will affect my delivery.,shipping,train,llm
+"I am expecting a delivery today, but there has been no update on the tracking since yesterday. Could you provide an update on the status?",shipping,train,llm
+"My parcel with tracking number 654321IJKL was scheduled for delivery, but I am currently away. Can I reschedule the delivery to a later date?",shipping,train,llm
+"I have concerns about the security of my delivery address. Is it possible to have the package delivered to a different, more secure location?",shipping,train,llm
+"The tracking information for my parcel with number 098765MNOP shows it as 'out for delivery,' but I have not received any notification from the courier. What should I do?",shipping,train,llm
+I would like to know if it is possible to redirect my parcel with tracking number 543210QRSTU to a different address than the one initially provided.,shipping,train,llm
+"My package with tracking number 210987VWXYZ was expected yesterday, but it has not arrived. Could you please check the current status?",shipping,train,llm
+I have a query regarding the estimated delivery time for my parcel with tracking number 876543WXYZ. Can you provide more precise information?,shipping,train,llm
+"The tracking status of my order shows 'delivery attempted,' but no one was available to receive it. How can I arrange for a redelivery?",shipping,train,llm
+We regret to inform you that the product you received is defective and requires immediate replacement.,product_defect,train,llm
+"Upon inspection, it was discovered that several components of the product are missing, necessitating a resend.",product_defect,train,llm
+"The item arrived with significant damage, making it unusable; we apologize for the inconvenience and will arrange for a new shipment.",product_defect,train,llm
+It appears the product is not functioning as expected; please provide us with detailed information so we can address the issue promptly.,product_defect,train,llm
+We are sorry to hear about the malfunction of your device. We will process a return and send out a fully operational replacement.,product_defect,train,llm
+The product you received seems to have a manufacturing defect. We will issue a return authorization and send a new unit at our expense.,product_defect,train,llm
+We understand your frustration with the broken item. A replacement will be dispatched immediately to ensure your satisfaction.,product_defect,train,llm
+The missing parts from your order have been noted. We will send the required components as soon as possible.,product_defect,train,llm
+"Your feedback about the faulty product is appreciated. We will arrange for a pickup and provide you with a new, fully functional item.",product_defect,train,llm
+"We apologize for the non-working product. Please return the defective item, and we will send a new one without delay.",product_defect,train,llm
+"The damage to the product is unacceptable. We will cover the return shipping and send a new, undamaged unit.",product_defect,train,llm
+It is disheartening to learn that the product did not meet your expectations. We will process a return and ensure you receive a working replacement.,product_defect,train,llm
+"I recently received my new XYZ device, but upon inspection, I noticed a crack in the casing which wasn't there at the time of purchase.",product_defect,train,llm
+"I am writing to express my concern regarding the XYZ gadget I ordered. It appears to be missing a crucial component, the power adapter.",product_defect,train,llm
+"The XYZ appliance I purchased has stopped functioning correctly. The display screen no longer lights up, rendering the device unusable.",product_defect,train,llm
+"I have encountered a malfunction with the XYZ equipment. The motor seems to be running inconsistently, causing the unit to overheat.",product_defect,train,llm
+"Upon unboxing the XYZ tool, I found that several parts were damaged, including the handle and the attachment nozzles.",product_defect,train,llm
+"The XYZ system I received is not operating as expected. The software crashes intermittently, which disrupts my workflow.",product_defect,train,llm
+I am disappointed to report that the XYZ apparatus has arrived with a faulty switch. It does not respond when pressed.,product_defect,train,llm
+"The XYZ mechanism I ordered seems to have a defect. The gears inside are misaligned, leading to improper operation.",product_defect,train,llm
+"I have identified an issue with the XYZ contraption. The battery does not hold a charge, despite being a new unit.",product_defect,train,llm
+"My XYZ instrument has arrived with a broken stand, which is essential for its proper use. This is unacceptable.",product_defect,train,llm
+The XYZ assembly is not working as advertised. The remote control fails to connect with the main unit.,product_defect,train,llm
+I regret to inform you that the XYZ construction kit is incomplete. Several pieces are absent from the set.,product_defect,train,llm
+I am experiencing difficulties logging into my account despite entering the correct credentials. Could you please assist me in resolving this issue?,account_access,train,llm
+I have been locked out of my account after multiple unsuccessful login attempts. How can I regain access?,account_access,train,llm
+I suspect that my account may have been compromised as I received an unusual verification code. What steps should I take to secure my account?,account_access,train,llm
+I am unable to reset my password as the verification code is not being delivered to my registered email address. Please advise on alternative recovery methods.,account_access,train,llm
+I encountered an error message stating 'Invalid Password' when attempting to log in. I have tried resetting my password but the problem persists. Your assistance would be greatly appreciated.,account_access,train,llm
+I have not received the two-factor authentication code required to log in. Could you please resend the code or provide an alternative method for verification?,account_access,train,llm
+My account seems to be temporarily suspended due to suspicious activity. I would like to know the steps I need to take to reactivate my account and ensure its security.,account_access,train,llm
+I am having trouble remembering my password and the 'Forgot Password' link is not working. What other options do I have to reset my password?,account_access,train,llm
+I received a notification about a login attempt from an unfamiliar location. How can I verify the authenticity of this attempt and secure my account if necessary?,account_access,train,llm
+"I am unable to log in because the system is not accepting my password, even though I am certain it is correct. Please help me troubleshoot this issue.",account_access,train,llm
+I have been receiving multiple verification codes without attempting to log in. Is this a normal occurrence or should I be concerned about the security of my account?,account_access,train,llm
+I suspect that someone else may be using my account as I noticed unfamiliar activity. What measures can I take to protect my account and prevent unauthorized access?,account_access,train,llm
+"Dear Support Team, I am unable to log in to my account despite entering the correct credentials. Could you please assist in resolving this issue?",account_access,train,llm
+"Hello, I have been locked out of my account after multiple failed login attempts. How can I regain access?",account_access,train,llm
+"Good day, I suspect unauthorized access to my account and would like to enable two-factor authentication for added security.",account_access,train,llm
+"Dear Customer Support, I did not receive the verification code via email. Could you please resend it or provide an alternative method?",account_access,train,llm
+"Hello, I am experiencing difficulties resetting my password. The reset link appears to be invalid. What should I do?",account_access,train,llm
+"Dear Team, I have concerns about the security of my account. Can you provide me with recent login activity details?",account_access,train,llm
+"Good afternoon, I am unable to remember my password and the recovery options are not working. How can I proceed?",account_access,train,llm
+"Hello Support, I received a notification about a login from an unrecognized device. What steps should I take to secure my account?",account_access,train,llm
+"Dear Customer Service, I am facing issues with the CAPTCHA verification during login. Is there an alternative method available?",account_access,train,llm
+"Good day, I have been locked out of my account and the provided recovery options are not sufficient. Please advise.",account_access,train,llm
+"Hello, I did not authorize a recent password change on my account. How can I report this and secure my account?",account_access,train,llm
+"Dear Support Team, I am concerned about the security of my personal information. Can you confirm the measures in place to protect my data?",account_access,train,llm
+I would appreciate it if you could provide more information about the operating hours of your store locations.,other,train,llm
+Could you please share details on the process for establishing a business partnership with your company?,other,train,llm
+I am interested in learning about the various gift options available for purchase in your store.,other,train,llm
+May I inquire about the availability of a specific product in your inventory?,other,train,llm
+I would like to receive more information regarding the return policy for items purchased in-store.,other,train,llm
+Could you please provide details on the loyalty program offered by your company?,other,train,llm
+I am curious to know if your stores accept digital gift cards as a form of payment.,other,train,llm
+May I request information on the process for exchanging an item purchased in-store?,other,train,llm
+I would like to express my satisfaction with the quality of products offered by your company.,other,train,llm
+Could you please share details on the process for providing feedback on in-store experiences?,other,train,llm
+I am interested in learning about any upcoming sales or promotions at your store locations.,other,train,llm
+May I inquire about the process for requesting a price match on items purchased from competing retailers?,other,train,llm
+"Dear Customer Support, could you provide more information about your return policy? Thank you.",other,train,llm
+"Hello, I am interested in learning about potential partnership opportunities with your store. How can I proceed?",other,train,llm
+"Good day, I would like to share some feedback regarding my recent shopping experience at your store.",other,train,llm
+"Dear Sir/Madam, could you please confirm the operating hours of your downtown location?",other,train,llm
+"Hello, I am looking for a unique gift option for a special occasion. Could you recommend any exclusive products?",other,train,llm
+"Dear Customer Service, I would appreciate it if you could provide details about your loyalty program.",other,train,llm
+"Good afternoon, I have a general inquiry about the availability of a specific product. Could you assist me?",other,train,llm
+"Dear Support Team, I would like to know if your store accepts gift cards from other retailers.",other,train,llm
+"Hello, I am interested in learning more about your store's sustainability initiatives. Could you provide some information?",other,train,llm
+"Dear Customer Care, I would like to request a catalog of your latest product offerings.",other,train,llm
+"Good day, I would like to inquire about the possibility of hosting an event at your store. How can I get started?",other,train,llm
+"Dear Assistance, I have a question regarding the shipping options available for international orders. Could you please clarify?",other,train,llm
+I've been double charged for the last three months and no one seems to care! This is ridiculous!,billing,train,llm
+Your service sucks! I want a refund for the subscription I never agreed to!,billing,train,llm
+"I've been trying to cancel my subscription for weeks, but you keep charging me! Fix this now!",billing,train,llm
+Your invoices are a mess! I can't make sense of the charges and I demand an explanation!,billing,train,llm
+I've been charged for a service I didn't use! This is fraud and I want my money back!,billing,train,llm
+Your payment system is broken! I can't make a payment and you're threatening late fees!,billing,train,llm
+"I canceled my subscription months ago, yet I'm still being charged! This is theft!",billing,train,llm
+Your company is a scam! I've been charged for something I never ordered!,billing,train,llm
+I've been trying to get a refund for weeks and no one will help me! This is unacceptable!,billing,train,llm
+Your service is a joke! I can't even log in to check my invoices!,billing,train,llm
+I've been trying to dispute a charge for months and you keep ignoring me! I want this resolved!,billing,train,llm
+Your customer service is non-existent! I've been trying to get a refund for a service that doesn't work and no one will help!,billing,train,llm
+"I'm beyond furious! My parcel is days late, and your tracking system is useless. This is unacceptable!",shipping,train,llm
+"I'm livid! I need to change my delivery address immediately, and your customer service is a nightmare.",shipping,train,llm
+"This is outrageous! My package is lost, and no one seems to care. I demand answers now!",shipping,train,llm
+I'm absolutely enraged! Your delivery service is a joke. Where is my parcel?,shipping,train,llm
+I can't believe the incompetence! My tracking number shows no updates. This is a disaster!,shipping,train,llm
+"I'm seething with anger! I requested a delivery change weeks ago, and it still hasn't been updated.",shipping,train,llm
+This is an absolute scandal! My parcel was delivered to the wrong address. Fix this now!,shipping,train,llm
+I'm absolutely furious! Your delivery times are a complete lie. Where is my package?,shipping,train,llm
+"I'm incensed! Your tracking information is inaccurate, and my parcel is nowhere to be found.",shipping,train,llm
+This is an outrage! I need to know why my delivery was delayed without any notification.,shipping,train,llm
+I'm absolutely livid! Your service is a complete failure. My parcel is still missing!,shipping,train,llm
+"I'm beyond angry! I requested a delivery hold, and it was completely ignored. Fix this immediately!",shipping,train,llm
+"I am absolutely livid! The widget I ordered arrived completely smashed, with pieces missing. This is utterly unacceptable!",product_defect,train,llm
+How dare you send me a defective gadget! It doesn't even turn on. I demand an immediate replacement or a full refund!,product_defect,train,llm
+This is the last straw! The appliance I received is utterly broken and doesn't function at all. Your quality control is a joke!,product_defect,train,llm
+"I am furious! The parts for the machine are missing, and it's impossible to assemble. This is a total rip-off!",product_defect,train,llm
+Your company has disappointed me beyond belief. The software I purchased is faulty and crashes constantly. Fix this now!,product_defect,train,llm
+I can't believe the nerve of your company! The electronics I ordered are completely non-functional. This is an outrage!,product_defect,train,llm
+This is an absolute disgrace! The furniture I received has damaged pieces and is unusable. I want this resolved yesterday!,product_defect,train,llm
+I am beyond angry! The tool I bought is defective and dangerous to use. Recall this product immediately!,product_defect,train,llm
+Your incompetence is staggering! The device I ordered is broken beyond repair. I expect a swift resolution!,product_defect,train,llm
+I am seething with rage! The equipment I received is missing critical components and doesn't work. This is a scam!,product_defect,train,llm
+This is an outrage! The appliance I bought is faulty and poses a safety hazard. I demand immediate action!,product_defect,train,llm
+I am absolutely incensed! The product I ordered is not only damaged but also entirely non-functional. This is a complete disaster!,product_defect,train,llm
+"I've been locked out of my account for three days now, and your so-called 'support' is nowhere to be found. This is absolutely ridiculous!",account_access,train,llm
+Your verification code system is a nightmare! I've tried entering the code five times and it still says it's invalid. Fix this mess!,account_access,train,llm
+"I'm furious! After changing my password, I'm still unable to log in. What kind of incompetent security measures are you using?",account_access,train,llm
+"Your account security is a joke! I received an email saying someone tried to log in from another country, but your support team isn't responding to my urgent calls.",account_access,train,llm
+I demand an explanation! I've been receiving multiple password reset emails that I didn't request. This is a breach of my account security!,account_access,train,llm
+"How dare you lock me out of my own account without any warning! I've been a loyal customer for years, and this is how you treat me?",account_access,train,llm
+"Your login process is an absolute disaster! I've tried everything, and I still can't access my account. I want this resolved immediately!",account_access,train,llm
+"I'm livid! I've been trying to reset my password for hours, and your system keeps giving me error messages. This is unacceptable!",account_access,train,llm
+Your verification code expired before I even had a chance to enter it! This is the most frustrating experience I've ever had with an online service.,account_access,train,llm
+"I'm absolutely outraged! I've been locked out of my account for no apparent reason, and your support team is completely unresponsive.",account_access,train,llm
+Your account security measures are a complete failure! I've received multiple phishing emails that look identical to your official communications.,account_access,train,llm
+"I'm at my wit's end! I've tried every possible combination to reset my password, and your system still won't let me in. This is a total debacle!",account_access,train,llm
+I am utterly frustrated with the lack of basic information on your website; it's beyond unacceptable!,other,train,llm
+Your store's customer service is a complete joke; I've been trying to get answers for days with no luck!,other,train,llm
+I'm incensed by the poor communication regarding store hours; this is the last place I'll ever shop at!,other,train,llm
+The audacity to claim 'exceptional service' while treating customers like dirt is infuriating!,other,train,llm
+I demand an explanation for the sudden change in your return policy; this is an outrageous betrayal of trust!,other,train,llm
+Your partnership with that brand is a slap in the face to loyal customers; I'm taking my business elsewhere!,other,train,llm
+The complete absence of gift options for certain occasions is inexcusable; I expected more from a reputed store!,other,train,llm
+I'm beyond livid that your store was closed without any prior notice; this is a total disgrace!,other,train,llm
+Your refusal to offer a simple price adjustment for a clear error is the most ridiculous thing I've ever encountered!,other,train,llm
+I'm disgusted by the way your staff handled my inquiry; this level of disrespect is unacceptable!,other,train,llm
+The lack of transparency about product origins is infuriating; I won't support a company that hides information!,other,train,llm
+I'm enraged by the inadequate response to my feedback; it's clear you don't value your customers' opinions!,other,train,llm
+"""Your store's customer service is utterly unacceptable! I've been waiting for a response to my query for over a week. How hard can it be to provide basic information?""",other,train,llm
+"""I can't believe the appalling state of your gift options. It's like you're trying to alienate your customers. Get it together!""",other,train,llm
+"""Your lack of communication regarding store hours is infuriating! How am I supposed to plan my visit when you don't even bother to update your website?""",other,train,llm
+"""The utter incompetence in handling partnerships is mind-boggling. Your collaboration with that brand was a disaster from start to finish. Do better!""",other,train,llm
+"""I'm absolutely livid about the misleading store information. Your website claims you have a certain product, but it's nowhere to be found. False advertising much?""",other,train,llm
+"""Your gift options are a joke! I wanted to surprise someone special, but your selection is so bland and uninspired. Step up your game!""",other,train,llm
+"""I've had it with your store's complete disregard for customer feedback. I've submitted multiple suggestions, and you've done nothing about them. Wake up!""",other,train,llm
+"""The way your store handles partnerships is an absolute disgrace. Your recent collaboration was a total failure, and it reflects poorly on your brand. Fix this mess!""",other,train,llm
+"""I'm absolutely fuming about the lack of basic store information. How am I supposed to make a purchase when you don't even list your prices online?""",other,train,llm
+"""Your gift options are an insult to intelligence. I can't believe you'd offer such uninspired and unoriginal choices. Get creative!""",other,train,llm
+"""I'm outraged by the way your store ignores customer feedback. I've reported a problem with a product, and you've done nothing to address it. Shame on you!""",other,train,llm
+"""Your partnerships are a complete joke. The recent collaboration was a disaster, and it's clear you have no idea what you're doing. Clean up your act!""",other,train,llm
+"I've been doubly charged for the same purchse, pleas sort it out.",billing,train,llm
+"Cant find my invoise for the last order, need it urgently.",billing,train,llm
+"My subscription renewd without my consent, stop it and refund me.",billing,train,llm
+Theres an unrecongnized charge on my card from your company.,billing,train,llm
+"Payment failed for my subscription, but I need it active asap.",billing,train,llm
+Why was I charged twice for the monthly sub? Fix it now.,billing,train,llm
+"Need a refund for a canceled subscribtion, money not returned.",billing,train,llm
+"Invoice for item never received, want a reshipment or refund.",billing,train,llm
+"Auto-renewal of subs was not autorized, when will I get my money back?",billing,train,llm
+"Experiencing issues with payment processing, subscription inactive.",billing,train,llm
+"Was charged for a free trial subscription, request immeadiate refund.",billing,train,llm
+My payment was sucessful but no confirmation or invoice received.,billing,train,llm
+"I got charged twise for the same purchase, need a refound asap.",billing,train,llm
+Why is my subscription fee higher this month? Please check and adjust.,billing,train,llm
+"The invoice I received doesn't match my purchase, can you fix this?",billing,train,llm
+"Payment failed for my auto-renewal, please update my card info.",billing,train,llm
+"I cancelled my subscription but still got charged, want a refund.",billing,train,llm
+"There's an unknown charge on my account, please investigate immediately.",billing,train,llm
+"I've been trying to pay but keep getting an error message, help!",billing,train,llm
+"My monthly payment went through twice, when will I get a refund?",billing,train,llm
+Can you send me a detailed invoice for the last three months?,billing,train,llm
+"I'm having trouble updating my payment method, it keeps rejecting.",billing,train,llm
+Why am I being charged for a service I never subscribed to?,billing,train,llm
+I need a refund for a failed transaction that was charged anyway.,billing,train,llm
+"My pakage is 1 week late, whts going on?",shipping,train,llm
+"Cant find my trcking number, wht do I do?",shipping,train,llm
+"I moved, how do I chnge my delivery adress?",shipping,train,llm
+"Whr is my order, I havnt recived any updates.",shipping,train,llm
+My parcel ws delieverd to the wrong addres.,shipping,train,llm
+"I need my item by Friday, will it arrive on time?",shipping,train,llm
+I thot I hered my package was deliverd but I cant find it.,shipping,train,llm
+My tracking says 'out for delivery' but its been 3 days.,shipping,train,llm
+Can I chnge the delivery date to next Monday?,shipping,train,llm
+"My tracking number isnt working, can you help?",shipping,train,llm
+"I missed the delivery, wht are my options now?",shipping,train,llm
+The delivery guy left my pakage at a neigbors house.,shipping,train,llm
+"My paket hasn't arrived yet, can I get an updat on wher it is?",shipping,train,llm
+"I belive ther was a mistak with my delivey addres, please chec it.",shipping,train,llm
+"I'm wondring if ther's a prolem with my trackin, it says 'deliveed' but I don't have it.",shipping,train,llm
+Can I chane the delivey addres for my ordr? I mad a typo whn I enterd it.,shipping,train,llm
+Wat do I do if my pakage is lost? I haven't recived any notifikation.,shipping,train,llm
+"My paket is markd as deliveed but I didn't get it, wat should I do?",shipping,train,llm
+"I nee to kno the exate time my paket wil be deliveed, is that posible?",shipping,train,llm
+"Ther's ben no updat on my trackin for a wek, is ther a delay?",shipping,train,llm
+Can u confirm if my paket was sent to the corect addres?,shipping,train,llm
+"I nee to kno the status of my paket, the trackin numr isn't working.",shipping,train,llm
+"The delivey date has pased and I stil havn't recived my ordr, wat happned?",shipping,train,llm
+"I nee to reroute my paket to a difrent addres, how can I do that?",shipping,train,llm
+Received a broken item. Disapponted.,product_defect,train,llm
+"Product faulty, wot do I do?",product_defect,train,llm
+Missing parts in the package.,product_defect,train,llm
+Item arrived dammaged beyond repair.,product_defect,train,llm
+"The device won't turn on, seems faulty.",product_defect,train,llm
+"Half the parts are here, others are gone.",product_defect,train,llm
+Product doent work as described.,product_defect,train,llm
+"Arrived with a huge dent, unacceptable.",product_defect,train,llm
+"Faulty wiring in the gadget, safety concern.",product_defect,train,llm
+"Pieces dont fit, somethings missing.",product_defect,train,llm
+Item non-functional right out of box.,product_defect,train,llm
+"Package torn, product inside is ruined.",product_defect,train,llm
+"I got my order and the main component is brokwn, need a replacemnt ASAP.",product_defect,train,llm
+"The package arrived but one of the itmes is missng, what should I do?",product_defect,train,llm
+"Received the gadget but it dosent turn on, seems faulty.",product_defect,train,llm
+"My purchace has a crackd part, not acceptable. Please help.",product_defect,train,llm
+"Item came damaged, the screen has a huge scratch on it.",product_defect,train,llm
+"The product I received is not working, power button unreponsive.",product_defect,train,llm
+"Missing screws in my kit, can't assemble the product.",product_defect,train,llm
+"One of the parts in my order is defective, needs to be replaced.",product_defect,train,llm
+"The device arrived but it dosnt connect to WiFi, very frustating.",product_defect,train,llm
+"Recieved a broken piece, the handle is snapped off.",product_defect,train,llm
+"My order was incomplete, essential part missing from the box.",product_defect,train,llm
+"The electronic device I got is malfunctioning, display flickering.",product_defect,train,llm
+"Cn't logn, says wrng passwrd but im sure its rite.",account_access,train,llm
+"Lockd out of my acount, need help resetng it asap.",account_access,train,llm
+"Verification code nt recived, tried 3 time allredy.",account_access,train,llm
+"My account got haked, pleace lock it imidiatly.",account_access,train,llm
+Forgot my passwrd and the reset link isn't working.,account_access,train,llm
+"Recived a suspicous email, worried about my acct securty.",account_access,train,llm
+"To many failed login attemps, now its lockd.",account_access,train,llm
+Changed my passwrd but still cant log in.,account_access,train,llm
+Getting errr msg when entering verifcation code.,account_access,train,llm
+"Someone tryed to acess my acount, plese help!",account_access,train,llm
+Need to update my secuirty info but cant log in.,account_access,train,llm
+"Cant rember my username, how do i retreve it?",account_access,train,llm
+Weer do you all acept cash? Ty.,other,train,llm
+Wat ar yur biz hrz? Ty.,other,train,llm
+I luvd ur svrves! Wul u b intrested in patnering?,other,train,llm
+Do u do gift cards? Ty.,other,train,llm
+I luvd the gud I bought! Thx!,other,train,llm
+Wat ar yur hrs? Ty.,other,train,llm
+Can I get a gift wrap? Thx.,other,train,llm
+Do you offer gift baskets? Thanks.,other,train,llm
+I have a genral q about yur svrves. Thx.,other,train,llm
+Do you have a physical store? Thanks.,other,train,llm
+What are your return policies? Thanks.,other,train,llm
+Can I purchase a gift certificate? Thanks.,other,train,llm
+I was wandering if your store has a location near downtown?,other,train,llm
+Can you let me know the store hours for the midtown location?,other,train,llm
+"I'd like to provide some feedback on the new summer collection, the colors are absolutly stunning!",other,train,llm
+Do you offer any gift cards or gift wrapping options for purchase?,other,train,llm
+Is there any possibility of a partnership with local artisans for exclusive product lines?,other,train,llm
+"I noticed your website doesn't list any upcoming sales, any plans for discounts soon?",other,train,llm
+Could you inform me about the return policy for online purchases?,other,train,llm
+Are there any upcoming events or sales at the downtown store?,other,train,llm
+"I’m interested in knowing more about the sourcing of your materials, any info would be great.",other,train,llm
+Do you have any plans to expand to other cities in the near future?,other,train,llm
+Can you confirm if the gift cards purchased online can be used in-store?,other,train,llm
+"I’m curious about the process for requesting a catalog, is it still available?",other,train,llm
+"Hello, I recently noticed an unexpected charge on my bank statement from your service, which I didn't authorize. To make matters worse, it appears twice, leading to a double charge. I've been a loyal customer for years, but this has left me quite puzzled and a bit frustrated. Could you please investigate and resolve this issue as soon as possible?",billing,test,llm
+"Dear Customer Support, I'm reaching out regarding an invoice I received that seems to be incorrect. It reflects a subscription fee that I believe I had canceled months ago. This has caused quite a stir in my monthly budget, and I would greatly appreciate it if you could look into this and provide a clarification or a refund if necessary.",billing,test,llm
+"Hi there, I've been experiencing some difficulties with the payment process on your platform. Whenever I try to renew my subscription, the system seems to encounter an error, and the transaction doesn't go through. This has been going on for a while, and I'm worried about a service interruption. Any help would be greatly appreciated.",billing,test,llm
+"Good day, I'm writing to inquire about a recent transaction that was declined on your website. I've checked my card, and there are sufficient funds available. This has happened a couple of times now, and I'm concerned about the security of my payment information. Could you please look into this matter?",billing,test,llm
+"Hello, I've noticed that I've been charged for a subscription that I thought I had paused. It's quite confusing, as I distinctly remember following the steps to halt the billing temporarily. This has led to some financial strain, and I would appreciate your assistance in resolving this discrepancy.",billing,test,llm
+"Dear Support Team, I'm a bit perplexed by the recent charges on my account. It seems that there are multiple charges for what appears to be the same service. I've been a subscriber for quite some time, and this is the first time I've encountered such an issue. Could you please provide some clarity and perhaps issue a refund for the overcharge?",billing,test,llm
+"Hi, I've been a consistent user of your service, but recently, I've been facing issues with the invoicing system. The amounts listed on the invoices don't seem to match the services I've been using, and it's causing a bit of a headache when trying to manage my expenses. Could you please review my account and correct any discrepancies?",billing,test,llm
+"Good afternoon, I'm writing to express my concern about a recurring charge that has appeared on my credit card statement. I'm not sure how this subscription was activated, as I don't recall signing up for it. I would like to request a cancellation of this subscription and a refund for the unauthorized charges.",billing,test,llm
+"Hello, I've been trying to cancel a subscription for some time now, but it seems that the charges continue to appear on my statement. I've followed the cancellation process as outlined on your website, but to no avail. This has been quite frustrating, and I would appreciate your help in resolving this issue.",billing,test,llm
+"Dear Customer Service, I'm reaching out regarding a payment problem I've been encountering. Whenever I attempt to make a purchase on your platform, the transaction fails, and I receive an error message. I've tried using different payment methods, but the issue persists. Could you please assist me in resolving this matter?",billing,test,llm
+"Hi there, I'm writing to bring to your attention a discrepancy in my recent invoice. It seems that there are charges for services that I didn't use, and it's quite confusing. I've been a faithful customer for a long time, and this has left me feeling a bit let down. Could you please investigate and provide a resolution?",billing,test,llm
+"Good day, I've been facing some challenges with the subscription renewal process on your platform. The system seems to be experiencing glitches, and the renewals aren't going through as expected. This has caused some service interruptions, and I would appreciate your assistance in resolving this issue promptly.",billing,test,llm
+"I recently noticed a duplicate charge on my statement from your company, and after digging through my records, I realized I had inadvertently signed up for two subscriptions last holiday season while searching for a gift. Could you please assist me in resolving this double charge?",billing,test,llm
+"Upon reviewing my latest bank statement, I discovered an unexpected deduction that appears to be from your service. I've been a loyal customer for years, but this charge seems out of place. Can we look into this discrepancy?",billing,test,llm
+"I've been trying to cancel my subscription for months now, yet I've just been charged again. I followed all the cancellation steps online, but it seems nothing has been processed. Please help me get a refund for this unauthorized renewal.",billing,test,llm
+"While going over my quarterly finances, I stumbled upon an invoice from your company that I hadn't noticed before. It's quite a large sum, and I'm not sure why it's so high. Can you provide a detailed breakdown of this invoice?",billing,test,llm
+"I attempted to make a payment through your website yesterday, but the transaction failed, and I'm still being charged a late fee. This is very frustrating as I believed the payment had gone through. Please assist me in sorting out this payment problem.",billing,test,llm
+"After a long trip abroad, I returned to find several charges from your service that I don’t recognize. I’m quite concerned about these unauthorized transactions and would like a thorough investigation and immediate refunds.",billing,test,llm
+"I’ve been trying to upgrade my subscription plan, but every time I attempt to pay, the website crashes and I’m not sure if the payment went through. This has happened multiple times, and I fear I might end up with duplicate charges.",billing,test,llm
+"I received an email about a new invoice, but the amount seems much higher than usual. I’ve been a steady subscriber without any changes in my plan. Could you please clarify these charges?",billing,test,llm
+"There seems to be a recurring charge on my credit card that I can’t identify with any of my known subscriptions. I’ve checked my account with you, but there’s no trace of this payment. Please help me trace and refund this charge.",billing,test,llm
+"I had to change my payment method recently due to a lost card, but it seems the new details haven’t been updated in your system as I’ve been charged a late fee. Can you please ensure my new payment method is registered and remove the late fee?",billing,test,llm
+"I’ve been a subscriber for years, but recently noticed multiple small charges that add up significantly. These charges aren’t reflected in my subscription details. Please investigate and provide a refund for these unauthorized micro-transactions.",billing,test,llm
+"I’m having trouble understanding why my subscription was automatically renewed when I had explicitly requested a pause due to a temporary financial setback. This has caused me considerable stress, and I request an immediate refund for the unwarranted renewal.",billing,test,llm
+"Hey there, so here's the deal, I ordered a package a month ago and it's still not here. I've been tracking it and it seems to be stuck in transit. I'm getting a bit anxious because it's a gift for a special occasion that's coming up soon. Any chance you can look into this and give me an update?",shipping,test,llm
+"Greetings, I've encountered a bit of a pickle with my recent order. It appears that the tracking information hasn't updated in over a week, and I'm starting to worry that the parcel might be lost. Could you please assist me in locating it or providing any information on its whereabouts?",shipping,test,llm
+"Hi, I hope this message finds you well. I recently had to change my delivery address due to an unexpected move, but it seems the new address wasn't updated in time. The parcel was delivered to the old address, and I'm not sure what to do next. Could you help me redirect the package to my new location?",shipping,test,llm
+"Hello, I'm reaching out because I have a rather urgent inquiry regarding my package. I was wondering if there's a possibility to change the delivery address at this late stage, as I've just realized I provided the wrong one. Is this something that can be done, and if so, how should I proceed?",shipping,test,llm
+"Dear support team, I've been eagerly awaiting the arrival of my package, but it seems to have gone missing in transit. The last update I received was a week ago, and since then, there's been radio silence. I'm quite concerned and would appreciate any assistance you can provide in locating my parcel.",shipping,test,llm
+"Hi there, I'm in a bit of a bind with my recent order. I noticed that the tracking information hasn't been updated for quite some time, and I'm starting to worry that something might have gone wrong. Could you please check on the status of my package and let me know if there are any issues?",shipping,test,llm
+"Greetings, I find myself in a bit of a predicament with my order. It seems that the delivery address I provided was incorrect, and now I'm worried the package might be lost. Is there any way to update the delivery address at this point, or should I take another course of action?",shipping,test,llm
+"Hello, I'm writing to inquire about the status of my package, which I've been tracking for the past two weeks. The tracking information hasn't changed, and I'm starting to get concerned. Could you please look into this matter and provide me with any updates or information you might have?",shipping,test,llm
+"Hi, I'm hoping you can help me with a rather urgent matter. I recently moved and forgot to update my delivery address for an order I placed. The package was delivered to my old address, and I'm not sure what to do next. Could you assist me in redirecting the package to my new location?",shipping,test,llm
+"Dear customer support, I'm reaching out because I'm quite worried about my package. The tracking information hasn't been updated in over a week, and I'm starting to fear it might be lost. Could you please investigate this issue and provide me with any information you might have on its whereabouts?",shipping,test,llm
+"Hello, I'm writing to express my concern about a package I've been tracking for the past month. The tracking information hasn't changed in weeks, and I'm starting to get anxious. Could you please look into this matter and let me know if there are any issues with the delivery?",shipping,test,llm
+"Hi there, I'm hoping you can assist me with a rather urgent issue. I recently moved and forgot to update my delivery address for an order I placed. The package was delivered to my old address, and I'm not sure what to do next. Could you help me redirect the package to my new location?",shipping,test,llm
+"Hello there, I recently purchased the Deluxe Gizmo set from your online store, and to my dismay, upon opening the package, I discovered that the primary component, the Gizmo itself, was completely shattered into pieces. This is quite disheartening as I had been eagerly anticipating using it for my upcoming project.",product_defect,test,llm
+"Greetings, I ordered the Ultra Widget Kit last month, and while the package arrived promptly, I noticed that the essential Widget Adapter was missing from the set. This has significantly hindered my ability to proceed with the assembly and use of the product as intended.",product_defect,test,llm
+"Hi, I'm reaching out regarding the Turbo Enhancer I bought from your website. Unfortunately, the device powers on but fails to perform its main function—boosting performance. I've tried all troubleshooting steps listed in the manual, but to no avail.",product_defect,test,llm
+"Hello, I am writing to express my concern about the Super Doodad I received. The packaging was intact, but the Doodad itself is malfunctioning; it intermittently shuts down without any apparent reason, which is quite frustrating during use.",product_defect,test,llm
+"Dear Customer Service, I recently acquired the Mega Contraption, and although it arrived without any external damage, I found that the internal circuitry is faulty. The Contraption does not respond to any inputs, rendering it completely non-functional.",product_defect,test,llm
+"Hi there, I'm contacting you about the Omni Gadget I purchased. The delivery was prompt, but upon inspection, I found that several screws and a crucial mounting bracket were missing from the package, making it impossible to install the Gadget as described.",product_defect,test,llm
+"Hello, I've encountered a significant issue with the Quantum Sprocket I ordered. The Sprocket arrived with visible damage to the housing, and upon testing, it produces an unusual noise and fails to operate smoothly, indicating a potential internal fault.",product_defect,test,llm
+"Greetings, I am very disappointed with the condition of the Nebula Device I received. Not only was the exterior packaging damaged, but the Device itself is not working; it doesn't power on at all, despite being fully charged.",product_defect,test,llm
+"Hi, I'm writing to report a problem with the Stellar Gizmo I recently bought. The Gizmo was supposed to come with a set of interchangeable parts, but several of these parts were either damaged or entirely absent from the package.",product_defect,test,llm
+"Hello, I purchased the Infinity Widget, and while the box showed no signs of damage, the Widget inside is clearly defective. It overheats rapidly and shuts down, which is a safety concern and renders it unusable.",product_defect,test,llm
+"Dear Support Team, I am very unhappy with the condition of the Cosmic Enhancer I received. The Enhancer was supposed to be brand new, but it arrived with a cracked casing and does not function at all when plugged in.",product_defect,test,llm
+"Hi there, I'm extremely frustrated with the condition of the Galactic Doodad I ordered. Not only was the Doodad missing critical components, but the ones that were included are of poor quality and do not fit together as they should.",product_defect,test,llm
+"Hey there, so I recently got this amazing new blender, but when I opened the box, the blade was already bent and the lid had a huge crack in it. I'm pretty bummed because I was looking forward to making smoothies every morning. What should I do next?",product_defect,test,llm
+"Hello, I just received my new wireless headphones, but they're not charging at all. I tried using different cables and outlets, but nothing seems to work. I'm worried I might have gotten a faulty batch. Any suggestions?",product_defect,test,llm
+"Hi, I ordered a complete kitchen set, but when it arrived, two of the pots were missing their handles. I'm not sure if this is a mistake or if they were never included. Could you please help me out here?",product_defect,test,llm
+"Greetings, I purchased a high-tech smart watch last week, but the touchscreen is completely unresponsive. I've tried restarting it multiple times, but it's still not working. Is there a way to get a replacement?",product_defect,test,llm
+"Hello, I recently bought a new vacuum cleaner, but it stopped working after just one use. The motor seems to be the issue, as it doesn't turn on at all. I'm hoping you can assist me in getting this resolved.",product_defect,test,llm
+"Hi, I got a new set of garden tools, but the shovel handle is already showing signs of wear and tear. It looks like it might break soon. Is this a common issue, or should I request a replacement?",product_defect,test,llm
+"Hey, I just unboxed my new gaming console, but one of the controllers is missing buttons. I can't play any games properly like this. What steps should I take to get this fixed?",product_defect,test,llm
+"Hello, I ordered a new laptop, but the screen has a huge crack right in the middle. I didn't drop it or anything, so I'm really confused about how this happened. Can you help me get a new one?",product_defect,test,llm
+"Hi, I bought a new fitness tracker, but the heart rate monitor isn't working at all. I've tried resetting it, but it still doesn't function properly. Is there a way to get a refund or a replacement?",product_defect,test,llm
+"Greetings, I recently purchased a new set of speakers, but one of them has a buzzing noise whenever I turn it on. I've tried different settings, but the issue persists. What should I do next?",product_defect,test,llm
+"Hello, I got a new coffee maker, but the water reservoir is leaking from the bottom. I've tried tightening it, but it's still not sealing properly. Is this a common problem, or should I ask for a replacement?",product_defect,test,llm
+"Hi, I ordered a new drone, but the propellers were damaged in transit. They have visible cracks and won't spin properly. I'm really disappointed because I was excited to try it out. Can you help me get new propellers?",product_defect,test,llm
+"I've been having trouble accessing my account since last Tuesday, and I'm pretty sure it's because I changed my password on my phone but forgot to update it on my laptop, and now I'm locked out and the verification codes aren't coming through, and I've tried everything I can think of but nothing seems to work.",account_access,test,llm
+"Ever since the big update last month, I've been unable to log in to my account; it keeps saying my password is incorrect, even though I've reset it multiple times and tried the verification code, but it never arrives, and I'm starting to worry about the security of my account.",account_access,test,llm
+"I've been locked out of my account for over a week now, and I've tried every password I can remember, but nothing works; the verification code option is greyed out, and I'm really concerned about potential security breaches.",account_access,test,llm
+"After a recent trip abroad, I've been unable to log in to my account; I suspect it might be due to a location-based security feature, as I've entered my password correctly multiple times, but the verification code never arrives, and I'm getting quite frustrated.",account_access,test,llm
+"I've been experiencing intermittent login issues for the past few days; sometimes I can access my account, but other times it says my password is incorrect, and when I try to use the verification code, it doesn't send, which is making me worry about the security of my account.",account_access,test,llm
+"Ever since I updated my email address associated with my account, I've been unable to log in; the password I've always used isn't working, and the verification code is being sent to my old email, which I no longer have access to, and I'm really concerned about the security of my account.",account_access,test,llm
+"I've been trying to log in to my account for the past hour, but it keeps saying my password is incorrect, even though I'm sure I'm entering it correctly; the verification code option is also not working, and I'm starting to get worried about potential security breaches.",account_access,test,llm
+"After a recent security update, I've been unable to log in to my account; it keeps saying my password is incorrect, and the verification code is not being sent to my phone, which is making me worry about the security of my account.",account_access,test,llm
+"I've been locked out of my account for the past few days, and I've tried every password I can remember, but nothing works; the verification code option is also not available, and I'm really concerned about potential security breaches.",account_access,test,llm
+"Ever since I changed my password last week, I've been unable to log in to my account; it keeps saying the password is incorrect, and the verification code is not being sent to my email, which is making me worry about the security of my account.",account_access,test,llm
+"I've been experiencing login issues for the past few days; sometimes I can access my account, but other times it says my password is incorrect, and the verification code is not being sent to my phone, which is making me worry about the security of my account.",account_access,test,llm
+"After a recent software update, I've been unable to log in to my account; it keeps saying my password is incorrect, and the verification code is not being sent to my email, which is making me worry about the security of my account.",account_access,test,llm
+"I recently moved to the area and have been on the lookout for a cozy place to grab a cup of coffee. I stumbled upon your store while taking a stroll through the neighborhood, and I must say, the aroma wafting through the air was simply irresistible. I have a few questions about your store hours and the types of coffee beans you source. Could you provide me with some information? I'm eager to learn more about your establishment and perhaps become a regular patron.",other,test,llm
+"As a long-time admirer of artisanal coffee, I was thrilled to discover your store in the heart of the city. The ambiance is warm and inviting, and the staff members I've interacted with have been incredibly knowledgeable and passionate about their craft. I would love to share some feedback on my recent visit and inquire about any upcoming events or workshops you may be hosting. Your store has truly become a sanctuary for coffee enthusiasts like myself.",other,test,llm
+"I recently had the pleasure of visiting your store while on a business trip, and I was captivated by the unique blend of flavors in your coffee. I'm curious to know more about the sourcing and roasting process behind your beans. Additionally, I'm interested in exploring potential partnership opportunities with your store, as I believe our values and commitment to quality align seamlessly.",other,test,llm
+"While browsing through your online store, I came across a delightful selection of gift options that would make perfect presents for my coffee-loving friends and family. I have a few questions regarding the customization options available for your gift sets and the estimated delivery times. Could you provide me with some guidance on selecting the ideal gift for each recipient? I'm eager to spread the joy of your exceptional coffee to my loved ones.",other,test,llm
+"As a fellow small business owner, I've always admired the passion and dedication you've poured into your store. I'm reaching out to inquire about the possibility of collaborating on a community event that celebrates local artisans and entrepreneurs. I believe that by joining forces, we can create an unforgettable experience for our customers and further strengthen the bonds within our community.",other,test,llm
+"I recently relocated to the area and have been searching for a go-to spot for my daily coffee fix. Your store caught my eye, and I was pleasantly surprised by the welcoming atmosphere and the diverse selection of coffee blends. I have a few questions about your loyalty program and any special offers available for new customers. I'm excited to become a part of your coffee community!",other,test,llm
+"As a dedicated coffee aficionado, I was overjoyed to discover your store nestled in the charming streets of our town. The passion and expertise that radiate from your staff members are truly inspiring. I would like to share some feedback on my recent visit and inquire about the possibility of hosting a coffee-tasting event at my local library. I believe that by sharing your exceptional coffee with the community, we can foster a deeper appreciation for the art of coffee crafting.",other,test,llm
+"While browsing through your online store, I was captivated by the beautiful artwork featured on your coffee packaging. I'm curious to know more about the artists you collaborate with and the inspiration behind each design. Additionally, I'm interested in learning about any upcoming art exhibitions or events that showcase the talent of local artists. Your store has truly become a hub for creativity and community.",other,test,llm
+"As a corporate event planner, I'm always on the lookout for unique and memorable experiences to offer my clients. Your store's exceptional coffee and charming atmosphere have caught my attention, and I'm reaching out to inquire about the possibility of partnering with you for future events. I believe that by combining your expertise in coffee crafting with my event planning skills, we can create unforgettable moments for our clients.",other,test,llm
+"While strolling through the bustling farmers' market, I had the pleasure of sampling your exquisite coffee at one of the vendor booths. The rich flavors and aroma were simply divine, and I couldn't resist seeking out your store to learn more about your coffee journey. I have a few questions about your sourcing practices and the story behind each blend. I'm eager to support local businesses and spread the word about your exceptional coffee!",other,test,llm
+"As a devoted coffee lover, I was thrilled to discover your store while on vacation in a charming coastal town. The welcoming atmosphere and the passion of your staff members left a lasting impression on me. I would like to share some feedback on my visit and inquire about the possibility of becoming a loyal customer even from afar. Your coffee has truly become a part of my travel memories, and I look forward to indulging in your exceptional blends upon my return home.",other,test,llm
+"While exploring the vibrant streets of our city, I stumbled upon your store and was immediately drawn in by the inviting aroma of freshly brewed coffee. The warm and welcoming atmosphere, coupled with the expertise of your staff members, made for an unforgettable experience. I have a few questions about your coffee subscription service and the variety of blends available. I'm eager to embark on a coffee journey with your store and discover new flavors with each delivery.",other,test,llm
+"I was charged twice for my recent purchase, please help me to get a refund.",billing,test,llm
+"I received an invoice for a subscription I did not authorize, could you cancel it?",billing,test,llm
+"My payment was declined, but I see the charge on my bank statement, what should I do?",billing,test,llm
+I would like to request a refund for a product that did not meet my expectations.,billing,test,llm
+"There seems to be a mistake with my invoice, the amount is incorrect.",billing,test,llm
+"I have been charged for a subscription I cancelled months ago, please investigate.",billing,test,llm
+"I am having trouble with my payment method, can you assist me in updating it?",billing,test,llm
+"I noticed a charge on my account that I do not recognize, please provide details.",billing,test,llm
+"My auto-renewal subscription was not cancelled as requested, please resolve this.",billing,test,llm
+"I attempted to make a purchase but encountered an error, how can I proceed?",billing,test,llm
+I need a detailed breakdown of the charges on my recent invoice.,billing,test,llm
+"I was double-charged for a service, please process a refund for the duplicate amount.",billing,test,llm
+"My paket was schoulded to arrive on last week, but I not recived it yet. Can you help?",shipping,test,llm
+I am concern about my order. The tracking status not updated since two weeks.,shipping,test,llm
+I need to chang the delivery adres for my order. How I can do this?,shipping,test,llm
+"My delivery was missed by me, and now it return to sender. What I do now?",shipping,test,llm
+The tracking number for my order not working. How I can track my paket?,shipping,test,llm
+I moved to a new adres. Please update my delivery adres for all future orders.,shipping,test,llm
+There was a mistake with my adres when I place the order. How I fix this?,shipping,test,llm
+"My paket was marked as delivered, but I did not receive it. What should I do?",shipping,test,llm
+Can you tell me why my order taking so long to arrive? It supposed to be here last week.,shipping,test,llm
+I want to know when my paket will arrive. The tracking information not clear for me.,shipping,test,llm
+There was an error with the adres I provided. Can you please update it for me?,shipping,test,llm
+I have a question about my delivery time. When I can expect my paket to arrive?,shipping,test,llm
+"Hello, my package was supposed to arrive last week but it still not here. Can you check the tracking number for me?",shipping,test,llm
+"Dear support, I need to change the delivery address for my parcel. How can I do that?",shipping,test,llm
+"Hi there, I have a question about the delivery time. When should I expect my package to arrive?",shipping,test,llm
+"Hello, I am worried that my parcel might be lost. The tracking information hasn't updated in days.",shipping,test,llm
+"Hi, I moved to a new address recently. Can I update the delivery location for my pending order?",shipping,test,llm
+"Dear team, I was told my parcel would be delivered yesterday, but it didn’t arrive. What should I do?",shipping,test,llm
+"Hello, I need to know the current status of my parcel. The last update was two days ago.",shipping,test,llm
+"Hi support, I have not received any tracking updates for my parcel. Is there a delay?",shipping,test,llm
+"Dear customer service, I would like to know if it’s possible to change the delivery date for my order.",shipping,test,llm
+"Hello, I think there might be a mistake with my delivery address. Can you please verify it for me?",shipping,test,llm
+"Hi, my parcel is late and I am concerned. Can you provide more information on its status?",shipping,test,llm
+"Hello support, I need to confirm the delivery schedule for my parcel as I will be away soon.",shipping,test,llm
+"I received my order but one item is broken, what should I do?",product_defect,test,llm
+"The product I got has some parts missing, how can I get the full set?",product_defect,test,llm
+"My device stopped working after one use, is this normal?",product_defect,test,llm
+I noticed some damage on the package and the product inside is faulty.,product_defect,test,llm
+"The item I ordered does not function as described, what are my options?",product_defect,test,llm
+"There are some parts of the product that seem to be damaged, can I get a replacement?",product_defect,test,llm
+"I have received a product that is not working, how can I return it?",product_defect,test,llm
+"My order arrived with a broken component, what steps should I take?",product_defect,test,llm
+"The device I purchased has a fault, how can I get it repaired?",product_defect,test,llm
+"One of the items in my order is missing, how can I resolve this issue?",product_defect,test,llm
+"The product I received is not in working condition, what should I do next?",product_defect,test,llm
+"I found that the parts of my order are incomplete, how can I get the missing pieces?",product_defect,test,llm
+I can't remember my password and the reset link is not coming to my inbox. Please help.,account_access,test,llm
+I have received several verification codes that I did not request. Is my account safe?,account_access,test,llm
+"After entering the verification code, the system still says it's incorrect. What should I do?",account_access,test,llm
+I am locked out of my account after too many failed login attempts. How can I regain access?,account_access,test,llm
+The password I set yesterday is not working today. Can you assist me in resolving this issue?,account_access,test,llm
+I suspect someone else is trying to access my account. What steps should I take to secure it?,account_access,test,llm
+I did not receive the email with the password reset instructions. Can you resend it?,account_access,test,llm
+My account is showing as temporarily suspended. Why is this happening and how can I fix it?,account_access,test,llm
+I entered the verification code correctly but the system still locks me out. Please advise.,account_access,test,llm
+I’m having trouble logging in with my usual password. Is there a way to recover my account?,account_access,test,llm
+I keep getting error messages when I try to log in. Is there an issue with the server?,account_access,test,llm
+I changed my password but the old one still works. How can I ensure the new password is active?,account_access,test,llm
+"I have tried to log in but password not accepted, I am sure it is correct.",account_access,test,llm
+"Please send me verification code again, I did not receive on my phone.",account_access,test,llm
+"My account was lockout and I do not know why, please help me regain access.",account_access,test,llm
+"I suspect someone else is using my account, how can I make it more secure?",account_access,test,llm
+"After changing password, system say it incorrect when I try to log in.",account_access,test,llm
+"I have not received any verification email, can you resend to me?",account_access,test,llm
+"Someone tried to access my account from unknown location, what should I do?",account_access,test,llm
+"I forget my password and the reset link is not working, please assist.",account_access,test,llm
+Is there a way to set up two-factor authentication for extra security?,account_access,test,llm
+"My account has been temporarily locked, how long will this take to resolve?",account_access,test,llm
+"I entered the verification code correctly but it says invalid, what to do?",account_access,test,llm
+Can you check if there are any unusual activities on my account recently?,account_access,test,llm
+"I have a general question about your return policy, could you help me?",other,test,llm
+Your store has amazing products! I wonder if you have a loyalty program?,other,test,llm
+"Hello, I am looking for specific store information, can you provide me details?",other,test,llm
+"I want to suggest a partnership between our companies, is this possible?",other,test,llm
+Could you please tell me more about the gift options available in your store?,other,test,llm
+"I have feedback about the customer service I received, it was excellent!",other,test,llm
+I would like to know if you have any upcoming sales or promotions.,other,test,llm
+Can you tell me the opening hours of your store on weekends?,other,test,llm
+"I am interested in a corporate partnership, how can we proceed?",other,test,llm
+Do you offer gift wrapping services for online purchases?,other,test,llm
+I have a question regarding the shipping options available for international orders.,other,test,llm
+Your products are fantastic! I would like to share my positive experience with others.,other,test,llm

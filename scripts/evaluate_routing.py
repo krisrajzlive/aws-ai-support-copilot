@@ -34,9 +34,10 @@ def main() -> None:
     replies: list[tuple[str, str]] = []
     for item in requests:
         case = analyze_case(session, settings, text=item["text"])
+        confidence = f" {case.category_confidence}" if case.category_confidence else ""
         table.add_row(
             item["id"],
-            f"{case.category} / {case.priority}",
+            f"{case.category} / {case.priority} ({case.category_source}{confidence})",
             case.sentiment or "-",
             f"{case.persona} ({case.persona_reason})",
             case.model_id,

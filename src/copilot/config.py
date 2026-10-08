@@ -29,6 +29,11 @@ class Settings(BaseSettings):
     # Cheap, fast models for the triage step (category and priority), tried in order
     triage_models: str = "amazon.nova-micro-v1:0,amazon.nova-lite-v1:0"
 
+    # Trained ticket classifier (ml/train.py output). When set and confident, it decides the
+    # category and the LLM triage only supplies the summary and priority.
+    classifier_path: str = ""
+    classifier_min_confidence: float = 0.6
+
     # Path to a personas TOML file; empty uses the built-in personas
     personas_file: str = ""
 

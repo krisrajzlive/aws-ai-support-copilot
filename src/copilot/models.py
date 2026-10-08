@@ -16,6 +16,8 @@ class SupportCase(BaseModel):
     image_labels: list[str] = Field(default_factory=list)
     summary: str = ""
     category: str = ""
+    category_source: str = ""
+    category_confidence: float | None = None
     persona: str = ""
     persona_reason: str = ""
     priority: str = ""
