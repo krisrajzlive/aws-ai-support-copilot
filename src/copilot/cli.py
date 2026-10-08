@@ -12,7 +12,7 @@ from copilot import __version__
 from copilot.aws import make_session
 from copilot.config import Settings
 from copilot.doctor import DoctorReport, Status, run_doctor
-from copilot.pipeline import analyze_case
+from copilot.pipeline import analyze_case, speak_reply
 
 app = typer.Typer(help="AWS AI Support Copilot", no_args_is_help=True, add_completion=False)
 console = Console()
@@ -57,11 +57,15 @@ def analyze(
     reply_language: Annotated[
         str | None, typer.Option(help="Defaults to the input language.")
     ] = None,
+    speak: Annotated[
+        Path | None, typer.Option(help="Write a spoken MP3 reply here (needs tts_backend=polly).")
+    ] = None,
 ) -> None:
     """Turn a support request into a structured case and a drafted reply."""
     settings = Settings()
+    session = make_session(settings)
     case = analyze_case(
-        make_session(settings),
+        session,
         settings,
         text=text,
         document=document.read_bytes() if document else None,
@@ -71,6 +75,9 @@ def analyze(
         reply_language=reply_language,
     )
     console.print_json(case.model_dump_json())
+    if speak:
+        speak.write_bytes(speak_reply(session, settings, case))
+        console.print(f"Spoken reply written to {speak}")
 
 
 @app.command()

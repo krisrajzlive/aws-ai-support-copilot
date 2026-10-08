@@ -19,6 +19,7 @@ class SupportCase(BaseModel):
     priority: str = ""
     reply_en: str = ""
     reply: str = ""
+    reply_language: str = ""
     blocked: bool = False
     model_id: str = ""
     backends: dict[str, str] = Field(default_factory=dict)

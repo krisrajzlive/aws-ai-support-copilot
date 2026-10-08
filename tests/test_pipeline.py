@@ -87,3 +87,31 @@ def test_audio_is_transcribed_with_voxtral_before_analysis():
     )
     assert "order is broken" in case.original_text
     assert case.backends["transcribe"] == "bedrock-voxtral"
+
+
+def test_translate_modes():
+    from copilot.services.bedrock import BedrockService
+    from copilot.services.translate import Translator
+
+    def bedrock_client():
+        return FakeSession({("bedrock-runtime", "converse"): _converse("hola")}).client(
+            "bedrock-runtime"
+        )
+
+    denied = FakeSession({("translate", "translate_text"): client_error("AccessDeniedException")})
+    ok = FakeSession({("translate", "translate_text"): lambda **_: {"TranslatedText": "hola-aws"}})
+
+    def make(session, mode):
+        return Translator(
+            session.client("translate"), BedrockService(bedrock_client(), ["m"]), mode
+        )
+
+    assert make(ok, "aws").translate("hi", "en", "es") == "hola-aws"
+    assert make(denied, "auto").translate("hi", "en", "es") == "hola"
+    assert make(denied, "bedrock").translate("hi", "en", "es") == "hola"
+    try:
+        make(denied, "aws").translate("hi", "en", "es")
+    except Exception as exc:  # strict aws mode must not silently fall back
+        assert "AccessDenied" in str(exc)
+    else:
+        raise AssertionError("aws mode should raise when denied")

@@ -41,9 +41,23 @@ Results of `copilot doctor` on a time-boxed, region-locked (us-east-1) training 
 Anthropic Claude models appear in the Bedrock catalog but are not invokable from code there, so
 Bedrock calls default to Amazon Nova Lite with Nova Micro/Pro, Qwen3 and gpt-oss as fallbacks.
 Translate runs against Amazon Translate when allowed and falls back to Bedrock otherwise;
-speech to text uses Voxtral on Bedrock. Amazon Transcribe and Polly backends are not
-implemented yet, and a Bedrock Guardrail backend (`scripts/create_guardrail.py`) is covered by
-stubbed tests only, because guardrails cannot be created in the lab account.
+speech to text uses Voxtral on Bedrock. The Amazon Transcribe, Polly and Bedrock Guardrails
+backends are implemented and covered by stubbed tests only, because those services are blocked in
+the lab account.
+
+## Configuration
+
+Each service that is commonly blocked in lab accounts is switchable in `.env` (see
+`.env.example`). Defaults run in a restricted account; the AWS-native backends are retained and
+tested with stubs.
+
+| Variable | Values | Default | Notes |
+|---|---|---|---|
+| `COPILOT_TRANSLATE_BACKEND` | `bedrock`, `aws`, `auto` | `bedrock` | `auto` tries Amazon Translate, then Bedrock if denied; `aws` never falls back |
+| `COPILOT_TRANSCRIBE_BACKEND` | `bedrock`, `aws` | `bedrock` | `aws` uses Amazon Transcribe and needs `COPILOT_TRANSCRIBE_BUCKET` |
+| `COPILOT_TTS_BACKEND` | `off`, `polly` | `off` | `polly` enables `copilot analyze --speak reply.mp3` |
+| `COPILOT_GUARDRAIL_ID` | guardrail id or empty | empty | create one with `scripts/create_guardrail.py` |
+| `COPILOT_BEDROCK_MODELS` | comma-separated model ids | Nova Lite first | first model that responds is used |
 
 ## Status
 

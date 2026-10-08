@@ -8,7 +8,8 @@ from copilot.models import SupportCase
 from copilot.services import comprehend, vision
 from copilot.services.bedrock import BedrockService
 from copilot.services.guardrails import GuardrailService
-from copilot.services.transcribe import Transcriber
+from copilot.services.speech import synthesize_reply
+from copilot.services.transcribe import AwsTranscriber, Transcriber
 from copilot.services.translate import Translator
 
 CATEGORIES = ["billing", "shipping", "product_defect", "account_access", "other"]
@@ -52,7 +53,7 @@ def analyze_case(
         return session.client(name, config=CLIENT_CONFIG)
 
     bedrock = BedrockService(client("bedrock-runtime"), settings.bedrock_model_list)
-    translator = Translator(client("translate"), bedrock)
+    translator = Translator(client("translate"), bedrock, settings.translate_backend)
     guardrail = (
         GuardrailService(client("bedrock"), settings.guardrail_id, settings.guardrail_version)
         if settings.guardrail_id
@@ -60,9 +61,13 @@ def analyze_case(
     )
     backends: dict[str, str] = {}
     if audio:
-        transcript = Transcriber(client("bedrock-runtime")).transcribe(audio, audio_format)
-        text = f"{text} {transcript}".strip()
-        backends["transcribe"] = Transcriber.backend
+        transcriber = (
+            AwsTranscriber(client("transcribe"), client("s3"), settings.transcribe_bucket)
+            if settings.transcribe_backend == "aws"
+            else Transcriber(client("bedrock-runtime"))
+        )
+        text = f"{text} {transcriber.transcribe(audio, audio_format)}".strip()
+        backends["transcribe"] = transcriber.backend
     case = SupportCase(original_text=text)
 
     if document:
@@ -105,6 +110,7 @@ def analyze_case(
 
     target = reply_language or source
     case.reply = translator.translate(case.reply_en, "en", target)
+    case.reply_language = target
     case.model_id = bedrock.model_id
     case.backends = {
         **backends,
@@ -113,3 +119,11 @@ def analyze_case(
         "guardrail": "bedrock-guardrails" if guardrail else "comprehend-pii-redaction",
     }
     return case
+
+
+def speak_reply(session: Any, settings: Settings, case: SupportCase) -> bytes:
+    """Spoken MP3 of the drafted reply; only available when COPILOT_TTS_BACKEND=polly."""
+    if settings.tts_backend != "polly":
+        raise RuntimeError("Spoken replies are off. Set COPILOT_TTS_BACKEND=polly to enable them.")
+    polly = session.client("polly", config=CLIENT_CONFIG)
+    return synthesize_reply(polly, case.reply, case.reply_language or "en", settings.polly_voice)

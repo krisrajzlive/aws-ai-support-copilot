@@ -9,13 +9,18 @@ from copilot.services.bedrock import BedrockService
 
 
 class Translator:
-    """Amazon Translate when the account allows it, otherwise a Bedrock model."""
+    """Translation with a configurable backend.
 
-    def __init__(self, translate_client: Any, bedrock: BedrockService):
+    mode "aws" uses Amazon Translate only, "bedrock" uses a Bedrock model only, and "auto" tries
+    Amazon Translate first and falls back to Bedrock when the account denies it.
+    """
+
+    def __init__(self, translate_client: Any, bedrock: BedrockService, mode: str = "bedrock"):
         self._client = translate_client
         self._bedrock = bedrock
+        self._use_aws = mode in ("aws", "auto")
+        self._fallback = mode == "auto"
         self.backend = "none"
-        self._use_aws = True
 
     def translate(self, text: str, source: str, target: str) -> str:
         if not text.strip() or source == target:
@@ -28,7 +33,8 @@ class Translator:
                 self.backend = "aws-translate"
                 return translated
             except ClientError as exc:
-                if exc.response.get("Error", {}).get("Code") not in DENIED_CODES:
+                denied = exc.response.get("Error", {}).get("Code") in DENIED_CODES
+                if not (denied and self._fallback):
                     raise
                 self._use_aws = False
         self.backend = "bedrock"
