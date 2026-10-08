@@ -19,7 +19,8 @@ SYSTEM_PROMPT = (
     "You are a customer-support triage assistant. Using only the case facts provided, return a "
     "single JSON object with keys: summary (max 2 sentences), category (one of "
     f"{CATEGORIES}), priority (one of {PRIORITIES}), reply (a polite, concise draft reply in "
-    "English that never repeats redacted values). Output JSON only."
+    "English). Tokens like [[NAME_1]] stand for customer details: use them verbatim where a "
+    "name or detail belongs and never invent values. Output JSON only."
 )
 
 
@@ -99,6 +100,7 @@ def analyze_case(
         insights.pii_types,
     )
     case.english_text = insights.redacted_text
+    placeholders = insights.placeholders
 
     result = bedrock.complete_json(SYSTEM_PROMPT, _case_prompt(case))
     case.summary = str(result.get("summary", ""))
@@ -109,7 +111,10 @@ def analyze_case(
         case.reply_en = guardrail.apply(case.reply_en, "OUTPUT").text
 
     target = reply_language or source
-    case.reply = translator.translate(case.reply_en, "en", target)
+    case.reply = comprehend.fill_placeholders(
+        translator.translate(case.reply_en, "en", target), placeholders
+    )
+    case.reply_en = comprehend.fill_placeholders(case.reply_en, placeholders)
     case.reply_language = target
     case.model_id = bedrock.model_id
     case.backends = {

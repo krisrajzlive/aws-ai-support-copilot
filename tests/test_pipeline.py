@@ -6,7 +6,7 @@ from conftest import FakeSession, client_error
 from copilot.config import Settings
 from copilot.pipeline import analyze_case
 from copilot.services.bedrock import parse_json_object
-from copilot.services.comprehend import analyze_english, redact
+from copilot.services.comprehend import analyze_english, fill_placeholders, redact
 
 
 def _converse(reply: str):
@@ -21,13 +21,21 @@ MODEL_JSON = json.dumps(
 )
 
 
-def test_redact_replaces_spans_right_to_left():
-    text = "Hi Ann, mail ann@x.com"
+def test_redact_numbers_tokens_and_reuses_one_per_distinct_value():
+    text = "Hi Ann, tell Bob, Ann"
     pii = [
         {"Type": "NAME", "BeginOffset": 3, "EndOffset": 6},
-        {"Type": "EMAIL", "BeginOffset": 13, "EndOffset": 22},
+        {"Type": "NAME", "BeginOffset": 13, "EndOffset": 16},
+        {"Type": "NAME", "BeginOffset": 18, "EndOffset": 21},
     ]
-    assert redact(text, pii) == "Hi [NAME], mail [EMAIL]"
+    redacted, mapping = redact(text, pii)
+    assert redacted == "Hi [[NAME_1]], tell [[NAME_2]], [[NAME_1]]"
+    assert mapping == {"[[NAME_1]]": "Ann", "[[NAME_2]]": "Bob"}
+
+
+def test_fill_placeholders_restores_known_tokens_only():
+    out = fill_placeholders("Dear [[NAME_1]], re [[ORDER_9]]", {"[[NAME_1]]": "Maria"})
+    assert out == "Dear Maria, re [[ORDER_9]]"
 
 
 def test_entities_and_sentiment_run_on_redacted_text():
@@ -115,3 +123,31 @@ def test_translate_modes():
         assert "AccessDenied" in str(exc)
     else:
         raise AssertionError("aws mode should raise when denied")
+
+
+def test_reply_is_personalised_from_placeholders_without_sending_pii_to_the_model():
+    prompts: list[str] = []
+
+    def converse(**kw):
+        prompts.append(kw["messages"][0]["content"][0]["text"])
+        reply = json.dumps(
+            {
+                "summary": "s",
+                "category": "other",
+                "priority": "low",
+                "reply": "Dear [[NAME_1]], sorry.",
+            }
+        )
+        return {"output": {"message": {"content": [{"text": reply}]}}}
+
+    def pii(**_):
+        return {"Entities": [{"Type": "NAME", "BeginOffset": 8, "EndOffset": 13}]}
+
+    session = FakeSession(
+        {("bedrock-runtime", "converse"): converse, ("comprehend", "detect_pii_entities"): pii}
+    )
+    case = analyze_case(
+        session, Settings(aws_profile=None, bedrock_models="m.one"), text="My name Maria broke it"
+    )
+    assert case.reply_en == "Dear Maria, sorry."
+    assert all("Maria" not in p for p in prompts)

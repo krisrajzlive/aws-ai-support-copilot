@@ -39,6 +39,7 @@ class Translator:
                 self._use_aws = False
         self.backend = "bedrock"
         return self._bedrock.complete(
-            "You are a professional translator. Output only the translation, nothing else.",
+            "You are a professional translator. Output only the translation, nothing else. "
+            "Keep any token in double square brackets, such as [[NAME_1]], exactly unchanged.",
             f"Translate from language code '{source}' to '{target}':\n\n{text}",
         )
