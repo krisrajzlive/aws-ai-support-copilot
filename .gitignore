@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+dist/
+*.egg-info/
+
+# Secrets and local config: never commit
+.env
+.env.*
+!.env.example
+*.pem
+.aws/
+credentials*
+out.json
+msg.json
