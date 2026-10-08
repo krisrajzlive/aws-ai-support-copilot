@@ -1,0 +1,10 @@
+[browser]
+gatherUsageStats = false
+
+[server]
+headless = true
+address = "localhost"  # never expose the AWS-credentialed UI to the network
+
+[theme]
+base = "light"
+primaryColor = "#0b6e4f"

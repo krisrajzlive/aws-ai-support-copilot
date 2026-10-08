@@ -29,8 +29,9 @@ TRIAGE_PROMPT = (
 BASE_REPLY_RULES = (
     "Write only the reply text addressed to the customer, in English, as plain text with no "
     "markdown and no preamble. Never state delivery times, prices, availability or company "
-    "policies unless they appear in the case facts; when the customer needs one, say a team member "
-    "will confirm it. Never invent order numbers, amounts or dates. Do not use bracketed template "
+    "policies unless they appear in the case facts, and never describe website pages, buttons, "
+    "forms or internal processes; when the customer needs one of these, say a team member will "
+    "confirm it. Never invent order numbers, amounts or dates. Do not use bracketed template "
     "placeholders such as [Your Name]; sign off as 'Customer Support Team'."
 )
 
@@ -46,11 +47,11 @@ def _reply_rules(placeholders: dict[str, str]) -> str:
     )
 
 
-def _case_prompt(case: SupportCase) -> str:
+def _case_prompt(case: SupportCase, include_entities: bool = True) -> str:
     parts = [f"Customer message (PII redacted): {case.english_text}"]
     if case.sentiment:
         parts.append(f"Detected sentiment: {case.sentiment}")
-    if case.entities:
+    if include_entities and case.entities:
         parts.append(f"Entities: {', '.join(case.entities)}")
     if case.document_lines:
         parts.append("Attached document text:\n" + "\n".join(case.document_lines[:40]))
@@ -150,7 +151,9 @@ def analyze_case(
     reply_llm = BedrockService(runtime, chosen.models)
     case.reply_en = reply_llm.complete(
         f"{chosen.prompt}\n\n{_reply_rules(placeholders)}",
-        f"{_case_prompt(case)}\nTriage summary: {case.summary}\nPriority: {case.priority}",
+        # Entities are left out here: order numbers get mistaken for the customer's name.
+        f"{_case_prompt(case, include_entities=False)}\n"
+        f"Triage summary: {case.summary}\nPriority: {case.priority}",
         max_tokens=chosen.max_tokens,
         temperature=chosen.temperature,
     )

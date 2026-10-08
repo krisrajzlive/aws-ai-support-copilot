@@ -38,9 +38,11 @@ categories = ["product_defect"]
 models = ["qwen.qwen3-32b-v1:0", "openai.gpt-oss-120b-1:0", "amazon.nova-pro-v1:0"]
 temperature = 0.3
 max_tokens = 700
-prompt = """You are a technical support engineer. Show empathy in one sentence, then give clear \
-numbered troubleshooting or replacement steps based only on the case facts. If a photo or document \
-context is provided, refer to what it shows. Ask for at most one missing detail."""
+prompt = """You are a technical support engineer. Show empathy in one sentence. For a product that \
+stopped working, give short numbered troubleshooting steps that apply to any device (check power, \
+reset, inspect for damage). For a product that arrived broken or damaged, do not troubleshoot: say \
+a team member will arrange the replacement or refund and will reply to the customer directly. If \
+photo or document context is provided, refer to what it shows. Ask for at most one missing detail."""
 
 [personas.security]
 description = "Login and account access: cautious, verification-first."

@@ -96,6 +96,20 @@ uv run copilot intake --say "my parcel is late" --say "B88231" --say "shipping" 
 uv run python scripts/create_lex_bot.py --delete        # clean up
 ```
 
+## Web UI
+
+A Streamlit app wraps the same pipeline: type or upload a request (text, receipt, product photo,
+voice message), chat with the Lex intake bot, and inspect the personas and routing rules. Each
+result shows which persona handled the case and why, which model answered each stage, what was
+redacted, and the full JSON.
+
+```bash
+uv run --group ui streamlit run app/streamlit_app.py     # then open http://localhost:8501
+```
+
+The app uses your `.env` and AWS profile like the CLI. It is bound to `localhost` only (see
+`.streamlit/config.toml`): it runs with your AWS credentials, so do not expose it to a network.
+
 ## Ticket classifier (SageMaker-ready)
 
 A TF-IDF + logistic-regression model predicts the ticket category. When it is confident
@@ -189,7 +203,7 @@ running large batches, and run `uv run python scripts/deploy_lambda.py delete` w
 | 4 | Bedrock triage and reply, optional Guardrails | done |
 | 5 | Ticket classifier (SageMaker-compatible training) | done |
 | 6 | Lex intake bot | done |
-| 7 | Web UI | planned |
+| 7 | Web UI (Streamlit) | done |
 
 ## Development
 
