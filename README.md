@@ -40,8 +40,10 @@ Results of `copilot doctor` on a time-boxed, region-locked (us-east-1) training 
 
 Anthropic Claude models appear in the Bedrock catalog but are not invokable from code there, so
 Bedrock calls default to Amazon Nova Lite with Nova Micro/Pro, Qwen3 and gpt-oss as fallbacks.
-Blocked services have full AWS implementations that are covered by stubbed tests and run
-unchanged in an unrestricted account.
+Translate runs against Amazon Translate when allowed and falls back to Bedrock otherwise;
+speech to text uses Voxtral on Bedrock. Amazon Transcribe and Polly backends are not
+implemented yet, and a Bedrock Guardrail backend (`scripts/create_guardrail.py`) is covered by
+stubbed tests only, because guardrails cannot be created in the lab account.
 
 ## Status
 

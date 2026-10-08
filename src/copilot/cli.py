@@ -51,6 +51,9 @@ def analyze(
     text: Annotated[str, typer.Option(help="Customer message, in any language.")] = "",
     document: Annotated[Path | None, typer.Option(help="Scanned page or receipt image.")] = None,
     image: Annotated[Path | None, typer.Option(help="Product photo.")] = None,
+    audio: Annotated[
+        Path | None, typer.Option(help="Voicemail or call recording (wav/mp3).")
+    ] = None,
     reply_language: Annotated[
         str | None, typer.Option(help="Defaults to the input language.")
     ] = None,
@@ -63,6 +66,8 @@ def analyze(
         text=text,
         document=document.read_bytes() if document else None,
         image=image.read_bytes() if image else None,
+        audio=audio.read_bytes() if audio else None,
+        audio_format=audio.suffix.lstrip(".").lower() if audio else "wav",
         reply_language=reply_language,
     )
     console.print_json(case.model_dump_json())

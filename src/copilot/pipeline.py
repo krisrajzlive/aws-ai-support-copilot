@@ -8,6 +8,7 @@ from copilot.models import SupportCase
 from copilot.services import comprehend, vision
 from copilot.services.bedrock import BedrockService
 from copilot.services.guardrails import GuardrailService
+from copilot.services.transcribe import Transcriber
 from copilot.services.translate import Translator
 
 CATEGORIES = ["billing", "shipping", "product_defect", "account_access", "other"]
@@ -41,6 +42,8 @@ def analyze_case(
     text: str = "",
     document: bytes | None = None,
     image: bytes | None = None,
+    audio: bytes | None = None,
+    audio_format: str = "wav",
     reply_language: str | None = None,
 ) -> SupportCase:
     """Run one support request through language, vision and Bedrock services."""
@@ -55,6 +58,11 @@ def analyze_case(
         if settings.guardrail_id
         else None
     )
+    backends: dict[str, str] = {}
+    if audio:
+        transcript = Transcriber(client("bedrock-runtime")).transcribe(audio, audio_format)
+        text = f"{text} {transcript}".strip()
+        backends["transcribe"] = Transcriber.backend
     case = SupportCase(original_text=text)
 
     if document:
@@ -72,7 +80,11 @@ def analyze_case(
         case.english_text = checked.text
         if checked.blocked:
             case.blocked, case.reply, case.reply_en = True, checked.text, checked.text
-            case.backends = {"translate": translator.backend, "guardrail": "bedrock-guardrails"}
+            case.backends = {
+                **backends,
+                "translate": translator.backend,
+                "guardrail": "bedrock-guardrails",
+            }
             return case
 
     insights = comprehend.analyze_english(comp, case.english_text)
@@ -95,6 +107,7 @@ def analyze_case(
     case.reply = translator.translate(case.reply_en, "en", target)
     case.model_id = bedrock.model_id
     case.backends = {
+        **backends,
         "translate": translator.backend,
         "llm": "bedrock",
         "guardrail": "bedrock-guardrails" if guardrail else "comprehend-pii-redaction",

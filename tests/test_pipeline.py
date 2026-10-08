@@ -73,3 +73,17 @@ def test_pipeline_falls_back_to_bedrock_translation_when_translate_denied():
     assert case.backends["translate"] == "bedrock"
     assert case.category == "product_defect"
     assert case.model_id == "m.one"
+
+
+def test_audio_is_transcribed_with_voxtral_before_analysis():
+    def converse(**kw):
+        if kw["modelId"].startswith("mistral.voxtral"):
+            return {"output": {"message": {"content": [{"text": "My order is broken"}]}}}
+        return {"output": {"message": {"content": [{"text": MODEL_JSON}]}}}
+
+    session = FakeSession({("bedrock-runtime", "converse"): converse})
+    case = analyze_case(
+        session, Settings(aws_profile=None, bedrock_models="m.one"), audio=b"RIFFfake"
+    )
+    assert "order is broken" in case.original_text
+    assert case.backends["transcribe"] == "bedrock-voxtral"

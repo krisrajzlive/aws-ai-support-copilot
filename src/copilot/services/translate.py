@@ -14,20 +14,24 @@ class Translator:
     def __init__(self, translate_client: Any, bedrock: BedrockService):
         self._client = translate_client
         self._bedrock = bedrock
-        self.backend = "aws-translate"
+        self.backend = "none"
+        self._use_aws = True
 
     def translate(self, text: str, source: str, target: str) -> str:
         if not text.strip() or source == target:
             return text
-        if self.backend == "aws-translate":
+        if self._use_aws:
             try:
-                return self._client.translate_text(
+                translated = self._client.translate_text(
                     Text=text, SourceLanguageCode=source, TargetLanguageCode=target
                 )["TranslatedText"]
+                self.backend = "aws-translate"
+                return translated
             except ClientError as exc:
                 if exc.response.get("Error", {}).get("Code") not in DENIED_CODES:
                     raise
-                self.backend = "bedrock"
+                self._use_aws = False
+        self.backend = "bedrock"
         return self._bedrock.complete(
             "You are a professional translator. Output only the translation, nothing else.",
             f"Translate from language code '{source}' to '{target}':\n\n{text}",
