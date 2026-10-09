@@ -1,35 +1,57 @@
 # AWS AI Support Copilot
 
-A multilingual customer-support pipeline that turns voice calls, scanned documents and product
-photos into structured cases and drafted replies. It orchestrates Amazon Bedrock, Textract,
-Rekognition, Comprehend and (optionally) Translate, Transcribe, Polly and Bedrock Guardrails
-behind a small, testable Python core.
+A multilingual customer-support copilot that turns voice calls, scanned documents and product
+photos into triaged cases and drafted replies grounded in company policy. A LangGraph workflow
+orchestrates Amazon Bedrock, Textract, Rekognition, Comprehend and Lex, with LangChain for the
+language models, LlamaIndex for policy retrieval and S3 for storage. Services that restricted
+accounts block (Translate, Transcribe, Polly, Guardrails) are switchable, with fallbacks.
 
 ```mermaid
 flowchart LR
-    A[Audio] --> T[Voxtral on Bedrock<br/>or Transcribe]
-    T --> L[Comprehend:<br/>language]
-    TX[Text] --> L
-    L --> TR[Translate or Bedrock<br/>to English]
-    TR --> G[Guardrails or<br/>Comprehend PII redaction]
-    D[Document] --> X[Textract] --> M
-    I[Image] --> R[Rekognition] --> M
-    G --> S[Comprehend:<br/>sentiment, entities]
-    S --> M[Bedrock: summary,<br/>category, priority, reply]
-    M --> B[Translate back,<br/>restore customer details]
-    B --> P[Polly: spoken reply<br/>optional]
+    IN[Text / audio / document / photo] --> TX[transcribe<br/>Voxtral or Transcribe]
+    TX --> AT[attachments<br/>Textract, Rekognition]
+    AT --> LG[language<br/>detect + translate to English]
+    LG --> GI{guardrail<br/>input}
+    GI -- blocked --> BL[blocked]
+    GI --> IN2[insights<br/>Comprehend PII, sentiment]
+    IN2 --> TR[triage<br/>Nova Micro]
+    TR --> CL[classify<br/>trained model]
+    CL --> RT[route<br/>persona]
+    RT --> RV[retrieve<br/>LlamaIndex policy search]
+    RV --> DR[draft<br/>persona + policy excerpts]
+    DR -- escalation --> HR{{human review<br/>approve / edit / reject}}
+    DR --> LO[localize<br/>translate back, restore details]
+    HR --> LO
+    HR -- rejected --> BL
+    LO --> AR[archive<br/>redacted record to S3]
+    BL --> AR
 ```
+
+`uv run copilot graph` prints the exact diagram from the compiled workflow.
+
+## What each part does
+
+| Piece | Role |
+|---|---|
+| **LangGraph** | The workflow as an explicit state machine: conditional edges for guardrail blocks and escalations, and a checkpointed pause so a person can approve, edit or reject an escalated reply before it is sent. |
+| **LangChain** (`langchain-aws`) | `ChatBedrockConverse` for triage, replies and translation, with an ordered model fallback chain. |
+| **LlamaIndex** | Vector index over the policy documents in `kb/policies`, Bedrock embeddings, incremental sync, persisted locally and in S3. |
+| **Amazon S3** | Durable store for the knowledge-base index and documents, and an archive of redacted case records. |
+| **Bedrock, Comprehend, Textract, Rekognition, Lex** | Models, PII and sentiment, document OCR, photo labels, conversational intake. |
 
 ## What it does
 
 1. **Understands the request.** Transcribes audio, detects the language, translates to English.
-2. **Protects customer data.** PII is replaced with numbered tokens (`[[NAME_1]]`) before any text
-   reaches a language model, and restored only in the final reply.
+2. **Protects customer data.** PII becomes numbered tokens (`[[NAME_1]]`) before any text reaches a
+   language model and is restored only in the final reply. Bare place names such as "Canada" are
+   not treated as PII, because the reply may need them; street addresses are.
 3. **Reads attachments.** Textract extracts receipt text; Rekognition labels product photos.
-4. **Triages.** A small, cheap model (Nova Micro) returns a summary, category and priority.
-5. **Routes to a persona.** Each persona has its own prompt, temperature and model list, so a
-   billing question, a damaged product and an angry customer are handled by different agents.
-6. **Replies in the customer's language.**
+4. **Triages.** A small model returns summary, category and priority; a trained classifier
+   overrides the category when it is confident.
+5. **Routes to a persona** with its own prompt, temperature and model list.
+6. **Grounds the reply in policy.** The policy excerpts retrieved for the question are the only
+   policy facts the model may state; otherwise it says a team member will confirm.
+7. **Replies in the customer's language** and archives a redacted record.
 
 ## Personas and routing
 
@@ -42,33 +64,51 @@ flowchart LR
 | `escalation` | urgent priority, or negative sentiment with high priority | Nova Pro, Nova Lite |
 | `general` | everything else | Nova Lite, Nova Micro |
 
-Every case records which persona handled it and why (`persona_reason`) and which model answered
-each stage (`models`). Personas live in a TOML file: copy
-[`src/copilot/default_personas.toml`](src/copilot/default_personas.toml), edit prompts, models
-or escalation rules, and set `COPILOT_PERSONAS_FILE`.
+Every case records the persona and why (`persona_reason`), the model used for each stage
+(`models`), the policy sources used and the archive key. Personas live in a TOML file: copy
+[`src/copilot/default_personas.toml`](src/copilot/default_personas.toml), edit prompts, models or
+escalation rules, and set `COPILOT_PERSONAS_FILE`.
 
 ```bash
-uv run copilot personas --check          # list personas and test that their models respond
-uv run copilot analyze --text "..." --persona billing   # force a persona
-uv run python scripts/evaluate_routing.py               # run 8 varied messages and show routing
+uv run copilot personas --check                          # list personas, test their models
+uv run copilot analyze --text "..." --persona billing    # force a persona
+uv run python scripts/evaluate_routing.py                # run 8 varied messages, show routing
 ```
 
-Replies are constrained to the case facts: the model may not invent delivery times, prices or
-policies, and customer names are only restored after the model has written the reply.
+## Policy knowledge base (LlamaIndex)
 
-Example (`copilot analyze --text "Hola, mi pedido 48213 llegó roto. Soy Maria Lopez, mi correo es
-maria.lopez@example.com. Quiero un reembolso."`):
+The documents in [`kb/policies`](kb/policies) describe a fictional company ("Acme Home Goods");
+they exist to ground replies and are invented for testing. Retrieval searches the whole message
+and, for multi-issue messages, each sentence as a separate query in parallel, then merges the
+results.
 
-```json
-{
-  "source_language": "es",
-  "english_text": "Hello, my order 48213 arrived broken. I am [[NAME_1]], my email is [[EMAIL_1]]. I want a refund.",
-  "sentiment": "NEGATIVE",
-  "category": "product_defect",
-  "reply": "Estimado Maria Lopez, lamentamos las molestias causadas por el artículo roto en su pedido 48213. ...",
-  "model_id": "amazon.nova-lite-v1:0"
-}
+```bash
+uv run copilot kb build            # embed the documents, save the index, mirror it to S3
+uv run copilot kb sync             # incremental: new docs added, edited docs re-embedded, removed docs dropped
+uv run copilot kb sync --from-s3   # treat the bucket as the source of truth (policies edited there)
+uv run copilot kb search "do you ship to Canada?"
 ```
+
+`sync` gives documents stable ids (their relative path), so unchanged documents cost no embedding
+calls. Mirroring to S3 prunes stale objects, and a download never deletes local files when the
+bucket prefix is empty or unreachable. Enable retrieval with `COPILOT_KB_ENABLED=true`.
+
+## S3
+
+`scripts/create_bucket.py` creates a private bucket (public access blocked, default encryption),
+verifies a write and read round trip, and prints `COPILOT_S3_BUCKET`. The bucket holds the index
+(`kb-index/`), the policy documents (`kb-docs/`) and archived cases (`cases/`).
+
+The archive stores only redacted fields (no original message and no restored reply), and an archive
+failure never fails a case. Delete everything with `scripts/create_bucket.py --delete`.
+
+## Human review for escalations
+
+Set `COPILOT_REQUIRE_ESCALATION_REVIEW=true` (or tick the box in the web UI). An escalated case
+pauses before the reply is localised; a person approves, edits or rejects the draft, and the
+workflow resumes from its checkpoint. Checkpoints live in memory, so a paused case does not survive
+a restart; use a persistent checkpointer before relying on this in production, and note that the
+checkpoint holds the customer details needed to restore the reply.
 
 ## Quickstart
 
@@ -76,60 +116,44 @@ maria.lopez@example.com. Quiero un reembolso."`):
 uv sync
 aws configure --profile sandbox   # enter credentials in your terminal; never commit them
 cp .env.example .env
-uv run copilot doctor             # shows which AWS services your account allows
+uv run copilot doctor             # which AWS services your account allows
+uv run python scripts/create_bucket.py
+uv run copilot kb build && uv run copilot analyze --text "Do you ship to Canada?"
 uv run copilot analyze --text "My mug arrived chipped" --document fixtures/receipt.png
 uv run copilot analyze --audio fixtures/call.wav
+uv run --group ui streamlit run app/streamlit_app.py     # web UI on http://localhost:8501
 ```
 
-`copilot doctor` probes the active credentials and lists what is usable, so the same code runs
-against a restricted lab account and a full AWS account.
+The UI is bound to `localhost` only: it runs with your AWS credentials, so do not expose it.
 
 ## Lex intake bot
 
-`scripts/create_lex_bot.py` builds an Amazon Lex V2 bot (`SupportIntake`) from code: it asks for the
-order number and issue type, confirms, and hands the collected case to the pipeline.
+`scripts/create_lex_bot.py` builds an Amazon Lex V2 bot from code: it asks for the order number
+and issue type, confirms, and hands the case to the workflow.
 
 ```bash
 uv run python scripts/create_lex_bot.py --recreate      # prints COPILOT_LEX_BOT_ID for .env
-uv run copilot intake                                    # chat with the bot, then triage the case
 uv run copilot intake --say "my parcel is late" --say "B88231" --say "shipping" --say "yes"
-uv run python scripts/create_lex_bot.py --delete        # clean up
+uv run python scripts/create_lex_bot.py --delete
 ```
-
-## Web UI
-
-A Streamlit app wraps the same pipeline: type or upload a request (text, receipt, product photo,
-voice message), chat with the Lex intake bot, and inspect the personas and routing rules. Each
-result shows which persona handled the case and why, which model answered each stage, what was
-redacted, and the full JSON.
-
-```bash
-uv run --group ui streamlit run app/streamlit_app.py     # then open http://localhost:8501
-```
-
-The app uses your `.env` and AWS profile like the CLI. It is bound to `localhost` only (see
-`.streamlit/config.toml`): it runs with your AWS credentials, so do not expose it to a network.
 
 ## Ticket classifier (SageMaker-ready)
 
-A TF-IDF + logistic-regression model predicts the ticket category. When it is confident
-(`COPILOT_CLASSIFIER_MIN_CONFIDENCE`, default 0.6) it decides the category and the LLM triage only
-supplies the summary and priority; otherwise the LLM decides. Each case records `category_source`
-(`classifier` or `llm`) and the confidence.
+A TF-IDF + logistic-regression model predicts the category. At confidence of at least
+`COPILOT_CLASSIFIER_MIN_CONFIDENCE` (0.6) it decides the category; otherwise the LLM does.
 
 ```bash
-uv run python ml/make_dataset.py                          # synthetic template tickets
-uv run python ml/generate_with_bedrock.py                 # varied styles written by Nova Pro
-uv run --group ml python ml/train.py                      # trains and exports ml/model/model.json
-COPILOT_CLASSIFIER_PATH=ml/model/model.json uv run copilot analyze --text "..."
+uv run python ml/make_dataset.py                 # synthetic template tickets
+uv run python ml/generate_with_bedrock.py        # varied customer styles written by Nova Pro
+uv run --group ml python ml/train.py             # trains and exports ml/model/model.json
 ```
 
-`ml/train.py` is a SageMaker script-mode script: it reads `SM_CHANNEL_TRAIN` and writes to
-`SM_MODEL_DIR`, so the same file runs locally, in a SageMaker notebook instance
-(`git clone` the repo, `pip install scikit-learn`, `python ml/train.py`) or as a training job. The
-exported weights are plain JSON, so inference needs no ML libraries.
+`ml/train.py` is a SageMaker script-mode script (`SM_CHANNEL_TRAIN`, `SM_MODEL_DIR`), so it runs
+locally, in a notebook instance or as a training job. Exported weights are plain JSON, so
+inference needs no ML libraries. Only the local run is verified; the lab account had no SageMaker
+execution role.
 
-Held-out results (all data is synthetic; no real customer messages):
+Held-out results (all data synthetic; no real customer messages):
 
 | Test set | Accuracy | Rows |
 |---|---|---|
@@ -139,55 +163,64 @@ Held-out results (all data is synthetic; no real customer messages):
 | Confident predictions only (confidence >= 0.6) | 99% | 45% of test rows |
 
 The regularisation strength `C` was chosen after comparing three values on these test sets, so the
-numbers are slightly optimistic. Treat the classifier as a fast first pass in front of the LLM, not
-a production model: retrain on real labelled tickets before relying on it.
+numbers are slightly optimistic. Retrain on real labelled tickets before relying on it.
 
 ## Configuration
 
-Services that are commonly blocked in lab accounts are switchable in `.env` (see `.env.example`).
-Defaults run in a restricted account; the AWS-native backends are implemented and tested with stubs.
+Copy `.env.example` to `.env`. Defaults suit a restricted account; AWS-native backends are
+implemented and tested with stubs.
 
 | Variable | Values | Default | Notes |
 |---|---|---|---|
-| `COPILOT_TRANSLATE_BACKEND` | `bedrock`, `aws`, `auto` | `bedrock` | `auto` tries Amazon Translate, then Bedrock if denied; `aws` never falls back |
-| `COPILOT_TRANSCRIBE_BACKEND` | `bedrock`, `aws` | `bedrock` | `aws` uses Amazon Transcribe and needs `COPILOT_TRANSCRIBE_BUCKET` |
-| `COPILOT_TTS_BACKEND` | `off`, `polly` | `off` | `polly` enables `copilot analyze --speak reply.mp3` |
-| `COPILOT_GUARDRAIL_ID` | guardrail id or empty | empty | create one with `scripts/create_guardrail.py` |
-| `COPILOT_BEDROCK_MODELS` | comma-separated model ids | Nova Lite first | used for translation fallback; first model that responds wins |
-| `COPILOT_TRIAGE_MODELS` | comma-separated model ids | Nova Micro, Nova Lite | classifies category and priority |
-| `COPILOT_LEX_BOT_ID` | bot id | empty | set to the id printed by `create_lex_bot.py`; alias defaults to the DRAFT test alias |
-| `COPILOT_CLASSIFIER_PATH` | path to `model.json` | empty (off) | enables the trained classifier; below `COPILOT_CLASSIFIER_MIN_CONFIDENCE` the LLM decides |
-| `COPILOT_PERSONAS_FILE` | path to TOML | built-in personas | custom prompts, models and escalation rules |
+| `COPILOT_BEDROCK_MODELS` | model ids | Nova Lite first | translation; first model that responds wins |
+| `COPILOT_TRIAGE_MODELS` | model ids | Nova Micro, Nova Lite | category and priority |
+| `COPILOT_PERSONAS_FILE` | path to TOML | built-in | prompts, models, escalation rules |
+| `COPILOT_CLASSIFIER_PATH` | path to `model.json` | empty (off) | below the confidence threshold the LLM decides |
+| `COPILOT_KB_ENABLED` | `true`, `false` | `false` | policy retrieval; needs the index (`copilot kb build`) |
+| `COPILOT_EMBEDDING_MODEL` | model id | Titan Text Embeddings V2 | used to embed documents and queries |
+| `COPILOT_KB_TOP_K`, `COPILOT_KB_MIN_SCORE` | number | 3, 0.18 | retrieval size and relevance cut-off |
+| `COPILOT_S3_BUCKET` | bucket name | empty | enables S3 index mirroring and the case archive |
+| `COPILOT_ARCHIVE_CASES` | `true`, `false` | `true` | only active when a bucket is set |
+| `COPILOT_REQUIRE_ESCALATION_REVIEW` | `true`, `false` | `false` | pause escalations for a human |
+| `COPILOT_LEX_BOT_ID` | bot id | empty | from `create_lex_bot.py`; alias is the DRAFT test alias |
+| `COPILOT_TRANSLATE_BACKEND` | `bedrock`, `aws`, `auto` | `bedrock` | `auto` tries Amazon Translate, falls back to Bedrock |
+| `COPILOT_TRANSCRIBE_BACKEND` | `bedrock`, `aws` | `bedrock` | `aws` needs `COPILOT_TRANSCRIBE_BUCKET` |
+| `COPILOT_TTS_BACKEND` | `off`, `polly` | `off` | `polly` enables `copilot analyze --speak` |
+| `COPILOT_GUARDRAIL_ID` | id | empty | create with `scripts/create_guardrail.py`; pin the version outside development |
 
 ## Verified against a restricted lab account
 
 Results from a time-boxed, region-locked (us-east-1) training sandbox:
 
-| Ran live | Blocked (config switches retained, stub-tested only) |
+| Ran live | Blocked (switches retained, stub-tested only) |
 |---|---|
-| Bedrock (Nova Lite/Micro/Pro, Qwen3, gpt-oss, Voxtral), Lex (bot built and conversed with from code), Textract, Comprehend (language, sentiment, entities, PII), Rekognition | Translate, Transcribe, Polly, Bedrock Guardrails, SageMaker training and endpoints |
+| Bedrock (Nova Lite/Micro/Pro, Qwen3, gpt-oss, Voxtral), Bedrock embeddings (Titan V2, Cohere, Nova multimodal), Lex (built and conversed with from code), Textract, Comprehend, Rekognition, S3 (private bucket, round trip) | Translate, Transcribe, Polly, Bedrock Guardrails, SageMaker training and endpoints, S3 lifecycle rules |
 
-Anthropic Claude models appear in the Bedrock catalog there but cannot be invoked from code, so
-Bedrock calls default to Amazon Nova Lite with other models as fallbacks.
+Vector stores: every self-hosted AWS option was denied (S3 Vectors, OpenSearch Serverless and
+managed, Aurora pgvector, MemoryDB, Neptune Analytics, DocumentDB). Bedrock Knowledge Bases can be
+listed but need an IAM service role the account cannot create, so the index is a local LlamaIndex
+store mirrored to S3. `copilot doctor` shows the same probes for your own account. Anthropic Claude
+models appear in the Bedrock catalog but cannot be invoked from code there, and the lab provider
+confirmed that Lambda's access to the AI services cannot be changed, so there is no Lambda path.
+
+## Performance notes
+
+Measured on the lab account (n=4 cases, a median of about 4.4 s per case; run-to-run noise was
+about 0.7 s):
+
+- Running triage, the classifier and retrieval as parallel graph branches, and Textract beside
+  Rekognition, worked and was tested, but gave **no measurable end-to-end gain**, so it was removed.
+- Searching three sub-queries in parallel inside the retriever took 0.45 s against 1.15 s one after
+  another, so that stays.
+- Reusing one AWS client per service cut an S3 write from 1.25 s to 0.53 s; a new client pays for
+  a new TLS connection each time.
 
 ## Cost
 
-Everything is pay-per-request with no always-on resources in the default configuration. A single
-`analyze` run makes a handful of small API calls and typically costs a fraction of a cent on Nova
-Lite; Textract and Rekognition are billed per page or image. Check current AWS pricing before
-running large batches.
-
-## Roadmap
-
-| Phase | Scope | State |
-|---|---|---|
-| 1 | Scaffold, config, CI, `copilot doctor` | done |
-| 2 | Language services, PII redaction, translation fallback | done |
-| 3 | Textract and Rekognition inputs | done |
-| 4 | Bedrock triage and reply, optional Guardrails | done |
-| 5 | Ticket classifier (SageMaker-compatible training) | done |
-| 6 | Lex intake bot | done |
-| 7 | Web UI (Streamlit) | done |
+Everything is pay-per-request with no always-on resources. A single case makes a handful of small
+API calls (typically a fraction of a cent on Nova Lite); Textract and Rekognition are billed per
+page or image. Check current AWS pricing before running large batches, and delete the bucket and
+Lex bot when finished.
 
 ## Development
 
@@ -196,8 +229,8 @@ uv run ruff check . && uv run ruff format --check .
 uv run pytest
 ```
 
-Unit tests stub AWS entirely and need no account or network. CI runs lint, tests and a gitleaks
-scan of the full history.
+Unit tests stub AWS and need no account or network; they ignore your local `.env`. CI runs lint,
+tests and a gitleaks scan of the full history.
 
 ## License
 

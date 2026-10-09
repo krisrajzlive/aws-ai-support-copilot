@@ -14,9 +14,9 @@ from botocore.exceptions import BotoCoreError, ClientError
 from copilot.aws import make_session
 from copilot.config import Settings
 from copilot.doctor import Status, run_doctor
+from copilot.graph import CaseGraph, CaseRun
 from copilot.models import SupportCase
 from copilot.personas import load_personas
-from copilot.pipeline import analyze_case
 from copilot.services.lex import LexIntake
 
 st.set_page_config(page_title="AWS AI Support Copilot", page_icon="🎧", layout="wide")
@@ -30,6 +30,12 @@ def get_settings() -> Settings:
 @st.cache_resource
 def get_session():
     return make_session(get_settings())
+
+
+@st.cache_resource
+def get_graph() -> CaseGraph:
+    """One workflow per server process so a paused review can be resumed on the next click."""
+    return CaseGraph(get_session(), get_settings())
 
 
 settings = get_settings()
@@ -79,6 +85,18 @@ def show_case(case: SupportCase) -> None:
             st.code("\n".join(case.document_lines), language=None)
         if case.image_labels:
             st.write("**Photo labels (Rekognition):** " + ", ".join(case.image_labels))
+    if case.policy_excerpts:
+        with st.expander(f"Policy used: {', '.join(case.policy_sources)}"):
+            for excerpt in case.policy_excerpts:
+                st.markdown(excerpt)
+                st.divider()
+    footer = []
+    if case.human_reviewed:
+        footer.append("approved by a human reviewer")
+    if case.archive_key:
+        footer.append(f"redacted record archived to S3 as `{case.archive_key}`")
+    if footer:
+        st.caption(" · ".join(footer))
     with st.expander("What the model saw (redacted) and backends used"):
         st.write(case.english_text)
         st.json(case.backends)
@@ -86,14 +104,36 @@ def show_case(case: SupportCase) -> None:
         st.json(case.model_dump())
 
 
-def run_pipeline(text: str, **kwargs) -> SupportCase | None:
+def run_pipeline(text: str, **kwargs) -> CaseRun | None:
     try:
         with st.spinner("Analysing..."):
-            return analyze_case(get_session(), settings, text=text, **kwargs)
+            return get_graph().start(text=text, **kwargs)
     except (ClientError, BotoCoreError, RuntimeError) as exc:
         st.error(f"AWS call failed: {exc}")
         st.caption("Credentials may have expired. Re-run `aws configure --profile ...` and reload.")
         return None
+
+
+def render_run(key: str) -> None:
+    """Show a finished case, or the approve/edit/reject panel for an escalated one."""
+    run: CaseRun | None = st.session_state.get(key)
+    if run is None:
+        return
+    if not run.pending:
+        show_case(run.case)
+        return
+    review = run.review
+    st.warning(f"Escalated case ({review['reason']}). Review the drafted reply before it is sent.")
+    st.write("**Summary:** " + review["summary"])
+    edited = st.text_area("Reply to send", value=review["draft"], key=f"{key}-draft", height=160)
+    st.caption("Customer details appear as tokens such as [[NAME_1]] and are restored on approval.")
+    approve, reject = st.columns(2)
+    if approve.button("Approve and send", type="primary", key=f"{key}-approve"):
+        st.session_state[key] = get_graph().resume(run.thread_id, approved=True, reply=edited)
+        st.rerun()
+    if reject.button("Reject draft", key=f"{key}-reject"):
+        st.session_state[key] = get_graph().resume(run.thread_id, approved=False)
+        st.rerun()
 
 
 # ---- sidebar ---------------------------------------------------------------------------------
@@ -105,6 +145,11 @@ with st.sidebar:
     )
     reply_language = st.text_input(
         "Reply language code", "", placeholder="same as customer, e.g. fr"
+    )
+    settings.require_escalation_review = st.checkbox(
+        "Human review for escalations",
+        value=settings.require_escalation_review,
+        help="Pause urgent or angry cases so a person approves or edits the reply first.",
     )
     st.divider()
     if st.button("Check AWS services"):
@@ -128,7 +173,7 @@ with tab_analyse:
     audio = up3.file_uploader("Voice message", type=["wav", "mp3"])
 
     if st.button("Analyse", type="primary", disabled=not (text.strip() or audio)):
-        case = run_pipeline(
+        st.session_state.analyse = run_pipeline(
             text,
             document=document.getvalue() if document else None,
             image=image.getvalue() if image else None,
@@ -137,8 +182,7 @@ with tab_analyse:
             reply_language=reply_language.strip() or None,
             persona=None if persona_choice == "Route automatically" else persona_choice,
         )
-        if case:
-            show_case(case)
+    render_run("analyse")
 
 # ---- tab 2: Lex chat -------------------------------------------------------------------------
 with tab_lex:
@@ -179,7 +223,7 @@ with tab_lex:
         if st.session_state.get("lex_case"):
             st.divider()
             st.subheader("Case opened from the conversation")
-            show_case(st.session_state.lex_case)
+            render_run("lex_case")
 
 # ---- tab 3: personas -------------------------------------------------------------------------
 with tab_personas:
