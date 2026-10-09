@@ -17,7 +17,7 @@ from pathlib import Path
 
 from copilot.aws import make_session
 from copilot.config import Settings
-from copilot.services.bedrock import BedrockService
+from copilot.services.llm import ChatLLM
 
 CATEGORIES = {
     "billing": "charges, double charges, refunds, invoices, subscriptions, payment problems",
@@ -52,7 +52,7 @@ def main() -> None:
 
     settings = Settings()
     session = make_session(settings)
-    llm = BedrockService(session.client("bedrock-runtime"), ["amazon.nova-pro-v1:0"])
+    llm = ChatLLM(session.client("bedrock-runtime"), ["amazon.nova-pro-v1:0"], settings.aws_region)
 
     rows: list[tuple[str, str, str, str]] = []
     for style, split in [(s, "train") for s in TRAIN_STYLES] + [(s, "test") for s in TEST_STYLES]:

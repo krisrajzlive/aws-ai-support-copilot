@@ -6,6 +6,10 @@ from pydantic import BaseModel, Field
 class SupportCase(BaseModel):
     """Structured result of analysing one inbound support request."""
 
+    case_id: str = ""
+    human_reviewed: bool = False
+    archive_key: str = ""
+
     source_language: str = "en"
     original_text: str = ""
     english_text: str = ""
@@ -21,6 +25,9 @@ class SupportCase(BaseModel):
     persona: str = ""
     persona_reason: str = ""
     priority: str = ""
+    reply_redacted: str = ""  # the reply before customer details are restored; safe to archive
+    policy_sources: list[str] = Field(default_factory=list)
+    policy_excerpts: list[str] = Field(default_factory=list)
     reply_en: str = ""
     reply: str = ""
     reply_language: str = ""

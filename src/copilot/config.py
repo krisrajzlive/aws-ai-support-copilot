@@ -53,6 +53,19 @@ class Settings(BaseSettings):
     lex_bot_alias_id: str = "TSTALIASID"
     lex_locale: str = "en_US"
 
+    # S3 bucket for the case archive and the knowledge-base index (scripts/create_bucket.py)
+    s3_bucket: str = ""
+    archive_cases: bool = True  # only takes effect when s3_bucket is set
+
+    # Policy knowledge base (LlamaIndex): documents, persisted index and retrieval settings
+    embedding_model: str = "amazon.titan-embed-text-v2:0"
+    kb_docs_dir: str = "kb/policies"
+    kb_index_dir: str = "kb/index"
+    kb_top_k: int = 3
+    kb_min_score: float = 0.18  # drops chunks unrelated to the question
+    kb_enabled: bool = False  # opt in once the index exists (copilot kb build)
+    require_escalation_review: bool = False  # pause escalated cases for a human decision
+
     # Empty disables Bedrock Guardrails; Comprehend PII redaction is always applied
     guardrail_id: str = ""
     guardrail_version: str = "DRAFT"

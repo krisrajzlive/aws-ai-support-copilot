@@ -5,7 +5,7 @@ from typing import Any
 from botocore.exceptions import ClientError
 
 from copilot.doctor import DENIED_CODES
-from copilot.services.bedrock import BedrockService
+from copilot.services.llm import ChatLLM
 
 
 class Translator:
@@ -15,7 +15,7 @@ class Translator:
     Amazon Translate first and falls back to Bedrock when the account denies it.
     """
 
-    def __init__(self, translate_client: Any, bedrock: BedrockService, mode: str = "bedrock"):
+    def __init__(self, translate_client: Any, bedrock: ChatLLM, mode: str = "bedrock"):
         self._client = translate_client
         self._bedrock = bedrock
         self._use_aws = mode in ("aws", "auto")

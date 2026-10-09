@@ -12,6 +12,13 @@ from copilot import __version__
 from copilot.aws import make_session
 from copilot.config import Settings
 from copilot.doctor import DoctorReport, Status, run_doctor
+from copilot.graph import CaseGraph
+from copilot.knowledge import (
+    KnowledgeBase,
+    bedrock_embeddings,
+    load_or_build,
+    sync_knowledge_base,
+)
 from copilot.personas import load_personas
 from copilot.pipeline import analyze_case, speak_reply
 from copilot.services.lex import LexIntake
@@ -157,6 +164,64 @@ def personas(
         for result in run_doctor(make_session(settings), probe_settings).results:
             if result.service == "bedrock":
                 console.print(f"  [{_STYLE[result.status]}]{result.status}[/]  {result.capability}")
+
+
+kb_app = typer.Typer(help="Policy knowledge base (LlamaIndex).", no_args_is_help=True)
+app.add_typer(kb_app, name="kb")
+
+
+@kb_app.command("build")
+def kb_build() -> None:
+    """Embed kb/policies with Bedrock, save the index locally and sync it to S3 when configured."""
+    from copilot.services import storage
+
+    settings = Settings()
+    session = make_session(settings)
+    kb = KnowledgeBase.build(settings.kb_docs_dir, bedrock_embeddings(settings))
+    kb.save(settings.kb_index_dir)
+    console.print(f"Index built from {settings.kb_docs_dir} and saved to {settings.kb_index_dir}")
+    if settings.s3_bucket:
+        count = storage.upload_dir(
+            session.client("s3"), settings.s3_bucket, "kb-index/", settings.kb_index_dir
+        )
+        console.print(f"Synced {count} files to s3://{settings.s3_bucket}/kb-index/")
+
+
+@kb_app.command("sync")
+def kb_sync(
+    from_s3: Annotated[
+        bool, typer.Option("--from-s3", help="Treat the S3 bucket as the source of truth.")
+    ] = False,
+) -> None:
+    """Update the index incrementally: add new documents, re-embed edited ones, drop removed."""
+    settings = Settings()
+    s3 = make_session(settings).client("s3")
+    report = sync_knowledge_base(settings, s3=s3, from_s3=from_s3)
+    console.print(
+        f"inserted {report.inserted}, updated {report.updated}, deleted {report.deleted}, "
+        f"unchanged {report.unchanged}"
+    )
+    if not report.changed:
+        console.print("Index was already up to date.")
+
+
+@kb_app.command("search")
+def kb_search(query: Annotated[str, typer.Argument(help="Question to look up.")]) -> None:
+    """Show the policy excerpts the pipeline would give the model for this query."""
+    settings = Settings()
+    session = make_session(settings)
+    kb = load_or_build(settings, s3=session.client("s3"))
+    for snippet in kb.search(query):
+        console.print(f"[bold]{snippet.source}[/bold]  score {snippet.score}")
+        console.print(snippet.text)
+        console.print()
+
+
+@app.command()
+def graph() -> None:
+    """Print the support-case workflow as a Mermaid diagram."""
+    settings = Settings()
+    console.print(CaseGraph(make_session(settings), settings).mermaid(), markup=False)
 
 
 @app.command()

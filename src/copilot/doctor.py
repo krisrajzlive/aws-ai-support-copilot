@@ -152,6 +152,31 @@ STATIC_PROBES: tuple[Probe, ...] = (
     ),
     Probe("sagemaker", "ListEndpoints", "sagemaker", lambda c: c.list_endpoints(MaxResults=1)),
     Probe("s3", "ListBuckets", "s3", lambda c: c.list_buckets()),
+    # Vector stores for retrieval-augmented generation. A list call only shows that the account may
+    # use the service; creating a collection, cluster or index can still be denied.
+    Probe("s3-vectors", "ListVectorBuckets", "s3vectors", lambda c: c.list_vector_buckets()),
+    Probe(
+        "opensearch-serverless",
+        "ListCollections",
+        "opensearchserverless",
+        lambda c: c.list_collections(),
+    ),
+    Probe("opensearch", "ListDomainNames", "opensearch", lambda c: c.list_domain_names()),
+    Probe(
+        "aurora-pgvector",
+        "DescribeDBClusters",
+        "rds",
+        lambda c: c.describe_db_clusters(MaxRecords=20),
+    ),
+    Probe("memorydb", "DescribeClusters", "memorydb", lambda c: c.describe_clusters()),
+    Probe("neptune-analytics", "ListGraphs", "neptune-graph", lambda c: c.list_graphs()),
+    Probe("documentdb", "DescribeDBClusters", "docdb", lambda c: c.describe_db_clusters()),
+    Probe(
+        "bedrock-knowledge-bases",
+        "ListKnowledgeBases",
+        "bedrock-agent",
+        lambda c: c.list_knowledge_bases(maxResults=1),
+    ),
     Probe(
         "transcribe",
         "ListTranscriptionJobs",

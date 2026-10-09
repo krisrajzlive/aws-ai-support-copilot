@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from conftest import FakeSession
+from conftest import FakeSession, converse_response
 from copilot.config import Settings
 from copilot.pipeline import analyze_case
 from copilot.services.guardrails import BLOCKED_MESSAGE, GuardrailService
@@ -13,7 +13,7 @@ MODEL_JSON = json.dumps(
 
 
 def _converse(**_):
-    return {"output": {"message": {"content": [{"text": MODEL_JSON}]}}}
+    return converse_response(MODEL_JSON)
 
 
 def test_no_intervention_returns_text_unchanged():

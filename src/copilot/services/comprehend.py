@@ -60,12 +60,31 @@ def _is_token_artifact(entity_text: str) -> bool:
     return "[[" in entity_text or re.fullmatch(r"[A-Z_]+_\d+\]*", entity_text) is not None
 
 
+_STREET_WORDS = re.compile(
+    r"\b(street|st|road|rd|avenue|ave|lane|ln|drive|dr|boulevard|blvd|court|ct|way|apt|suite)\b",
+    re.IGNORECASE,
+)
+
+
+def is_personal(entity: dict[str, Any], text: str) -> bool:
+    """Comprehend tags any place name as ADDRESS, even a bare country like 'Canada'.
+
+    A country or city alone identifies no one and the reply may need it ("do you ship to
+    Canada?"), so only street-level addresses (a number or a street word) are redacted.
+    """
+    if entity["Type"] != "ADDRESS":
+        return True
+    span = text[entity["BeginOffset"] : entity["EndOffset"]]
+    return bool(re.search(r"\d", span) or _STREET_WORDS.search(span))
+
+
 def analyze_english(client: Any, text: str) -> TextInsights:
     """Sentiment, named entities and PII on English text; each call degrades independently."""
     insights = TextInsights(redacted_text=text)
     chunk = text[:4500]
     try:
-        pii = client.detect_pii_entities(Text=chunk, LanguageCode="en").get("Entities", [])
+        found = client.detect_pii_entities(Text=chunk, LanguageCode="en").get("Entities", [])
+        pii = [e for e in found if is_personal(e, chunk)]
         insights.pii_types = sorted({e["Type"] for e in pii})
         redacted, insights.placeholders = redact(chunk, pii)
         insights.redacted_text = redacted + text[4500:]

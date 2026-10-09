@@ -2,16 +2,16 @@ from __future__ import annotations
 
 import json
 
-from conftest import FakeSession, client_error, router_converse
+from conftest import FakeSession, client_error, converse_response, router_converse
 from copilot.config import Settings
 from copilot.pipeline import analyze_case
-from copilot.services.bedrock import parse_json_object
 from copilot.services.comprehend import analyze_english, fill_placeholders, redact
+from copilot.services.llm import parse_json_object
 
 
 def _converse(reply: str):
     def call(**_):
-        return {"output": {"message": {"content": [{"text": reply}]}}}
+        return converse_response(reply)
 
     return call
 
@@ -88,8 +88,8 @@ def test_pipeline_falls_back_to_bedrock_translation_when_translate_denied():
 def test_audio_is_transcribed_with_voxtral_before_analysis():
     def converse(**kw):
         if kw["modelId"].startswith("mistral.voxtral"):
-            return {"output": {"message": {"content": [{"text": "My order is broken"}]}}}
-        return {"output": {"message": {"content": [{"text": MODEL_JSON}]}}}
+            return converse_response("My order is broken")
+        return converse_response(MODEL_JSON)
 
     session = FakeSession({("bedrock-runtime", "converse"): converse})
     case = analyze_case(
@@ -100,7 +100,7 @@ def test_audio_is_transcribed_with_voxtral_before_analysis():
 
 
 def test_translate_modes():
-    from copilot.services.bedrock import BedrockService
+    from copilot.services.llm import ChatLLM
     from copilot.services.translate import Translator
 
     def bedrock_client():
@@ -112,9 +112,7 @@ def test_translate_modes():
     ok = FakeSession({("translate", "translate_text"): lambda **_: {"TranslatedText": "hola-aws"}})
 
     def make(session, mode):
-        return Translator(
-            session.client("translate"), BedrockService(bedrock_client(), ["m"]), mode
-        )
+        return Translator(session.client("translate"), ChatLLM(bedrock_client(), ["m"]), mode)
 
     assert make(ok, "aws").translate("hi", "en", "es") == "hola-aws"
     assert make(denied, "auto").translate("hi", "en", "es") == "hola"
@@ -149,3 +147,24 @@ def test_reply_is_personalised_from_placeholders_without_sending_pii_to_the_mode
     assert case.reply_en == "Dear Maria, sorry."
     sent = [m["messages"][0]["content"][0]["text"] for m in calls]
     assert all("Maria" not in text for text in sent)
+
+
+def test_bare_country_is_not_redacted_but_street_addresses_are():
+    from copilot.services.comprehend import is_personal
+
+    text = "ship to Canada or to 12 Oak Street, Seattle"
+    country = {"Type": "ADDRESS", "BeginOffset": 8, "EndOffset": 14}
+    street = {"Type": "ADDRESS", "BeginOffset": 21, "EndOffset": 43}
+    assert not is_personal(country, text)
+    assert is_personal(street, text)
+    assert is_personal({"Type": "EMAIL", "BeginOffset": 0, "EndOffset": 4}, text)
+
+
+def test_greeting_rules_only_offer_name_tokens_as_salutations():
+    from copilot.graph import reply_rules
+
+    both = reply_rules({"[[NAME_1]]": "Maria", "[[ADDRESS_1]]": "Canada"}, has_policy=False)
+    assert "Greet the customer with the token [[NAME_1]]" in both
+    assert "never as a greeting: [[ADDRESS_1]]" in both
+    only_address = reply_rules({"[[ADDRESS_1]]": "Canada"}, has_policy=False)
+    assert "plain 'Hello,'" in only_address

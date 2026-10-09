@@ -15,3 +15,6 @@ dist/
 credentials*
 out.json
 msg.json
+
+# Built knowledge-base index (rebuilt from kb/policies; synced to S3)
+kb/index/
