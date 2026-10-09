@@ -183,8 +183,12 @@ uv run python scripts/deploy_lambda.py delete
 ```
 
 The role must allow the services you enable (Bedrock `InvokeModel`, Comprehend, Textract,
-Rekognition, and so on). In the lab account the only available role grants logging only: deploy and
-invocation work and the function reports the missing Bedrock permission as a 502.
+Rekognition, and so on). In the restricted lab account used during development the only
+available role grants logging only, and the lab provider confirmed that Lambda's access to Bedrock
+and the other AI services cannot be changed there. Deploy and invocation work, and the function
+reports the missing Bedrock permission as a 502, so end-to-end runs in that account use the CLI and
+the web UI. The handler is tested with stubs and is ready for an account whose execution role
+allows the services you enable.
 
 ## Cost
 
