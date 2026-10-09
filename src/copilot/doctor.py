@@ -152,7 +152,6 @@ STATIC_PROBES: tuple[Probe, ...] = (
     ),
     Probe("sagemaker", "ListEndpoints", "sagemaker", lambda c: c.list_endpoints(MaxResults=1)),
     Probe("s3", "ListBuckets", "s3", lambda c: c.list_buckets()),
-    Probe("lambda", "ListFunctions", "lambda", lambda c: c.list_functions(MaxItems=1)),
     Probe(
         "transcribe",
         "ListTranscriptionJobs",

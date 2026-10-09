@@ -15,4 +15,3 @@ dist/
 credentials*
 out.json
 msg.json
-build/

@@ -2,8 +2,8 @@
 
 A multilingual customer-support pipeline that turns voice calls, scanned documents and product
 photos into structured cases and drafted replies. It orchestrates Amazon Bedrock, Textract,
-Rekognition, Comprehend and (optionally) Translate, Transcribe, Polly, Bedrock Guardrails and
-Lambda behind a small, testable Python core.
+Rekognition, Comprehend and (optionally) Translate, Transcribe, Polly and Bedrock Guardrails
+behind a small, testable Python core.
 
 ```mermaid
 flowchart LR
@@ -127,7 +127,7 @@ COPILOT_CLASSIFIER_PATH=ml/model/model.json uv run copilot analyze --text "..."
 `ml/train.py` is a SageMaker script-mode script: it reads `SM_CHANNEL_TRAIN` and writes to
 `SM_MODEL_DIR`, so the same file runs locally, in a SageMaker notebook instance
 (`git clone` the repo, `pip install scikit-learn`, `python ml/train.py`) or as a training job. The
-exported weights are plain JSON, so inference needs no ML libraries and fits in a Lambda package.
+exported weights are plain JSON, so inference needs no ML libraries.
 
 Held-out results (all data is synthetic; no real customer messages):
 
@@ -165,37 +165,17 @@ Results from a time-boxed, region-locked (us-east-1) training sandbox:
 
 | Ran live | Blocked (config switches retained, stub-tested only) |
 |---|---|
-| Bedrock (Nova Lite/Micro/Pro, Qwen3, gpt-oss, Voxtral), Lex (bot built and conversed with from code), Textract, Comprehend (language, sentiment, entities, PII), Rekognition, Lambda deploy | Translate, Transcribe, Polly, Bedrock Guardrails, SageMaker training and endpoints |
+| Bedrock (Nova Lite/Micro/Pro, Qwen3, gpt-oss, Voxtral), Lex (bot built and conversed with from code), Textract, Comprehend (language, sentiment, entities, PII), Rekognition | Translate, Transcribe, Polly, Bedrock Guardrails, SageMaker training and endpoints |
 
 Anthropic Claude models appear in the Bedrock catalog there but cannot be invoked from code, so
 Bedrock calls default to Amazon Nova Lite with other models as fallbacks.
-
-## Running as an AWS Lambda
-
-`src/copilot/handler.py` exposes the pipeline as a Lambda function (JSON in, case JSON out;
-documents, images and audio are passed as base64). Credentials come from the execution role.
-
-```bash
-uv run python scripts/package_lambda.py                       # builds dist/support-copilot.zip (~18 MB)
-uv run python scripts/deploy_lambda.py deploy --role-arn <role-arn>
-uv run python scripts/deploy_lambda.py invoke --text "My order arrived broken"
-uv run python scripts/deploy_lambda.py delete
-```
-
-The role must allow the services you enable (Bedrock `InvokeModel`, Comprehend, Textract,
-Rekognition, and so on). In the restricted lab account used during development the only
-available role grants logging only, and the lab provider confirmed that Lambda's access to Bedrock
-and the other AI services cannot be changed there. Deploy and invocation work, and the function
-reports the missing Bedrock permission as a 502, so end-to-end runs in that account use the CLI and
-the web UI. The handler is tested with stubs and is ready for an account whose execution role
-allows the services you enable.
 
 ## Cost
 
 Everything is pay-per-request with no always-on resources in the default configuration. A single
 `analyze` run makes a handful of small API calls and typically costs a fraction of a cent on Nova
 Lite; Textract and Rekognition are billed per page or image. Check current AWS pricing before
-running large batches, and run `uv run python scripts/deploy_lambda.py delete` when finished.
+running large batches.
 
 ## Roadmap
 

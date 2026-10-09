@@ -2,7 +2,7 @@
 
 `ml/train.py` fits TF-IDF + logistic regression (scikit-learn, locally or in a SageMaker notebook)
 and exports the weights to JSON. This module reproduces the vectoriser and the linear model in
-plain Python so the pipeline and Lambda package stay small.
+plain Python so the pipeline needs no ML libraries at runtime.
 """
 
 from __future__ import annotations
